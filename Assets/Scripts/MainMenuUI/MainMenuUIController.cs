@@ -14,4 +14,9 @@ public class MainMenuUIController : MonoBehaviour
     {
         SceneManager.LoadScene("SingleMode");
     }
+
+    public void OptionsButton()
+    {
+        SceneManager.LoadScene("OptionMenu");
+    }
 }
