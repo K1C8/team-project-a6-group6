@@ -225,10 +225,10 @@ RectTransform:
   - {fileID: 988586788}
   m_Father: {fileID: 1979722873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -203.35999}
-  m_SizeDelta: {x: -628.394, y: -1750.887}
+  m_SizeDelta: {x: 451.60602, y: 167.11304}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &940880625
 MonoBehaviour:
@@ -273,7 +273,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 940880626}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1466416408}
+        m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
+        m_MethodName: MultiModeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &940880626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,10 +492,10 @@ RectTransform:
   - {fileID: 1582739849}
   m_Father: {fileID: 1979722873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -592}
-  m_SizeDelta: {x: -628.394, y: -1750.887}
+  m_SizeDelta: {x: 451.60602, y: 167.11304}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1065396735
 MonoBehaviour:
@@ -601,10 +613,10 @@ RectTransform:
   - {fileID: 1426667553}
   m_Father: {fileID: 1979722873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -400}
-  m_SizeDelta: {x: -628.394, y: -1750.887}
+  m_SizeDelta: {x: 451.60602, y: 167.11304}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1225401256
 MonoBehaviour:
@@ -649,7 +661,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1225401257}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1466416408}
+        m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
+        m_MethodName: SingleModeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1225401257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,6 +858,7 @@ GameObject:
   - component: {fileID: 1466416406}
   - component: {fileID: 1466416405}
   - component: {fileID: 1466416404}
+  - component: {fileID: 1466416408}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -924,6 +949,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1466416408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466416403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 393a811ea2e1a0047bb2eef59c5a673d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1536667931
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,10 +993,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1979722873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 420.014}
-  m_SizeDelta: {x: 0, y: -840.028}
+  m_SizeDelta: {x: 1080, y: 1077.9719}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1536667933
 MonoBehaviour:
