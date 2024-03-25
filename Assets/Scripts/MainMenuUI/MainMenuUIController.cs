@@ -14,7 +14,7 @@ public class MainMenuUIController : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey("masterVol"))
+        if (PlayerPrefs.HasKey("masterVol") || PlayerPrefs.HasKey("bgmVol") || PlayerPrefs.HasKey("sfxVol"))
         {
             LoadVolume();
         }
