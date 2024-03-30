@@ -68,5 +68,8 @@ public class MainMenuUIController : MonoBehaviour
     {
         SceneManager.LoadScene("SingleMode");
     }
-
+    public void PlayButtonSFX()
+    {
+        AudioManager.Instance.PlaySFX("Button");
+    }
 }
