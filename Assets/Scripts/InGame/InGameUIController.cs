@@ -5,14 +5,14 @@ using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenuUIController : MonoBehaviour
+public class InGameUIController : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider SFXSlider;
-
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         if (PlayerPrefs.HasKey("masterVol") || PlayerPrefs.HasKey("bgmVol") || PlayerPrefs.HasKey("sfxVol"))
         {
@@ -24,7 +24,6 @@ public class MainMenuUIController : MonoBehaviour
             SetBgmVolume();
             SetEffectVolume();
         }
-
     }
 
     // This function will control the master volume
@@ -59,14 +58,17 @@ public class MainMenuUIController : MonoBehaviour
         SetEffectVolume();
     }
 
-    public void MultiModeButton()
+    public void PauseGame()
     {
-        SceneManager.LoadScene("MultiMode");
+
     }
 
-    public void SingleModeButton ()
+    public void ResumeGame()
     {
-        SceneManager.LoadScene("SingleMode");
-    }
 
+    }
+    public void QuitGame()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
