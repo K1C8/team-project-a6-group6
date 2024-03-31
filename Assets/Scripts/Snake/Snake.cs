@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Windows;
+using System;
 
 public class Snake : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Snake : MonoBehaviour
     public int initialSize = 4;
     private int score = 0;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI resumeText;
+    private int count = 3;
 
     private void Start()
     {
@@ -62,8 +65,7 @@ public class Snake : MonoBehaviour
         Transform segment = Instantiate(segmentPrefab, gameView.transform);
         segment.position = segments[segments.Count - 1].position;
         // Add the new segment to the list
-        segments.Add(segment);
-        
+        segments.Add(segment); 
     }
 
     public void ResetState()
@@ -108,10 +110,30 @@ public class Snake : MonoBehaviour
     { 
         gameOver.SetActive(true);
         Time.timeScale = 0;
+        
     }
 
-    public void Resume() 
+    private IEnumerator CountingBeforeStart()
     {
-        Time.timeScale = 1;
+        count = 3; // Reset count to its initial value
+        resumeText.gameObject.SetActive(true); // Make sure the text is visible
+
+        while (count > 0)
+        {
+            resumeText.text = count.ToString();
+            yield return new WaitForSecondsRealtime(1); // Now it will wait for 1 real-time second, regardless of Time.timeScale
+            count--;
+        }
+
+        resumeText.text = "Start!";
+        yield return new WaitForSecondsRealtime(1); // Additional wait to show "Start!"
+
+        resumeText.gameObject.SetActive(false); // Hide the text now that the countdown is over
+        Time.timeScale = 1; // Resume the game time, allowing everything else to proceed.
+        gameOver.SetActive(false); // Also, make sure to hide the game over screen if needed.
+    }
+    public void Resume()
+    {
+        StartCoroutine(CountingBeforeStart());
     }
 }
