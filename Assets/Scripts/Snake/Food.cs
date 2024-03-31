@@ -29,10 +29,20 @@ public class Food : MonoBehaviour
         float minY = bottomWall.position.y + bottomWallThickness / 2;
         float maxY = topWall.position.y - topWallThickness / 2;
 
-        Vector2 spawnPosition = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+        Vector2 spawnPosition = new Vector2(Mathf.RoundToInt(Random.Range(minX, maxX)), Mathf.RoundToInt(Random.Range(minY, maxY)));
 
         //Instantiate(foodPrefab, spawnPosition, Quaternion.identity);
         this.transform.position = spawnPosition;
         Debug.Log(spawnPosition);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {   
+        if(other.tag == "Player")
+        {   
+            // Could add SFX here
+
+            RandomizePosition();
+        }
     }
 }
