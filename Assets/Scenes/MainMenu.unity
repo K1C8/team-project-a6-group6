@@ -149,7 +149,7 @@ AudioSource:
   m_GameObject: {fileID: 193268145}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6170749869724485282, guid: 124ee53fd17e0334b8c887676e325a56, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1390,10 +1390,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393a811ea2e1a0047bb2eef59c5a673d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 0}
-  masterSlider: {fileID: 0}
-  bgmSlider: {fileID: 0}
-  SFXSlider: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: 124ee53fd17e0334b8c887676e325a56, type: 2}
+  masterSlider: {fileID: 1344477296}
+  bgmSlider: {fileID: 2046417020}
+  SFXSlider: {fileID: 1513405396}
 --- !u!4 &859623729
 Transform:
   m_ObjectHideFlags: 0
@@ -3437,13 +3437,13 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1701027320}
   m_Direction: 0
   m_MinValue: -80
-  m_MaxValue: 0
+  m_MaxValue: 20
   m_WholeNumbers: 0
   m_Value: -40
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 859623728}
         m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 1
@@ -3855,14 +3855,14 @@ MonoBehaviour:
   m_FillRect: {fileID: 1606956460}
   m_HandleRect: {fileID: 2058983854}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: -20
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: -40
+  m_Value: -2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 859623728}
         m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
         m_MethodName: SetEffectVolume
         m_Mode: 1
@@ -4465,7 +4465,7 @@ AudioSource:
   m_GameObject: {fileID: 1905460028}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7525924717266793792, guid: 124ee53fd17e0334b8c887676e325a56, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -4874,14 +4874,14 @@ MonoBehaviour:
   m_FillRect: {fileID: 431924228}
   m_HandleRect: {fileID: 2074344819}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: -20
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: -40
+  m_Value: -2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 859623728}
         m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
         m_MethodName: SetBgmVolume
         m_Mode: 1
