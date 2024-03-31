@@ -63,7 +63,7 @@ public class Snake : MonoBehaviour
         segment.position = segments[segments.Count - 1].position;
         // Add the new segment to the list
         segments.Add(segment);
-        score++;
+        
     }
 
     public void ResetState()
@@ -95,6 +95,7 @@ public class Snake : MonoBehaviour
         if (other.gameObject.CompareTag("Food"))
         {
             Grow();
+            score++;
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
