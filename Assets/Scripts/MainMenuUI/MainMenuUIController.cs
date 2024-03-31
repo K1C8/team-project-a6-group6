@@ -68,5 +68,22 @@ public class MainMenuUIController : MonoBehaviour
     {
         SceneManager.LoadScene("SingleMode");
     }
+    public void PlayButtonSFX()
+    {
+        AudioManager.Instance.PlaySFX("Button");
+    }
 
+    // Update after game scenes added
+    public void PlayTetris()
+    {
+        SceneManager.LoadScene("InGameTemp");
+    }
+    public void PlaySnake()
+    {
+        SceneManager.LoadScene("InGameTemp");
+    }
+    public void PlayJet()
+    {
+        SceneManager.LoadScene("InGameTemp");
+    }
 }
