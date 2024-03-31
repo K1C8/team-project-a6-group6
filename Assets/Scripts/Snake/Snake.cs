@@ -29,10 +29,8 @@ public class Snake : MonoBehaviour
 
     private void FixedUpdate()
     {
-        this.transform.position = new Vector3(
-            Mathf.Round(this.transform.position.x) + direction.x,
-            Mathf.Round(this.transform.position.y) + direction.y,
-            0.0f
-        );
+        int x = Mathf.RoundToInt(transform.position.x + direction.x);
+        int y = Mathf.RoundToInt(transform.position.y + direction.y);
+        this.transform.position = new Vector2(x, y);
     }
 }
