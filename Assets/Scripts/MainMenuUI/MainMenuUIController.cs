@@ -80,7 +80,7 @@ public class MainMenuUIController : MonoBehaviour
     }
     public void PlaySnake()
     {
-        SceneManager.LoadScene("InGameTemp");
+        SceneManager.LoadScene("Tetris");
     }
     public void PlayJet()
     {
