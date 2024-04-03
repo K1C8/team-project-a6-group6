@@ -66,6 +66,7 @@ public class MainMenuUIController : MonoBehaviour
 
     public void SingleModeButton ()
     {
+        Debug.Log("Single Mode Pressed.");
         SceneManager.LoadScene("SingleMode");
     }
     public void PlayButtonSFX()
