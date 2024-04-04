@@ -16,7 +16,7 @@ namespace Utils {
         // Instance reference
         public static Assets i {
             get { 
-                if (_i == null) _i = (Instantiate(Resources.Load("CodeMonkeyAssets")) as GameObject).GetComponent<Assets>(); 
+                if (_i == null) _i = (Instantiate(Resources.Load("Assets")) as GameObject).GetComponent<Assets>(); 
                 return _i; 
             }
         }
