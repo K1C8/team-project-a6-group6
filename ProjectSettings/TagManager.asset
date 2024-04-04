@@ -41,9 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2426118255
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Snake
+  - name: Over
     uniqueID: 4017260921
     locked: 0
