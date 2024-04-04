@@ -6,21 +6,43 @@ using static UnityEditor.PlayerSettings;
 public class Food : MonoBehaviour
 {
     public BoxCollider2D gridArea;
+    private Snake snake;
 
+    private void Awake()
+    {
+        snake = FindObjectOfType<Snake>();
+    }
     private void Start() 
     { 
         RandomizePosition();
     }
     public void RandomizePosition()
     {
-        Bounds bounds = this.gridArea.bounds;
-       
+        Bounds bounds = gridArea.bounds;
 
-        Vector2 spawnPosition = new Vector2Int(Mathf.RoundToInt(Random.Range(bounds.min.x, bounds.max.x)), Mathf.RoundToInt(Random.Range(bounds.min.y, bounds.max.y)));
+        // Pick a random position inside the bounds
+        // Round the values to ensure it aligns with the grid
+        int x = Mathf.RoundToInt(Random.Range(bounds.min.x, bounds.max.x));
+        int y = Mathf.RoundToInt(Random.Range(bounds.min.y, bounds.max.y));
 
-        //Instantiate(foodPrefab, spawnPosition, Quaternion.identity);
-        this.transform.position = spawnPosition;
-        Debug.Log(spawnPosition);
+        // Prevent the food from spawning on the snake
+        while (snake.Occupies(x, y))
+        {
+            x++;
+
+            if (x > bounds.max.x)
+            {
+                x = Mathf.RoundToInt(bounds.min.x);
+                y++;
+
+                if (y > bounds.max.y)
+                {
+                    y = Mathf.RoundToInt(bounds.min.y);
+                }
+            }
+        }
+
+        transform.position = new Vector2(x, y);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

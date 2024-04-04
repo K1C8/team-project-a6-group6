@@ -183,6 +183,19 @@ public class Snake : MonoBehaviour
         gridPositionList.AddRange(snakeMovePositionList);
         return gridPositionList;
     }
+    public bool Occupies(int x, int y)
+    {
+        foreach (Vector2Int position in snakeMovePositionList)
+        {
+            if (position.x == x &&
+                position.y == y)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     private IEnumerator CountingBeforeStart()
     {
