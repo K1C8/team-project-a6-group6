@@ -15,7 +15,6 @@ public class Snake : MonoBehaviour
     private float gridMoveTimerMax;
     private int snakeBodySize;
     private int score;
-    private int count = 3;
     Boolean isMovingUp = false;
     Boolean isMovingDown = false;
     Boolean isMovingRight = false;
@@ -24,9 +23,8 @@ public class Snake : MonoBehaviour
     public Sprite segmentSprite;
 
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI resumeText;
-    public GameObject gameOver; // Assign in the Inspector
-    private Boolean isResumed;
+    public GameObject gameOver; 
+
 
 
     private void Awake()
@@ -40,9 +38,7 @@ public class Snake : MonoBehaviour
         snakeMovePositionList = new List<Vector2Int>();
         snakeBodySize = 3;
         score = 0;
-        isResumed = false;
         Time.timeScale = 0;
-        StartCoroutine(CountingBeforeStart());
     }
 
 
@@ -198,35 +194,5 @@ public class Snake : MonoBehaviour
         }
 
         return false;
-    }
-
-    private IEnumerator CountingBeforeStart()
-    {
-        count = 3; // Reset count to its initial value
-        resumeText.gameObject.SetActive(true); // Make sure the text is visible
-        while (count > 0)
-        {
-            resumeText.text = count.ToString();
-            Debug.Log("Countdown: " + count); // Verify the countdown is running
-            yield return new WaitForSecondsRealtime(1); // Now it will wait for 1 real-time second, regardless of Time.timeScale
-            count--;
-        }
-
-        resumeText.text = "Start!";
-        yield return new WaitForSecondsRealtime(1); // Additional wait to show "Start!"
-
-        Debug.Log("Countdown finished"); // Confirm the coroutine reaches the end
-        //RestartGame();
-        resumeText.gameObject.SetActive(false);
-        Time.timeScale = 1;
-    }
-    public void Resume()
-    {
-        Time.timeScale = 0;
-        StartCoroutine(CountingBeforeStart());
-    }
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the scene to restart the game
     }
 }
