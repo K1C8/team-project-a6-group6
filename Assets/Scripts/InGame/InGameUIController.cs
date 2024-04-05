@@ -60,7 +60,7 @@ public class InGameUIController : MonoBehaviour
 
     public void PauseGame()
     {
-
+        Time.timeScale = 0;
     }
 
     public void ResumeGame()

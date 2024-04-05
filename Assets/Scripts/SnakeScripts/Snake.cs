@@ -41,7 +41,10 @@ public class Snake : MonoBehaviour
         snakeBodySize = 3;
         score = 0;
         isResumed = false;
+        Time.timeScale = 0;
+        StartCoroutine(CountingBeforeStart());
     }
+
 
     private void Update()
     {   
@@ -201,7 +204,6 @@ public class Snake : MonoBehaviour
     {
         count = 3; // Reset count to its initial value
         resumeText.gameObject.SetActive(true); // Make sure the text is visible
-
         while (count > 0)
         {
             resumeText.text = count.ToString();
@@ -214,17 +216,17 @@ public class Snake : MonoBehaviour
         yield return new WaitForSecondsRealtime(1); // Additional wait to show "Start!"
 
         Debug.Log("Countdown finished"); // Confirm the coroutine reaches the end
-        RestartGame();
+        //RestartGame();
+        resumeText.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
     public void Resume()
     {
+        Time.timeScale = 0;
         StartCoroutine(CountingBeforeStart());
-       
     }
-    private void RestartGame()
+    public void RestartGame()
     {
-        Time.timeScale = 1; // Resume normal game speed
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the scene to restart the game
     }
-
 }

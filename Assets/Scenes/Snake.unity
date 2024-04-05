@@ -1481,6 +1481,7 @@ GameObject:
   - component: {fileID: 325563813}
   - component: {fileID: 325563812}
   - component: {fileID: 325563811}
+  - component: {fileID: 325563815}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1571,6 +1572,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &325563815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325563810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8949b7988a009f64d8dc81d6d1867aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 124ee53fd17e0334b8c887676e325a56, type: 2}
+  masterSlider: {fileID: 1000022519}
+  bgmSlider: {fileID: 1237073502}
+  SFXSlider: {fileID: 2048009186}
 --- !u!1 &327917899
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,8 +2366,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2134506876}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.51750004, y: 0}
+  m_AnchorMax: {x: 0.51750004, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5449,12 +5466,12 @@ MonoBehaviour:
   m_MinValue: -80
   m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: -40
+  m_Value: -38.6
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
+      - m_Target: {fileID: 1211201954}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 1
         m_Arguments:
@@ -6386,6 +6403,7 @@ GameObject:
   - component: {fileID: 1211201951}
   - component: {fileID: 1211201953}
   - component: {fileID: 1211201952}
+  - component: {fileID: 1211201954}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -6456,6 +6474,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211201950}
   m_CullTransparentMesh: 1
+--- !u!114 &1211201954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211201950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8949b7988a009f64d8dc81d6d1867aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 124ee53fd17e0334b8c887676e325a56, type: 2}
+  masterSlider: {fileID: 1000022519}
+  bgmSlider: {fileID: 1237073502}
+  SFXSlider: {fileID: 2048009186}
 --- !u!1 &1237073500
 GameObject:
   m_ObjectHideFlags: 0
@@ -6546,8 +6580,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
+      - m_Target: {fileID: 1211201954}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
         m_MethodName: SetBgmVolume
         m_Mode: 1
         m_Arguments:
@@ -8383,7 +8417,7 @@ RectTransform:
   m_Father: {fileID: 1782726885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.51750004, y: 1}
   m_AnchoredPosition: {x: 2.5, y: 0}
   m_SizeDelta: {x: 15, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8693,7 +8727,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Resume
+  m_text: Restart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a59fcbb88387a614fb0e1694d2b7cb6b, type: 2}
   m_sharedMaterial: {fileID: 3894273643174941849, guid: a59fcbb88387a614fb0e1694d2b7cb6b, type: 2}
@@ -10065,7 +10099,7 @@ GameObject:
   - component: {fileID: 1842740718}
   - component: {fileID: 1842740717}
   m_Layer: 5
-  m_Name: Resume
+  m_Name: Restart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10149,7 +10183,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 475500701}
         m_TargetAssemblyTypeName: Snake, Assembly-CSharp
-        m_MethodName: Resume
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10970,8 +11004,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
+      - m_Target: {fileID: 1211201954}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
         m_MethodName: SetEffectVolume
         m_Mode: 1
         m_Arguments:
@@ -11140,10 +11174,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1791184858}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1211201954}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
