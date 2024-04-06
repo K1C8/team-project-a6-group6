@@ -23,7 +23,10 @@ public class Snake : MonoBehaviour
     public Sprite segmentSprite;
 
     public TextMeshProUGUI scoreText;
-    public GameObject gameOver; 
+    public GameObject gameOver;
+
+    public Boolean isGameOver;
+    public InGameUIController uiController;
 
 
 
@@ -39,15 +42,18 @@ public class Snake : MonoBehaviour
         snakeBodySize = 3;
         score = 0;
         Time.timeScale = 0;
+        isGameOver = false;
     }
 
 
     private void Update()
-    {   
-        HandleInput();
-        HandleGridMovement();
-        scoreText.text = score.ToString();
-        
+    {
+        if (!isGameOver && uiController.isRunning)
+        {
+            HandleInput();
+            HandleGridMovement();
+            scoreText.text = score.ToString();
+        }  
     }
 
     private void HandleInput()
@@ -154,11 +160,13 @@ public class Snake : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Food"))
         {
+            AudioManager.Instance.PlaySFX("Eat");
             snakeBodySize++;
             score++;
         }
         else if (other.gameObject.CompareTag("Obstacle")) 
-        {   
+        {
+            AudioManager.Instance.PlaySFX("Lose");
             GameOver();
         } 
     }
@@ -172,7 +180,7 @@ public class Snake : MonoBehaviour
     {
         gameOver.SetActive(true);
         Time.timeScale = 0;
-
+        isGameOver = true;
     }
 
     // Return the full list of positions occupied by the snake: Head + Body

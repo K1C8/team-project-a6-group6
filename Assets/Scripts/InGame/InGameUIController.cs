@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,6 +14,9 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider SFXSlider;
     public TextMeshProUGUI resumeText;
+    public Snake snake;
+    public Boolean isRunning = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,12 +67,17 @@ public class InGameUIController : MonoBehaviour
     public void PauseGame()
     {
         Time.timeScale = 0;
+        isRunning = false;
     }
 
     public void ResumeGame()
-    {
-        Time.timeScale = 0;
-        StartCoroutine(CountingBeforeStart());
+    {   
+        isRunning = true;
+        if (!snake.isGameOver) 
+        {
+            Time.timeScale = 0;
+            StartCoroutine(CountingBeforeStart());
+        } 
     }
     public void QuitGame()
     {
@@ -102,5 +111,9 @@ public class InGameUIController : MonoBehaviour
     public void PressToStart() 
     {
         Time.timeScale = 1;
+    }
+    public void PlayButtonSFX()
+    {
+        AudioManager.Instance.PlaySFX("Button");
     }
 }

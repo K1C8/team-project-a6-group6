@@ -1298,6 +1298,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 534610599}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+        m_MethodName: PlayButtonSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 534610599}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &322740194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1505,7 +1529,6 @@ GameObject:
   - component: {fileID: 325563813}
   - component: {fileID: 325563812}
   - component: {fileID: 325563811}
-  - component: {fileID: 325563815}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1596,23 +1619,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &325563815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325563810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8949b7988a009f64d8dc81d6d1867aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 124ee53fd17e0334b8c887676e325a56, type: 2}
-  masterSlider: {fileID: 1000022519}
-  bgmSlider: {fileID: 1237073502}
-  SFXSlider: {fileID: 2048009186}
-  resumeText: {fileID: 0}
 --- !u!1 &327917899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,6 +1721,8 @@ MonoBehaviour:
   bgmSlider: {fileID: 1237073502}
   SFXSlider: {fileID: 2048009186}
   resumeText: {fileID: 0}
+  snake: {fileID: 0}
+  isRunning: 1
 --- !u!1 &334123858
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,6 +2368,8 @@ MonoBehaviour:
   segmentSprite: {fileID: -2413806693520163455, guid: 6dce29da83a3a044693c2b01eea3c719, type: 3}
   scoreText: {fileID: 1799791845}
   gameOver: {fileID: 340230228}
+  isGameOver: 0
+  uiController: {fileID: 534610599}
 --- !u!1 &492798120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2679,6 +2689,8 @@ MonoBehaviour:
   bgmSlider: {fileID: 1237073502}
   SFXSlider: {fileID: 2048009186}
   resumeText: {fileID: 1325561307}
+  snake: {fileID: 475500701}
+  isRunning: 1
 --- !u!4 &534610600
 Transform:
   m_ObjectHideFlags: 0
@@ -3092,6 +3104,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 534610599}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+        m_MethodName: PlayButtonSFX
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5751,7 +5775,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1211201954}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 1
@@ -6341,6 +6365,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 534610599}
         m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+        m_MethodName: PlayButtonSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 534610599}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -6684,7 +6720,6 @@ GameObject:
   - component: {fileID: 1211201951}
   - component: {fileID: 1211201953}
   - component: {fileID: 1211201952}
-  - component: {fileID: 1211201954}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -6755,23 +6790,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211201950}
   m_CullTransparentMesh: 1
---- !u!114 &1211201954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1211201950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8949b7988a009f64d8dc81d6d1867aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 124ee53fd17e0334b8c887676e325a56, type: 2}
-  masterSlider: {fileID: 1000022519}
-  bgmSlider: {fileID: 1237073502}
-  SFXSlider: {fileID: 2048009186}
-  resumeText: {fileID: 0}
 --- !u!1 &1237073500
 GameObject:
   m_ObjectHideFlags: 0
@@ -6862,7 +6880,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1211201954}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
         m_MethodName: SetBgmVolume
         m_Mode: 1
@@ -7602,6 +7620,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 534610599}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+        m_MethodName: PlayButtonSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 534610599}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10535,6 +10577,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+        m_MethodName: PlayButtonSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1842740718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10935,6 +10989,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 534610599}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+        m_MethodName: PlayButtonSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 534610599}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11358,7 +11436,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1211201954}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
         m_MethodName: SetEffectVolume
         m_Mode: 1
@@ -11528,7 +11606,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1211201954}
+      - m_Target: {fileID: 534610599}
+        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+        m_MethodName: PlayButtonSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 534610599}
         m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1

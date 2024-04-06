@@ -2726,6 +2726,10 @@ MonoBehaviour:
   sfxSounds:
   - name: Button
     clip: {fileID: 8300000, guid: 0bb36014e255f5745b99a24e5ecd5916, type: 3}
+  - name: Lose
+    clip: {fileID: 8300000, guid: 885a2c0c8b5fa5949a792d6cfacef882, type: 3}
+  - name: Eat
+    clip: {fileID: 8300000, guid: 019333ddf5881244b88695eb419d43c8, type: 3}
   musicSource: {fileID: 1905460029}
   sfxSource: {fileID: 193268146}
 --- !u!4 &1186580103
@@ -3858,7 +3862,7 @@ MonoBehaviour:
   m_MinValue: -20
   m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: -2
+  m_Value: 2.7
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4877,7 +4881,7 @@ MonoBehaviour:
   m_MinValue: -20
   m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: -2
+  m_Value: 1.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
