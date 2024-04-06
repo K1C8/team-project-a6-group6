@@ -12,7 +12,6 @@ public class JetPlayerUpEvent : MonoBehaviour,IPointerDownHandler,IPointerUpHand
     // Update is called once per frame
     void Update()
     {
-        int test = 0;
         if (isPressed)
         {
             JetPlayer.transform.Translate(0, MoveUnit * Time.deltaTime, 0);
