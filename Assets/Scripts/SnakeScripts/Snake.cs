@@ -28,6 +28,14 @@ public class Snake : MonoBehaviour
     public Boolean isGameOver;
     public SnakeInGameUIController uiController;
 
+    public Sprite upHeadSprite;
+    public Sprite downHeadSprite;
+    public Sprite leftHeadSprite;
+    public Sprite rightHeadSprite;
+
+    private SpriteRenderer headSpriteRenderer;
+
+
 
 
     private void Awake()
@@ -43,6 +51,9 @@ public class Snake : MonoBehaviour
         score = 0;
         Time.timeScale = 0;
         isGameOver = false;
+
+        headSpriteRenderer = GetComponent<SpriteRenderer>();
+        headSpriteRenderer.sprite = rightHeadSprite; // Default facing right
     }
 
 
@@ -64,6 +75,7 @@ public class Snake : MonoBehaviour
             {
                 gridMoveDirection.x = 0;
                 gridMoveDirection.y = +1;
+                headSpriteRenderer.sprite = upHeadSprite;
             }
         }
         if (isMovingDown)
@@ -72,6 +84,7 @@ public class Snake : MonoBehaviour
             {
                 gridMoveDirection.x = 0;
                 gridMoveDirection.y = -1;
+                headSpriteRenderer.sprite = downHeadSprite;
             }
         }
         if (isMovingLeft)
@@ -80,6 +93,7 @@ public class Snake : MonoBehaviour
             {
                 gridMoveDirection.x = -1;
                 gridMoveDirection.y = 0;
+                headSpriteRenderer.sprite = leftHeadSprite;
             }
         }
         if (isMovingRight)
@@ -88,6 +102,7 @@ public class Snake : MonoBehaviour
             {
                 gridMoveDirection.x = +1;
                 gridMoveDirection.y = 0;
+                headSpriteRenderer.sprite = rightHeadSprite;
             }
         }
     }
@@ -99,6 +114,7 @@ public class Snake : MonoBehaviour
         isMovingDown = false;
         isMovingRight = false;
         isMovingLeft = false;
+        
     }
     public void MoveDown()
     {
@@ -106,6 +122,7 @@ public class Snake : MonoBehaviour
         isMovingDown = true;
         isMovingRight = false;
         isMovingLeft = false;
+        
     }
 
     public void MoveLeft()
@@ -114,6 +131,7 @@ public class Snake : MonoBehaviour
         isMovingDown = false;
         isMovingRight = false;
         isMovingLeft = true;
+        
     }
 
     public void MoveRight()
@@ -122,6 +140,7 @@ public class Snake : MonoBehaviour
         isMovingDown = false;
         isMovingRight = true;
         isMovingLeft = false;
+        
     }
 
 
@@ -145,7 +164,7 @@ public class Snake : MonoBehaviour
             for (int i = 0; i < snakeMovePositionList.Count; i++)
             {
                 Vector2Int snakeMovePosition = snakeMovePositionList[i];
-                World_Sprite worldSprite = World_Sprite.Create(new Vector3(snakeMovePosition.x, snakeMovePosition.y), Vector3.one * .7f, segmentSprite, Color.green);
+                World_Sprite worldSprite = World_Sprite.Create(new Vector3(snakeMovePosition.x, snakeMovePosition.y), Vector3.one * .75f, segmentSprite, Color.white);
                 worldSprite.AddBoxCollider2D(); 
                 worldSprite.SetTag("Obstacle");
                 FunctionTimer.Create(worldSprite.DestroySelf, gridMoveTimerMax);
