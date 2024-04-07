@@ -1298,8 +1298,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 1
         m_Arguments:
@@ -1310,8 +1310,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
@@ -1455,8 +1455,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PressToStart
         m_Mode: 1
         m_Arguments:
@@ -1720,9 +1720,6 @@ MonoBehaviour:
   masterSlider: {fileID: 1000022519}
   bgmSlider: {fileID: 1237073502}
   SFXSlider: {fileID: 2048009186}
-  resumeText: {fileID: 0}
-  snake: {fileID: 0}
-  isRunning: 1
 --- !u!1 &334123858
 GameObject:
   m_ObjectHideFlags: 0
@@ -2369,7 +2366,7 @@ MonoBehaviour:
   scoreText: {fileID: 1799791845}
   gameOver: {fileID: 340230228}
   isGameOver: 0
-  uiController: {fileID: 534610599}
+  uiController: {fileID: 534610601}
 --- !u!1 &492798120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,15 +2661,30 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 534610600}
-  - component: {fileID: 534610599}
+  - component: {fileID: 534610601}
   m_Layer: 0
-  m_Name: InGameUIController
+  m_Name: SnakeInGameUIController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &534610599
+--- !u!4 &534610600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534610598}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &534610601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2681,7 +2693,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 534610598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8949b7988a009f64d8dc81d6d1867aed, type: 3}
+  m_Script: {fileID: 11500000, guid: 4124eac637660a14e8ef28f5377c3456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 124ee53fd17e0334b8c887676e325a56, type: 2}
@@ -2691,21 +2703,6 @@ MonoBehaviour:
   resumeText: {fileID: 1325561307}
   snake: {fileID: 475500701}
   isRunning: 1
---- !u!4 &534610600
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534610598}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 115.25369, y: 335.9235, z: -4.607814}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &569863160
 GameObject:
   m_ObjectHideFlags: 0
@@ -2869,8 +2866,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PressToStart
         m_Mode: 1
         m_Arguments:
@@ -3112,8 +3109,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 1
         m_Arguments:
@@ -3124,8 +3121,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
         m_Arguments:
@@ -3257,8 +3254,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PressToStart
         m_Mode: 1
         m_Arguments:
@@ -3402,8 +3399,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PressToStart
         m_Mode: 1
         m_Arguments:
@@ -3734,12 +3731,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 20e92ebc7e4af484494ad783ff1f980d, type: 3}
   m_Color: {r: 1, g: 0.17406991, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.13, y: 3.1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3754,8 +3751,8 @@ Transform:
   m_GameObject: {fileID: 740271768}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -206, y: -365.83557, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 0.3465, y: 0.3465, z: 0.3465}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 652597993}
@@ -3805,18 +3802,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.035611033, y: 0.041546226}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 3.13, y: 3.1}
+    newSize: {x: 3.13, y: 3.1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.0089867, y: 2.5728314}
   m_EdgeRadius: 0
 --- !u!1 &770874084
 GameObject:
@@ -5768,25 +5765,13 @@ MonoBehaviour:
   m_FillRect: {fileID: 1465872927}
   m_HandleRect: {fileID: 492798121}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: -38.6
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
-        m_MethodName: SetMasterVolume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1005747910
 GameObject:
   m_ObjectHideFlags: 0
@@ -6363,8 +6348,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 1
         m_Arguments:
@@ -6375,8 +6360,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -6873,25 +6858,13 @@ MonoBehaviour:
   m_FillRect: {fileID: 1371599324}
   m_HandleRect: {fileID: 503669082}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: -40
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
-        m_MethodName: SetBgmVolume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1238992334
 GameObject:
   m_ObjectHideFlags: 0
@@ -7192,8 +7165,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PressToStart
         m_Mode: 1
         m_Arguments:
@@ -7628,8 +7601,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 1
         m_Arguments:
@@ -7640,8 +7613,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
@@ -9792,8 +9765,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PressToStart
         m_Mode: 1
         m_Arguments:
@@ -10565,9 +10538,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
-        m_MethodName: RestartGame
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
+        m_MethodName: PlayButtonSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10577,9 +10550,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
-        m_MethodName: PlayButtonSFX
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10997,8 +10970,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 1
         m_Arguments:
@@ -11009,8 +10982,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
@@ -11429,25 +11402,13 @@ MonoBehaviour:
   m_FillRect: {fileID: 1005747911}
   m_HandleRect: {fileID: 992155956}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: -40
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
-        m_MethodName: SetEffectVolume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &2051619353
 GameObject:
   m_ObjectHideFlags: 0
@@ -11606,8 +11567,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: PlayButtonSFX
         m_Mode: 1
         m_Arguments:
@@ -11618,8 +11579,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 534610599}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:

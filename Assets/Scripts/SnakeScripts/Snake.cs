@@ -26,7 +26,7 @@ public class Snake : MonoBehaviour
     public GameObject gameOver;
 
     public Boolean isGameOver;
-    public InGameUIController uiController;
+    public SnakeInGameUIController uiController;
 
 
 

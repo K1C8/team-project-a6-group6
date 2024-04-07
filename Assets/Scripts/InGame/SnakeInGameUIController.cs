@@ -1,16 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenuUIController : MonoBehaviour
+public class SnakeInGameUIController : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider SFXSlider;
+    public TextMeshProUGUI resumeText;
+    public Snake snake;
+    public Boolean isRunning = true;
 
     private void Start()
     {
@@ -52,31 +57,56 @@ public class MainMenuUIController : MonoBehaviour
         return linear != 0 ? 20.0f * Mathf.Log10(linear) : -80.0f;
     }
 
-    public void MultiModeButton()
+    public void PauseGame()
     {
-        SceneManager.LoadScene("MultiMode");
+        Time.timeScale = 0;
+        isRunning = false;
     }
 
-    public void SingleModeButton ()
+    public void ResumeGame()
     {
-        SceneManager.LoadScene("SingleMode");
+        isRunning = true;
+        if (!snake.isGameOver)
+        {
+            Time.timeScale = 0;
+            StartCoroutine(CountingBeforeStart());
+        }
+    }
+    public void QuitGame()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the scene to restart the game
+    }
+
+    private IEnumerator CountingBeforeStart()
+    {
+        int count = 3; // Reset count to its initial value
+        resumeText.gameObject.SetActive(true); // Make sure the text is visible
+        while (count > 0)
+        {
+            resumeText.text = count.ToString();
+            Debug.Log("Countdown: " + count); // Verify the countdown is running
+            yield return new WaitForSecondsRealtime(1); // Now it will wait for 1 real-time second, regardless of Time.timeScale
+            count--;
+        }
+
+        resumeText.text = "Start!";
+        yield return new WaitForSecondsRealtime(1); // Additional wait to show "Start!"
+
+        Debug.Log("Countdown finished"); // Confirm the coroutine reaches the end
+        resumeText.gameObject.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void PressToStart()
+    {
+        Time.timeScale = 1;
     }
     public void PlayButtonSFX()
     {
         AudioManager.Instance.PlaySFX("Button");
-    }
-
-    // Update after game scenes added
-    public void PlayTetris()
-    {
-        SceneManager.LoadScene("InGameTemp");
-    }
-    public void PlaySnake()
-    {
-        SceneManager.LoadScene("Snake");
-    }
-    public void PlayJet()
-    {
-        SceneManager.LoadScene("InGameTemp");
     }
 }
