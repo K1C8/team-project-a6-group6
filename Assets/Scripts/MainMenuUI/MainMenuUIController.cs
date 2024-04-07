@@ -13,7 +13,7 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private Slider SFXSlider;
 
     private void Start()
-    {
+    {   
         masterSlider.value = PlayerPrefs.GetFloat("masterVol", 0.75f); // Default value if not set
         bgmSlider.value = PlayerPrefs.GetFloat("bgmVol", 0.75f);
         SFXSlider.value = PlayerPrefs.GetFloat("sfxVol", 0.75f);
@@ -74,6 +74,7 @@ public class MainMenuUIController : MonoBehaviour
     public void PlaySnake()
     {
         SceneManager.LoadScene("Snake");
+        AudioManager.Instance.PlayMusic("BGM For Snake");
     }
     public void PlayJet()
     {
