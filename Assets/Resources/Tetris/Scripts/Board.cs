@@ -18,7 +18,7 @@ public class Board : MonoBehaviour
         get
         {
             Vector2Int position = new Vector2Int(-this.boardSize.x / 2, -this.boardSize.y / 2);
-            return new RectInt(position + new Vector2Int(0,1), this.boardSize + new Vector2Int(0, 4));
+            return new RectInt(position, this.boardSize + new Vector2Int(0, 4));
         }
     }
 
@@ -44,7 +44,7 @@ public class Board : MonoBehaviour
     {
         int randomCellIndex = Random.Range(0, this.tetrominoes.Length);
         TetrominoData data = this.tetrominoes[randomCellIndex];
-        data = this.tetrominoes[0]; // for test
+        data = this.tetrominoes[5]; // for test
         this.activePiece.Initialize(this, generatePosition, data);
         Set(this.activePiece);
     }

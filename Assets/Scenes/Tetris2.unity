@@ -419,9 +419,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tetrominoes:
-  - tetromino: 0
-    tile: {fileID: 11400000, guid: 5edbc8a388f414c49892a9eb1b2bc190, type: 2}
   - tetromino: 1
+    tile: {fileID: 11400000, guid: 5edbc8a388f414c49892a9eb1b2bc190, type: 2}
+  - tetromino: 0
     tile: {fileID: 11400000, guid: dede77b96620a9a41b55ed40184be30f, type: 2}
   - tetromino: 2
     tile: {fileID: 11400000, guid: 392f25deb19cc264c80d1d38c5232b5d, type: 2}
@@ -434,6 +434,7 @@ MonoBehaviour:
   - tetromino: 6
     tile: {fileID: 11400000, guid: e89f8d9a82dfebd4b949622445b7a413, type: 2}
   generatePosition: {x: -1, y: 6, z: 0}
+  boardSize: {x: 10, y: 14}
 --- !u!114 &894310214
 MonoBehaviour:
   m_ObjectHideFlags: 0
