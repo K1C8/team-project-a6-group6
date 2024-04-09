@@ -15,7 +15,6 @@ public class Snake : MonoBehaviour
     private float gridMoveTimerMax;
     private int snakeBodySize;
     private int score;
-    private int count = 3;
     Boolean isMovingUp = false;
     Boolean isMovingDown = false;
     Boolean isMovingRight = false;
@@ -24,9 +23,19 @@ public class Snake : MonoBehaviour
     public Sprite segmentSprite;
 
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI resumeText;
-    public GameObject gameOver; // Assign in the Inspector
-    private Boolean isResumed;
+    public GameObject gameOver;
+
+    public Boolean isGameOver;
+    public SnakeInGameUIController uiController;
+
+    public Sprite upHeadSprite;
+    public Sprite downHeadSprite;
+    public Sprite leftHeadSprite;
+    public Sprite rightHeadSprite;
+
+    private SpriteRenderer headSpriteRenderer;
+
+
 
 
     private void Awake()
@@ -40,15 +49,22 @@ public class Snake : MonoBehaviour
         snakeMovePositionList = new List<Vector2Int>();
         snakeBodySize = 3;
         score = 0;
-        isResumed = false;
+        Time.timeScale = 0;
+        isGameOver = false;
+
+        headSpriteRenderer = GetComponent<SpriteRenderer>();
+        headSpriteRenderer.sprite = rightHeadSprite; // Default facing right
     }
 
+
     private void Update()
-    {   
-        HandleInput();
-        HandleGridMovement();
-        scoreText.text = score.ToString();
-        
+    {
+        if (!isGameOver && uiController.isRunning)
+        {
+            HandleInput();
+            HandleGridMovement();
+            scoreText.text = score.ToString();
+        }  
     }
 
     private void HandleInput()
@@ -59,6 +75,7 @@ public class Snake : MonoBehaviour
             {
                 gridMoveDirection.x = 0;
                 gridMoveDirection.y = +1;
+                headSpriteRenderer.sprite = upHeadSprite;
             }
         }
         if (isMovingDown)
@@ -67,6 +84,7 @@ public class Snake : MonoBehaviour
             {
                 gridMoveDirection.x = 0;
                 gridMoveDirection.y = -1;
+                headSpriteRenderer.sprite = downHeadSprite;
             }
         }
         if (isMovingLeft)
@@ -75,6 +93,7 @@ public class Snake : MonoBehaviour
             {
                 gridMoveDirection.x = -1;
                 gridMoveDirection.y = 0;
+                headSpriteRenderer.sprite = leftHeadSprite;
             }
         }
         if (isMovingRight)
@@ -83,6 +102,7 @@ public class Snake : MonoBehaviour
             {
                 gridMoveDirection.x = +1;
                 gridMoveDirection.y = 0;
+                headSpriteRenderer.sprite = rightHeadSprite;
             }
         }
     }
@@ -94,6 +114,7 @@ public class Snake : MonoBehaviour
         isMovingDown = false;
         isMovingRight = false;
         isMovingLeft = false;
+        
     }
     public void MoveDown()
     {
@@ -101,6 +122,7 @@ public class Snake : MonoBehaviour
         isMovingDown = true;
         isMovingRight = false;
         isMovingLeft = false;
+        
     }
 
     public void MoveLeft()
@@ -109,6 +131,7 @@ public class Snake : MonoBehaviour
         isMovingDown = false;
         isMovingRight = false;
         isMovingLeft = true;
+        
     }
 
     public void MoveRight()
@@ -117,6 +140,7 @@ public class Snake : MonoBehaviour
         isMovingDown = false;
         isMovingRight = true;
         isMovingLeft = false;
+        
     }
 
 
@@ -140,7 +164,7 @@ public class Snake : MonoBehaviour
             for (int i = 0; i < snakeMovePositionList.Count; i++)
             {
                 Vector2Int snakeMovePosition = snakeMovePositionList[i];
-                World_Sprite worldSprite = World_Sprite.Create(new Vector3(snakeMovePosition.x, snakeMovePosition.y), Vector3.one * .7f, segmentSprite, Color.green);
+                World_Sprite worldSprite = World_Sprite.Create(new Vector3(snakeMovePosition.x, snakeMovePosition.y), Vector3.one * .75f, segmentSprite, Color.white);
                 worldSprite.AddBoxCollider2D(); 
                 worldSprite.SetTag("Obstacle");
                 FunctionTimer.Create(worldSprite.DestroySelf, gridMoveTimerMax);
@@ -155,11 +179,13 @@ public class Snake : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Food"))
         {
+            AudioManager.Instance.PlaySFX("Eat");
             snakeBodySize++;
             score++;
         }
         else if (other.gameObject.CompareTag("Obstacle")) 
-        {   
+        {
+            AudioManager.Instance.PlaySFX("Lose");
             GameOver();
         } 
     }
@@ -173,7 +199,7 @@ public class Snake : MonoBehaviour
     {
         gameOver.SetActive(true);
         Time.timeScale = 0;
-
+        isGameOver = true;
     }
 
     // Return the full list of positions occupied by the snake: Head + Body
@@ -196,35 +222,4 @@ public class Snake : MonoBehaviour
 
         return false;
     }
-
-    private IEnumerator CountingBeforeStart()
-    {
-        count = 3; // Reset count to its initial value
-        resumeText.gameObject.SetActive(true); // Make sure the text is visible
-
-        while (count > 0)
-        {
-            resumeText.text = count.ToString();
-            Debug.Log("Countdown: " + count); // Verify the countdown is running
-            yield return new WaitForSecondsRealtime(1); // Now it will wait for 1 real-time second, regardless of Time.timeScale
-            count--;
-        }
-
-        resumeText.text = "Start!";
-        yield return new WaitForSecondsRealtime(1); // Additional wait to show "Start!"
-
-        Debug.Log("Countdown finished"); // Confirm the coroutine reaches the end
-        RestartGame();
-    }
-    public void Resume()
-    {
-        StartCoroutine(CountingBeforeStart());
-       
-    }
-    private void RestartGame()
-    {
-        Time.timeScale = 1; // Resume normal game speed
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the scene to restart the game
-    }
-
 }
