@@ -16,6 +16,7 @@ public class MatchingUI : MonoBehaviour
     [SerializeField] private GameScenes[] gameScenes;
     void Start()
     {
+        AudioManager.Instance.PlayMusic("BGM For Matching");
         StartCoroutine(SimulateMatching());
     }
 
@@ -38,6 +39,7 @@ public class MatchingUI : MonoBehaviour
         int randomIndex = Random.Range(0, gameScenes.Length);
         GameScenes selectedGame = gameScenes[randomIndex];
 
+        AudioManager.Instance.PlaySFX("Matched");
         // Activate game UI after 0.5 seconds
         yield return new WaitForSeconds(0.5f);
         gameName.text = selectedGame.sceneName;
