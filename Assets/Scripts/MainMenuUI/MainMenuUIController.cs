@@ -13,7 +13,8 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private Slider SFXSlider;
 
     private void Start()
-    {   
+    {
+        Time.timeScale = 1f;
         masterSlider.value = PlayerPrefs.GetFloat("masterVol", 0.75f); // Default value if not set
         bgmSlider.value = PlayerPrefs.GetFloat("bgmVol", 0.75f);
         SFXSlider.value = PlayerPrefs.GetFloat("sfxVol", 0.75f);
