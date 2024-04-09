@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerBulletLogic : MonoBehaviour
 {
+    private int _damage = 50;
+
     [SerializeField]
     private float _speed = 12.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,14 +27,31 @@ public class PlayerBulletLogic : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        GameObject otherObject = other.gameObject;
         // If the other object is an Enemy, destroy the enemy then destroy this bullet instance.
         if (other.tag == "Enemy")
         {
-            if (other.gameObject is IExplosible)
+            IExplosible enemy = null;
+            switch (other.name)
+            {
+                case "EnemyEntryPrefab(Clone)":
+                    {
+                        enemy = otherObject.GetComponent<EnemyEntryLogic>();
+                        break;
+                    }
+                default:
+                    break;
+            }
+            if (enemy != null )
+            {
+                Debug.Log("EnemyEntryLogic found.");
+                enemy.TakeDamage(_damage);
+            }
+            if (enemy is IExplosible)
             {
                 Debug.Log("IExplosible instance caught.");
             }
-            Destroy(other.gameObject);
+            // Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
     }

@@ -14,6 +14,8 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
     private float _yLowerBound = 2.5f;
     private Vector3 _spawnPosition;
     private int _direction = 1;
+    private int _hitPoint = 50;
+    private int _score = 50;
 
     [SerializeField]
     private float _boardLeftBorder = -2.5f;
@@ -84,6 +86,21 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
 
     public int GetHealth()
     {
-        return 100;
+        return _hitPoint;
+    }
+
+    public int GetScore()
+    {
+        return _score;
+    }
+
+    public void TakeDamage(int damageTaken)
+    {
+        _hitPoint -= damageTaken;
+        Debug.Log(string.Format("Enemy Entry has {0} hit point left.", _hitPoint));
+        if (_hitPoint < 1)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -15,6 +15,8 @@ public class JetPlayerController : MonoBehaviour
     private float _boardUpperBorder = -3.5f;
     private float _boardRightBorder = 2.5f;
     private float _boardLeftBorder = -2.5f;
+    private float _invincibleCoolDownTime = 3.0f;
+    private Collider2D _playerCollider2D;
 
     [SerializeField] 
     public GameObject JetPlayer;
@@ -118,5 +120,20 @@ public class JetPlayerController : MonoBehaviour
             Destroy(this.gameObject);
         }
         Debug.Log(string.Format("Updating JetPlayer health and lives with damage as: damage {0}, HP {1}, lives {2}", damage, _healthPoint, _lives));
+
+        InvincibleEffect();
+    }
+
+    IEnumerator InvincibleTimer()
+    {
+        yield return new WaitForSeconds(_invincibleCoolDownTime);
+        _playerCollider2D.enabled = true;
+    }
+
+    void InvincibleEffect()
+    {
+        _playerCollider2D = this.gameObject.GetComponent<CapsuleCollider2D>();
+        _playerCollider2D.enabled = false; 
+        StartCoroutine(InvincibleTimer());
     }
 }
