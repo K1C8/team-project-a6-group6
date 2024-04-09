@@ -21,4 +21,18 @@ public class PlayerBulletLogic : MonoBehaviour
             Destroy(gameObject, 1);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // If the other object is an Enemy, destroy the enemy then destroy this bullet instance.
+        if (other.tag == "Enemy")
+        {
+            if (other.gameObject is IExplosible)
+            {
+                Debug.Log("IExplosible instance caught.");
+            }
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
+    }
 }

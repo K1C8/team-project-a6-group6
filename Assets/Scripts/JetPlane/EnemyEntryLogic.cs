@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class EnemyEntryLogic : MonoBehaviour
+public class EnemyEntryLogic : MonoBehaviour, IExplosible
 {
     private float _xStart;
     private float _xPosition;
@@ -74,6 +74,16 @@ public class EnemyEntryLogic : MonoBehaviour
         {
             transform.Translate(Vector3.right * _speed * _direction * Time.deltaTime);
         }
-        Debug.Log(string.Format("Updating EnemyEntry intended as: x {0}, y {1}, direction {2}", _xPosition, _yPosition, _direction));
+        // Debug.Log(string.Format("Updating EnemyEntry intended as: x {0}, y {1}, direction {2}", _xPosition, _yPosition, _direction));
+    }
+
+    public int GetDamage()
+    {
+        return 50;
+    }
+
+    public int GetHealth()
+    {
+        return 100;
     }
 }
