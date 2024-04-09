@@ -54,7 +54,7 @@ public class MainMenuUIController : MonoBehaviour
 
     public void MultiModeButton()
     {
-        SceneManager.LoadScene("MultiMode");
+        SceneManager.LoadScene("Matching");
     }
 
     public void SingleModeButton ()
