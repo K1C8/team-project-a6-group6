@@ -74,7 +74,9 @@ public class SnakeInGameUIController : MonoBehaviour
     }
     public void QuitGame()
     {
+        AudioManager.Instance.PlayMusic("BGM");
         SceneManager.LoadScene("MainMenu");
+        
     }
     public void RestartGame()
     {
