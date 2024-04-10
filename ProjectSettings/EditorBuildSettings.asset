@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InGameTemp.unity
     guid: 35340cb4ba00a2d40957f44bd40b5ab9
+  - enabled: 1
+    path: Assets/Scenes/Snake.unity
+    guid: 0f629b81a181f2640bf06a3297c58cbe
   m_configObjects: {}
