@@ -71,6 +71,8 @@ public class MainMenuUIController : MonoBehaviour
     public void PlayTetris()
     {
         SceneManager.LoadScene("InGameTemp");
+        SceneManager.LoadScene("Tetris");
+        AudioManager.Instance.PlayMusic("BGM For Tetris");
     }
     public void PlaySnake()
     {
