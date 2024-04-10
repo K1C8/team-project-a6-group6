@@ -11,13 +11,23 @@ public class Piece : MonoBehaviour
     public Vector3Int[] cells { get; private set; }
     public Vector3Int position { get; private set; }
     public int rotationIndex { get; private set; } // (0,1,2,3) storing 4 rotations
+
+    public float stepDelay = 1f;
+    public float lockDelay = .5f;
+
+    private float stepTime;
+    private float lockTime; // time for locking after the tetris touches the ground?
+    private bool isLocked;
+
     public void Initialize(Board board, Vector3Int position, TetrominoData data)
     {
         this.board = board;
         this.position = position;
         this.data = data;
         this.rotationIndex = 0;
-
+        this.stepTime = Time.time + this.stepDelay; // trigger a stepping each stepDelay amount of time
+        this.lockTime = 0f;
+        this.isLocked = false;
 
         if (this.cells == null)
         {
@@ -28,12 +38,14 @@ public class Piece : MonoBehaviour
         { 
             this.cells[i] = ((Vector3Int)data.cells[i]);
         }
-        //GetComponent<Board>(); 
     }
 
     public void Update()
     {
+        if (this.isLocked) { return; }
+
         this.board.Clear(this);
+        this.lockTime += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -56,6 +68,39 @@ public class Piece : MonoBehaviour
             Rotate();
         }
         this.board.Set(this);
+        
+        if (Time.time >= this.stepTime)
+        {
+            Step();
+        }
+    
+    }
+
+    private void Step()
+    {
+        this.stepTime = Time.time + this.stepDelay;
+        this.board.Clear(this);
+        bool valid = Move(Vector2Int.down);
+
+        if (valid)
+        {
+            this.lockTime = 0f;
+        }
+
+        if (this.lockTime >= this.lockDelay)
+        {
+            Debug.Log("[Lock] in [Step]. lockTime is " + this.lockTime + ", valid flag is " + valid + " ---------- " + Time.time.ToString());
+            Lock();
+        }
+        this.board.Set(this);
+    }
+
+    private void Lock()
+    {
+        this.board.Set(this);
+        this.isLocked = true;
+        this.lockTime = 0f;
+        this.board.GeneratePiece();
     }
 
     private void HardDrop()
@@ -64,6 +109,7 @@ public class Piece : MonoBehaviour
         {
             continue;
         }
+        Lock();
     }
 
     private bool Move(Vector2Int translation)
@@ -77,6 +123,7 @@ public class Piece : MonoBehaviour
         if (valid)
         {
             this.position = newPosition;
+            //this.lockTime = 0f;
         }
 
         return valid;

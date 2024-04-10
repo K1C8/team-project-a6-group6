@@ -44,7 +44,6 @@ public class Board : MonoBehaviour
     {
         int randomCellIndex = Random.Range(0, this.tetrominoes.Length);
         TetrominoData data = this.tetrominoes[randomCellIndex];
-        data = this.tetrominoes[5]; // for test
         this.activePiece.Initialize(this, generatePosition, data);
         Set(this.activePiece);
     }
@@ -76,8 +75,16 @@ public class Board : MonoBehaviour
         for (int i = 0; i < piece.cells.Length; i++)
         {
             Vector3Int tilePosition = piece.cells[i] + position;
-            if (!bounds.Contains((Vector2Int)tilePosition)) { return false; }
-            if (this.tilemap.HasTile(tilePosition)) { return false;  }
+            if (!bounds.Contains((Vector2Int)tilePosition)) 
+            {
+                Debug.Log("out of bound!");
+                return false; 
+            }
+            if (this.tilemap.HasTile(tilePosition)) 
+            { 
+                Debug.Log("has tile!");
+                return false;
+            }
         }
         return true;
     }
