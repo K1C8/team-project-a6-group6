@@ -12,14 +12,14 @@ public class Piece : MonoBehaviour
     public Vector3Int position { get; private set; }
     public int rotationIndex { get; private set; } // (0,1,2,3) storing 4 rotations
 
-    public float stepDelay = 1f;
+    public float stepDelay;
     public float lockDelay = .5f;
 
     private float stepTime;
     private float lockTime; // time for locking after the tetris touches the ground?
     private bool isLocked;
 
-    public void Initialize(Board board, Vector3Int position, TetrominoData data)
+    public void Initialize(Board board, Vector3Int position, TetrominoData data, float stepDelay)
     {
         this.board = board;
         this.position = position;
@@ -28,6 +28,7 @@ public class Piece : MonoBehaviour
         this.stepTime = Time.time + this.stepDelay; // trigger a stepping each stepDelay amount of time
         this.lockTime = 0f;
         this.isLocked = false;
+        this.stepDelay = stepDelay;
 
         if (this.cells == null)
         {
@@ -44,7 +45,7 @@ public class Piece : MonoBehaviour
     {
         if (this.isLocked) { return; }
 
-        this.board.Clear(this);
+        this.board.ClearTile(this);
         this.lockTime += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.A))
@@ -79,7 +80,7 @@ public class Piece : MonoBehaviour
     private void Step()
     {
         this.stepTime = Time.time + this.stepDelay;
-        this.board.Clear(this);
+        this.board.ClearTile(this);
         bool valid = Move(Vector2Int.down);
 
         if (valid)
@@ -89,7 +90,8 @@ public class Piece : MonoBehaviour
 
         if (this.lockTime >= this.lockDelay)
         {
-            Debug.Log("[Lock] in [Step]. lockTime is " + this.lockTime + ", valid flag is " + valid + " ---------- " + Time.time.ToString());
+            //Debug.Log("[Lock] in [Step]. lockTime is " + this.lockTime +
+            //", valid flag is " + valid + " ---------- " + Time.time.ToString());
             Lock();
         }
         this.board.Set(this);
@@ -99,8 +101,13 @@ public class Piece : MonoBehaviour
     {
         this.board.Set(this);
         this.isLocked = true;
-        this.lockTime = 0f;
-        this.board.GeneratePiece();
+
+        if (!this.board.isGameOver)
+        {
+            this.lockTime = 0f;
+            this.board.ClearRows();
+            this.board.GeneratePiece();
+        }
     }
 
     private void HardDrop()

@@ -53,4 +53,15 @@ public static class Data
         { Tetromino.T, WallKicksJLOSTZ },
         { Tetromino.Z, WallKicksJLOSTZ },
     };
+
+    public static readonly Vector2[] ScoreVersusSpeed = new Vector2[]
+    {
+        new Vector2(0, 1), new Vector2(1, 1), new Vector2(2, 1),
+        new Vector2(3, 0.9f), new Vector2(4, 0.9f), new Vector2(5, 0.9f),
+        new Vector2(6, 0.8f), new Vector2(7, 0.8f), new Vector2(8, 0.8f),
+        new Vector2(9, 0.7f), new Vector2(10, 0.7f), new Vector2(11, 0.7f),
+        new Vector2(12, 0.6f), new Vector2(13, 0.6f), new Vector2(14, 0.6f),
+        new Vector2(15, 0.5f), new Vector2(16, 0.5f), new Vector2(17, 0.5f),
+
+    };
 }
