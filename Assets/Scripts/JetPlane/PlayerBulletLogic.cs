@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBulletLogic : MonoBehaviour
+public class PlayerBulletLogic : MonoBehaviour, IBullet
 {
     private int _damage = 50;
 
     [SerializeField]
-    private float _speed = 12.0f;
+    private float _speed = 8.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +25,12 @@ public class PlayerBulletLogic : MonoBehaviour
         }
     }
 
+    public int GetDamage()
+    {
+        return _damage;
+    }
+
+    /*
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject otherObject = other.gameObject;
@@ -54,5 +60,5 @@ public class PlayerBulletLogic : MonoBehaviour
             // Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
-    }
+    }*/
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    private float _spawnInterval = 4.0f;
+    private float _spawnMaximumInterval = 4.0f;
     private bool _isPlayerAlive = true;
 
     [SerializeField]
@@ -33,7 +33,7 @@ public class EnemySpawnManager : MonoBehaviour
             Vector3 positionToSpawn = new Vector3(Random.Range(-2f, 2f), 4, 0);
             GameObject newEnemyEntry = Instantiate(_enemyEntry, positionToSpawn, Quaternion.identity);
             newEnemyEntry.transform.parent = _containerTypeEnemy.transform;
-            yield return new WaitForSeconds(_spawnInterval);
+            yield return new WaitForSeconds(Random.Range(0.5f, _spawnMaximumInterval));
         }
     }
 

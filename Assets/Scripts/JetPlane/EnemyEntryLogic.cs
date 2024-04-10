@@ -16,6 +16,11 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
     private int _direction = 1;
     private int _hitPoint = 50;
     private int _score = 50;
+    private int _damage = 50;
+    private float _fireInterval = 3.0f;
+    private int _burstCount = 1;
+    private bool _canFire = true;
+    private GameObject _containerTypeEnemyBullet;
 
     [SerializeField]
     private float _boardLeftBorder = -2.5f;
@@ -23,6 +28,8 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
     private float _boardRightBorder = 2.5f;
     [SerializeField]
     private float _speed = 2f;
+    [SerializeField]
+    private GameObject _enemyEntryBullet;
 
     // Start is called before the first frame update
     void Start()
@@ -46,24 +53,35 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
         _spawnPosition = new Vector3(_xPosition, 4, 0);
         transform.position = _spawnPosition;
 
+        _containerTypeEnemyBullet = GameObject.Find("EnemyBulletContainer");
+        if (_containerTypeEnemyBullet == null)
+        {
+            Debug.LogWarning("Container for enemy bullets is null.");
+        }
+    }
 
+    IEnumerator DirectionDecision()
+    {
+        yield return new WaitForSecondsRealtime(0.2f);
+        _xPosition = transform.position.x;
+        if (_xPosition < _xLeftBound)
+        {
+            _direction = 1;
+        }
+        else if (_xPosition > _xRightBound)
+        {
+            _direction = -1;
+        }
+    }
+
+    IEnumerator BulletTimer()
+    {
+        yield return new WaitForSeconds(_fireInterval);
+        _canFire = true;
     }
 
     void ControlMovement()
     {
-        IEnumerator DirectionDecision()
-        {
-            yield return new WaitForSecondsRealtime(0.2f);
-            _xPosition = transform.position.x;
-            if (_xPosition < _xLeftBound) 
-            {
-                _direction = 1;
-            } else if (_xPosition > _xRightBound)
-            {
-                _direction = -1;
-            }
-        }
-
         _xPosition = transform.position.x;
         _yPosition = transform.position.y;
 
@@ -75,6 +93,16 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
         } else
         {
             transform.Translate(Vector3.right * _speed * _direction * Time.deltaTime);
+            if (_canFire)
+            {
+                _canFire = false;
+                GameObject bullet = Instantiate(_enemyEntryBullet, transform.position + new Vector3(0f, -0.25f, 0f), Quaternion.identity);
+                if (_containerTypeEnemyBullet != null)
+                {
+                    bullet.transform.parent = _containerTypeEnemyBullet.transform;
+                }
+                StartCoroutine(BulletTimer());
+            }
         }
         // Debug.Log(string.Format("Updating EnemyEntry intended as: x {0}, y {1}, direction {2}", _xPosition, _yPosition, _direction));
     }
@@ -101,6 +129,45 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
         if (_hitPoint < 1)
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        GameObject otherObject = other.gameObject;
+        // If the other object is the player, deduct the hit point of the player then destroy this bullet instance.
+        if (other.tag == "Player")
+        {
+            IExplosible player = null;
+            PlayerBulletLogic bullet = null;
+            int selfDamage = 0;
+            switch (other.name)
+            {
+                case "JetPlayer":
+                    {
+                        player = otherObject.GetComponent<JetPlayerController>();
+                        break;
+                    }
+                case "PlayerBulletPrefab(Clone)":
+                    {
+                        bullet = otherObject.GetComponent<PlayerBulletLogic>();
+                        break;
+                    }
+                default:
+                    break;
+            }
+            if (player != null)
+            {
+                Debug.Log("JetPlayerController found.");
+                selfDamage = player.GetDamage();
+                player.TakeDamage(_damage);
+                TakeDamage(selfDamage);
+            } else if (bullet != null)
+            {
+                selfDamage = bullet.GetDamage();
+                Destroy(otherObject);
+                TakeDamage(selfDamage);
+            }
         }
     }
 }

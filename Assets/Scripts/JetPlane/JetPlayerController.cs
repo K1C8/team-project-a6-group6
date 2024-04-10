@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JetPlayerController : MonoBehaviour
+public class JetPlayerController : MonoBehaviour, IExplosible
 {
     private float _fireInterval = 0.2f;
     private int _burstCount = 1;
     private bool _canFire = true;
     private int _healthPoint = 100;
     private int _lives = 2;
+    private bool _isInvincible = false;
+    private SpriteRenderer _spriteRenderer;
     private EnemySpawnManager _enemySpawnManager;
 
-    private float _boardLowerBorder = 3.5f;
-    private float _boardUpperBorder = -3.5f;
+    private float _boardLowerBorder = 2.6f;
+    private float _boardUpperBorder = -2.6f;
     private float _boardRightBorder = 2.5f;
     private float _boardLeftBorder = -2.5f;
     private float _invincibleCoolDownTime = 3.0f;
@@ -31,6 +33,7 @@ public class JetPlayerController : MonoBehaviour
     void Start()
     {
         _enemySpawnManager = GameObject.Find("EnemySpawnManager").GetComponent<EnemySpawnManager>();
+        _spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
 
         // Check if _enemySpawnManger is null.
         if (_enemySpawnManager == null ) 
@@ -66,13 +69,39 @@ public class JetPlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // If other is enemy, then damage the player and destroy (for now) the enemy.
+        GameObject otherObject = other.gameObject;
+        // If the other object is an Enemy, destroy the enemy then destroy this bullet instance.
         if (other.tag == "Enemy")
         {
-            int damagePoint = 50;
-            Destroy(other.gameObject);
-            Damage(damagePoint);
+            IBullet bullet = null;
+            switch (other.name)
+            {
+                case "EnemyEntryBulletPrefab(Clone)":
+                    {
+                        bullet = otherObject.GetComponent<EnemyEntryBulletLogic>();
+                        break;
+                    }
+                default:
+                    break;
+            }
+            if (bullet != null)
+            {
+                Debug.Log("Bullet from enemy collided.");
+                int selfDamage = bullet.GetDamage();
+                Destroy(other.gameObject);
+                TakeDamage(selfDamage);
+            }
         }
+    }
+
+    public int GetDamage()
+    {
+        return 100;
+    }
+
+    public void TakeDamage(int damageTaken)
+    {
+        Damage(damageTaken);
     }
 
     private Vector3 BoundaryCheckAndMove()
@@ -128,12 +157,32 @@ public class JetPlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(_invincibleCoolDownTime);
         _playerCollider2D.enabled = true;
+        _isInvincible = false;
+        _spriteRenderer.enabled = true;
+    }
+
+    IEnumerator InvincibleFlicker()
+    {
+        while (_isInvincible)
+        {
+            _spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            _spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(0.25f);
+        }
     }
 
     void InvincibleEffect()
     {
-        _playerCollider2D = this.gameObject.GetComponent<CapsuleCollider2D>();
+        _playerCollider2D = this.gameObject.GetComponent<PolygonCollider2D>();
         _playerCollider2D.enabled = false; 
+        _isInvincible = true;
         StartCoroutine(InvincibleTimer());
+        if (_isInvincible)
+        {
+            StartCoroutine(InvincibleFlicker());
+        }
     }
+
+
 }
