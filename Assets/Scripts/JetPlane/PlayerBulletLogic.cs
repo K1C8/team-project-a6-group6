@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBulletLogic : MonoBehaviour, IBullet
 {
     private int _damage = 50;
+    private int _angle = 0;
 
     [SerializeField]
     private float _speed = 8.0f;
@@ -18,7 +19,9 @@ public class PlayerBulletLogic : MonoBehaviour, IBullet
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.up * _speed * Time.deltaTime);
+        Vector3 vector = Vector3.up * _speed * Time.deltaTime;
+        vector = Quaternion.Euler(0, 0, _angle) * vector;
+        transform.Translate(vector);
         if (transform.position.y > 5f)
         {
             Destroy(gameObject, 1);
@@ -28,6 +31,11 @@ public class PlayerBulletLogic : MonoBehaviour, IBullet
     public int GetDamage()
     {
         return _damage;
+    }
+
+    public void SetAngle(int angle)
+    {
+        _angle = angle;
     }
 
     /*

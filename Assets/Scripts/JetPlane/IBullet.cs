@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IBullet
 {
     public int GetDamage();
+
+    public void SetAngle(int angle);
 }

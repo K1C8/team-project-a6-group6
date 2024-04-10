@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyEntryBulletLogic : MonoBehaviour, IBullet
 {
     private int _damage = 50;
+    private int _angle = 0;
 
     [SerializeField]
     private float _speed = 6.0f;
@@ -30,7 +31,11 @@ public class EnemyEntryBulletLogic : MonoBehaviour, IBullet
         return _damage;
     }
 
-    
+    public void SetAngle(int angle)
+    {
+        _angle = angle;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject otherObject = other.gameObject;

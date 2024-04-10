@@ -13,12 +13,17 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     private SpriteRenderer _spriteRenderer;
     private EnemySpawnManager _enemySpawnManager;
 
+    private bool _isKeyUpPressed = false;
+    private bool _isKeyDownPressed = false;
+    private bool _isKeyLeftPressed = false;
+    private bool _isKeyRightPressed = false;
     private float _boardLowerBorder = 2.6f;
     private float _boardUpperBorder = -2.6f;
     private float _boardRightBorder = 2.5f;
     private float _boardLeftBorder = -2.5f;
     private float _invincibleCoolDownTime = 3.0f;
     private Collider2D _playerCollider2D;
+    private int _bulletAngle = 8;
 
     [SerializeField] 
     public GameObject JetPlayer;
@@ -54,9 +59,14 @@ public class JetPlayerController : MonoBehaviour, IExplosible
 
         if (_canFire)
         {
+            int angleWidthTotal = _bulletAngle * (_burstCount - 1);
+            int angle = angleWidthTotal / -2;
             for (int i = 0; i < _burstCount; i++)
             {
                 GameObject bullet = Instantiate(_bulletPrefab, transform.position + new Vector3(0f, 0.25f, 0f), Quaternion.identity);
+                IBullet bulletLogic = bullet.GetComponent<PlayerBulletLogic>();
+                bulletLogic.SetAngle(angle);
+                angle += _bulletAngle;
                 bullet.transform.parent = _containerTypeBullet.transform;
             }
             _canFire = false;
@@ -64,7 +74,7 @@ public class JetPlayerController : MonoBehaviour, IExplosible
         }
 
         transform.Translate(BoundaryCheckAndMove());
-
+        // ResetKeyPressed();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -108,6 +118,22 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     {
         float _yMovement = Input.GetAxisRaw("Vertical");
         float _xMovement = Input.GetAxisRaw("Horizontal");
+        if (_isKeyUpPressed)
+        {
+            _yMovement += 1.0f;
+        }
+        if (_isKeyDownPressed)
+        {
+            _yMovement -= 1.0f;
+        }
+        if (_isKeyLeftPressed)
+        {
+            _xMovement -= 1.0f;
+        }
+        if (_isKeyRightPressed)
+        {
+            _xMovement += 1.0f;
+        }
         float _yPosition = transform.position.y;
         float _xPosition = transform.position.x;
 
@@ -142,6 +168,8 @@ public class JetPlayerController : MonoBehaviour, IExplosible
         {
             _healthPoint = 100;
             _lives -= 1;
+            ResetPowerUp();
+            InvincibleEffect();
         }
         if (_lives < 1)
         {
@@ -149,8 +177,6 @@ public class JetPlayerController : MonoBehaviour, IExplosible
             Destroy(this.gameObject);
         }
         Debug.Log(string.Format("Updating JetPlayer health and lives with damage as: damage {0}, HP {1}, lives {2}", damage, _healthPoint, _lives));
-
-        InvincibleEffect();
     }
 
     IEnumerator InvincibleTimer()
@@ -184,5 +210,50 @@ public class JetPlayerController : MonoBehaviour, IExplosible
         }
     }
 
+    public void OnUpKeyDown()
+    {
+        _isKeyUpPressed = true;
+    }
 
+    public void OnUpKeyUp()
+    {
+        _isKeyUpPressed = false;
+    }
+
+    public void OnDownKeyDown()
+    {
+        _isKeyDownPressed = true;
+    }
+
+    public void OnDownKeyUp()
+    {
+        _isKeyDownPressed = false;
+    }
+
+    public void OnLeftKeyDown()
+    {
+        _isKeyLeftPressed = true;
+        Debug.Log("Left Key Down called.");
+    }
+
+    public void OnLeftKeyUp()
+    {
+        _isKeyLeftPressed = false;
+        Debug.Log("Left Key Up called.");
+    }
+
+    public void OnRightKeyDown()
+    {
+        _isKeyRightPressed = true;
+    }
+
+    public void OnRightKeyUp()
+    {
+        _isKeyRightPressed = false;
+    }
+
+    private void ResetPowerUp()
+    {
+        _burstCount = 1;
+    }
 }

@@ -21,6 +21,8 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
     private int _burstCount = 1;
     private bool _canFire = true;
     private GameObject _containerTypeEnemyBullet;
+    private float _timeToRush;
+    private bool _isTimeToRush = false;
 
     [SerializeField]
     private float _boardLeftBorder = -2.5f;
@@ -58,6 +60,8 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
         {
             Debug.LogWarning("Container for enemy bullets is null.");
         }
+
+        _timeToRush = UnityEngine.Random.Range(10f, 20f);
     }
 
     IEnumerator DirectionDecision()
@@ -80,6 +84,12 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
         _canFire = true;
     }
 
+    IEnumerator RushToBottom()
+    {
+        yield return new WaitForSeconds(_timeToRush);
+        _isTimeToRush = true;
+    }
+
     void ControlMovement()
     {
         _xPosition = transform.position.x;
@@ -92,7 +102,15 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
             transform.Translate(Vector3.down * _speed * Time.deltaTime);
         } else
         {
-            transform.Translate(Vector3.right * _speed * _direction * Time.deltaTime);
+            StartCoroutine(RushToBottom());
+            if (_isTimeToRush)
+            {
+                transform.Translate(Vector3.down * _speed * 2 * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Vector3.right * _speed * _direction * Time.deltaTime);
+            }
             if (_canFire)
             {
                 _canFire = false;
@@ -109,7 +127,7 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
 
     public int GetDamage()
     {
-        return 50;
+        return _damage;
     }
 
     public int GetHealth()
@@ -132,6 +150,7 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
         }
     }
 
+    //Note: All collide calculation is done on the side which can take damage (aka active objects). If both sides are able to take damage, the logic is on the enemy side.
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject otherObject = other.gameObject;
