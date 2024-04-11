@@ -11,9 +11,11 @@ public class Piece : MonoBehaviour
     public Vector3Int[] cells { get; private set; }
     public Vector3Int position { get; private set; }
     public int rotationIndex { get; private set; } // (0,1,2,3) storing 4 rotations
+    [HideInInspector]
+    public bool isGameStarted = false;
 
     public float stepDelay;
-    public float lockDelay = .5f;
+    public float lockDelay;
 
     private float stepTime;
     private float lockTime; // time for locking after the tetris touches the ground?
@@ -27,8 +29,8 @@ public class Piece : MonoBehaviour
         this.rotationIndex = 0;
         this.stepTime = Time.time + this.stepDelay; // trigger a stepping each stepDelay amount of time
         this.lockTime = 0f;
-        this.isLocked = false;
         this.stepDelay = stepDelay;
+        this.isLocked = (this.stepDelay > 10) ?  true : false;
 
         if (this.cells == null)
         {
@@ -43,38 +45,66 @@ public class Piece : MonoBehaviour
 
     public void Update()
     {
-        if (this.isLocked) { return; }
+        if (this.isLocked || !this.isGameStarted) { return; }
 
-        this.board.ClearTile(this);
         this.lockTime += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.A))
         {
+            this.board.ClearTile(this);
             Move(Vector2Int.left);
+            this.board.Set(this);
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
+            this.board.ClearTile(this);
             Move(Vector2Int.right);
+            this.board.Set(this);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
+            this.board.ClearTile(this);
             Move(Vector2Int.down);
+            this.board.Set(this);
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
+            this.board.ClearTile(this);
             HardDrop();
+            this.board.Set(this);
         }
         else if (Input.GetKeyDown(KeyCode.W))
         {
+            this.board.ClearTile(this);
             Rotate();
+            this.board.Set(this);
         }
-        this.board.Set(this);
         
         if (Time.time >= this.stepTime)
         {
             Step();
         }
     
+    }
+
+    public void VirtualMove(int direction)
+    {
+        if (this.isLocked || !this.isGameStarted) { return; }
+
+        this.board.ClearTile(this);
+
+        if (direction == 1)
+            Move(Vector2Int.left);
+        else if (direction == 2)
+            Move(Vector2Int.right);
+        else if (direction == 3)
+            Move(Vector2Int.down);
+        else if (direction == 4)
+            Rotate();
+        else if (direction == 5)
+            HardDrop();
+
+        this.board.Set(this);
     }
 
     private void Step()
@@ -102,7 +132,7 @@ public class Piece : MonoBehaviour
         this.board.Set(this);
         this.isLocked = true;
 
-        if (!this.board.isGameOver)
+        if (!this.board.IsGameOver)
         {
             this.lockTime = 0f;
             this.board.ClearRows();
@@ -121,6 +151,8 @@ public class Piece : MonoBehaviour
 
     private bool Move(Vector2Int translation)
     {
+        if (!this.isGameStarted) { return false; }
+
         Vector3Int newPosition = this.position;
         newPosition.x += translation.x;
         newPosition.y += translation.y;

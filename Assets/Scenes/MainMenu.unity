@@ -2732,6 +2732,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 885a2c0c8b5fa5949a792d6cfacef882, type: 3}
   - name: Eat
     clip: {fileID: 8300000, guid: 019333ddf5881244b88695eb419d43c8, type: 3}
+  - name: Clear Line
+    clip: {fileID: 8300000, guid: bf2a825f4b56d8d4f8bd055a779fff7e, type: 3}
   musicSource: {fileID: 1905460029}
   sfxSource: {fileID: 193268146}
 --- !u!4 &1186580103
