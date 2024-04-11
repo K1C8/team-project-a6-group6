@@ -34,6 +34,12 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     [SerializeField]
     private GameObject _containerTypeBullet;
 
+    public int Burst
+    {
+        get { return _burstCount; }
+        set { _burstCount = value; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -100,6 +106,22 @@ public class JetPlayerController : MonoBehaviour, IExplosible
                 int selfDamage = bullet.GetDamage();
                 Destroy(other.gameObject);
                 TakeDamage(selfDamage);
+            }
+        } else if (other.tag == "PowerUp")
+        {
+            AbstractPowerUp powerUp = null;
+            switch (other.name)
+            {
+                case "PowerUpBullet":
+                    {
+                        powerUp = otherObject.GetComponent<PowerUpBullet>();
+                        break;
+                    }
+                default : break;
+            }
+            if (powerUp != null)
+            {
+                powerUp.ProcessPowerUp(this);
             }
         }
     }

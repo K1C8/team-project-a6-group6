@@ -27,4 +27,6 @@ public abstract class AbstractPowerUp : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public abstract void ProcessPowerUp(JetPlayerController player);
 }

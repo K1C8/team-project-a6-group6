@@ -6,6 +6,8 @@ public class JetGameManagerLogic : MonoBehaviour
 {
     private int _playerScore;
 
+    [SerializeField] private GameObject _gameOverSingleMode;
+
     public int PlayerScore
     {
         get { return _playerScore; }
@@ -36,5 +38,16 @@ public class JetGameManagerLogic : MonoBehaviour
     void Update()
     {
         
+    }
+
+    IEnumerator GameOverProcess()
+    {
+        yield return new WaitForSeconds(3f);
+        _gameOverSingleMode.SetActive(true);
+    }
+
+    public void OnGameOver()
+    {
+        StartCoroutine(GameOverProcess());
     }
 }
