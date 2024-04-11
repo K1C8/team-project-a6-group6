@@ -84,9 +84,9 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
         _canFire = true;
     }
 
-    IEnumerator RushToBottom()
+    IEnumerator RushToBottom(float timeToRush)
     {
-        yield return new WaitForSeconds(_timeToRush);
+        yield return new WaitForSeconds(timeToRush);
         _isTimeToRush = true;
     }
 
@@ -102,7 +102,7 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
             transform.Translate(Vector3.down * _speed * Time.deltaTime);
         } else
         {
-            StartCoroutine(RushToBottom());
+            StartCoroutine(RushToBottom(_timeToRush));
             if (_isTimeToRush)
             {
                 transform.Translate(Vector3.down * _speed * 2 * Time.deltaTime);
@@ -125,11 +125,6 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
         // Debug.Log(string.Format("Updating EnemyEntry intended as: x {0}, y {1}, direction {2}", _xPosition, _yPosition, _direction));
     }
 
-    public int GetDamage()
-    {
-        return _damage;
-    }
-
     public int GetHealth()
     {
         return _hitPoint;
@@ -138,6 +133,11 @@ public class EnemyEntryLogic : MonoBehaviour, IExplosible
     public int GetScore()
     {
         return _score;
+    }
+
+    public int GetDamage()
+    {
+        return _damage;
     }
 
     public void TakeDamage(int damageTaken)

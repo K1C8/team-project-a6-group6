@@ -23,7 +23,7 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     private float _boardLeftBorder = -2.5f;
     private float _invincibleCoolDownTime = 3.0f;
     private Collider2D _playerCollider2D;
-    private int _bulletAngle = 8;
+    private int _bulletAngle = 5;
 
     [SerializeField] 
     public GameObject JetPlayer;
@@ -80,7 +80,7 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject otherObject = other.gameObject;
-        // If the other object is an Enemy, destroy the enemy then destroy this bullet instance.
+        // If the other object is a bullet from an enemy, destroy the enemy bullet then take the damage.
         if (other.tag == "Enemy")
         {
             IBullet bullet = null;
