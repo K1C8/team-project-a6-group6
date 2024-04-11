@@ -15,11 +15,21 @@ public class JetGameManagerLogic : MonoBehaviour
     // Member to call when user touches a button
     public void PressToStart()
     {
-        GameObject JetPlayer = GameObject.Find("JetPlayer");
-        GameObject EnemySpawnManager = GameObject.Find("EnemySpawnManager");
-        JetPlayer.SetActive(true);
-        EnemySpawnManager.SetActive(true);
+        JetPlayerController JetPlayer = (FindObjectsByType<JetPlayerController>(FindObjectsInactive.Include, FindObjectsSortMode.None))[0];
+        EnemySpawnManager EnemySpawnManager = (FindObjectsByType<EnemySpawnManager>(FindObjectsInactive.Include, FindObjectsSortMode.None))[0];
+        GameObject pressToStartText = GameObject.Find("PressToStart");
+        if (JetPlayer != null && EnemySpawnManager != null)
+        {
+            JetPlayer.gameObject.SetActive(true);
+            EnemySpawnManager.gameObject.SetActive(true);
+            pressToStartText.SetActive(false);
+        }
 
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
     }
 
     // Update is called once per frame
