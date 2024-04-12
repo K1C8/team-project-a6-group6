@@ -33,6 +33,8 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     public float MoveUnit;
     [SerializeField]
     private GameObject _containerTypeBullet;
+    [SerializeField]
+    private JetGameManagerLogic _jetGameManagerLogic;
 
     public int Burst
     {
@@ -87,7 +89,7 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     {
         GameObject otherObject = other.gameObject;
         // If the other object is a bullet from an enemy, destroy the enemy bullet then take the damage.
-        if (other.tag == "Enemy")
+        if (other.CompareTag("Enemy"))
         {
             IBullet bullet = null;
             switch (other.name)
@@ -107,7 +109,7 @@ public class JetPlayerController : MonoBehaviour, IExplosible
                 Destroy(other.gameObject);
                 TakeDamage(selfDamage);
             }
-        } else if (other.tag == "PowerUp")
+        } else if (other.CompareTag("PowerUp"))
         {
             AbstractPowerUp powerUp = null;
             switch (other.name)
@@ -196,6 +198,7 @@ public class JetPlayerController : MonoBehaviour, IExplosible
         if (_lives < 1)
         {
             _enemySpawnManager.OnPlayerDeath();
+            _jetGameManagerLogic.OnGameOver();
             Destroy(this.gameObject);
         }
         Debug.Log(string.Format("Updating JetPlayer health and lives with damage as: damage {0}, HP {1}, lives {2}", damage, _healthPoint, _lives));

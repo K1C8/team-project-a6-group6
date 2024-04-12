@@ -2817,10 +2817,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1925068438}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1250673277}
+        m_TargetAssemblyTypeName: JetGameManagerLogic, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5386,8 +5386,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 1250673277}
+        m_TargetAssemblyTypeName: JetGameManagerLogic, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -5456,6 +5456,10 @@ PrefabInstance:
       propertyPath: _containerTypeBullet
       value: 
       objectReference: {fileID: 2131320589}
+    - target: {fileID: 2264244721246688612, guid: 637d607e58038f0469d606c6d59f6067, type: 3}
+      propertyPath: _jetGameManagerLogic
+      value: 
+      objectReference: {fileID: 1250673277}
     - target: {fileID: 6333437102504209209, guid: 637d607e58038f0469d606c6d59f6067, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6305,7 +6309,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589c173121f57e945bc4e76c2b776a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameOverSingleMode: {fileID: 0}
+  _gameOverSingleMode: {fileID: 1925068438}
+  _audioMixer: {fileID: 0}
+  _masterVolumeSlider: {fileID: 933114069}
+  _bgmVolumeSlider: {fileID: 1721044645}
+  _effectVolumeSlider: {fileID: 0}
 --- !u!1 &1264394635
 GameObject:
   m_ObjectHideFlags: 0
