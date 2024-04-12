@@ -14,12 +14,18 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
     protected int _burstCount;
     protected int _damage;
     protected int _hitPoint;
+    protected int _minimumValueBullet;
+    protected int _minimumValueHitPoint;
+    protected int _minimumValueExtraLife;
+    protected int _minimumValueShield;
     protected int _direction;
     protected int _score;
     protected bool _canFire;
     protected bool _isTimeToRush;
     protected GameObject _containerTypeEnemyBullet;
+    protected GameObject _powerUpBullet;
 
+    private int _diceResult = 0;
 
     protected void SetUpEnemyBulletContainer()
     {
@@ -47,6 +53,11 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
         Debug.Log(string.Format("Enemy Entry has {0} hit point left.", _hitPoint));
         if (_hitPoint < 1)
         {
+            RollPowerUpDice();
+            if (_diceResult >= _minimumValueBullet && _powerUpBullet != null)
+            {
+                Instantiate(_powerUpBullet, transform.position + new Vector3(0, -0.25f, 0), Quaternion.identity);
+            }
             Destroy(this.gameObject);
         }
     }
@@ -123,7 +134,6 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
         {
             IExplosible player = null;
             PlayerBulletLogic bullet = null;
-            int selfDamage = 0;
             switch (other.name)
             {
                 case "JetPlayer":
@@ -139,6 +149,7 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
                 default:
                     break;
             }
+            int selfDamage;
             if (player != null)
             {
                 Debug.Log("JetPlayerController found.");
@@ -153,5 +164,10 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
                 TakeDamage(selfDamage);
             }
         }
+    }
+
+    private void RollPowerUpDice()
+    {
+        _diceResult = Random.Range(0, 100);
     }
 }

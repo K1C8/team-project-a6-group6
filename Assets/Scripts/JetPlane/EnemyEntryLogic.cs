@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class EnemyEntryLogic : AbstractEnemyLogic, IExplosible
+public class EnemyEntryLogic : AbstractEnemyLogic
 {
     private float _xStart;
     private float _xPosition;
@@ -20,18 +20,18 @@ public class EnemyEntryLogic : AbstractEnemyLogic, IExplosible
     // private GameObject _containerTypeEnemyBullet;
     // private float _timeToRush;
 
-    [SerializeField]
-    private float _boardLeftBorder = -2.5f;
-    [SerializeField]
-    private float _boardRightBorder = 2.5f;
-    [SerializeField]
-    private float _speedEntry = 2f;
-    [SerializeField]
-    private float _yLowerBoundEntry = 2.5f;
-    [SerializeField]
-    private int _bulletAngleEntry = 5;
-    [SerializeField]
-    private GameObject _enemyEntryBullet;
+    [SerializeField] private float _boardLeftBorder = -2.5f;
+    [SerializeField] private float _boardRightBorder = 2.5f;
+    [SerializeField] private float _fireIntervalEntry = 3.0f;
+    [SerializeField] private float _speedEntry = 2f;
+    [SerializeField] private float _yLowerBoundEntry = 2.5f;
+    [SerializeField] private int _bulletAngleEntry = 5;
+    [SerializeField] private int _minimumValueBulletEntry = 90;
+    [SerializeField] private int _minimumValueHitPointEntry = 97;
+    [SerializeField] private int _minimumValueExtraLifeEntry = 99;
+    [SerializeField] private int _minimumValueShieldEntry = 100;
+    [SerializeField] private GameObject _enemyEntryBullet;
+    [SerializeField] private GameObject _powerUpBulletEntry;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +48,7 @@ public class EnemyEntryLogic : AbstractEnemyLogic, IExplosible
 
     protected void Spawn()
     {
-        _fireInterval = 3.0f;
+        _fireInterval = _fireIntervalEntry;
         _speed = _speedEntry;
         _timeToRush = UnityEngine.Random.Range(10f, 20f);
         // _yLowerBound = 2.5f;
@@ -57,6 +57,10 @@ public class EnemyEntryLogic : AbstractEnemyLogic, IExplosible
         _damage = 50;
         _direction = 1;
         _hitPoint = 50;
+        _minimumValueBullet = _minimumValueBulletEntry;
+        _minimumValueHitPoint = _minimumValueHitPointEntry;
+        _minimumValueExtraLife = _minimumValueExtraLifeEntry;
+        _minimumValueShield = _minimumValueShieldEntry;
         _score = 50;
         _canFire = true;
         _isTimeToRush = false;
@@ -69,6 +73,7 @@ public class EnemyEntryLogic : AbstractEnemyLogic, IExplosible
         _xPosition = transform.position.x;
         _spawnPosition = new Vector3(_xPosition, 4, 0);
         transform.position = _spawnPosition;
+        _powerUpBullet = _powerUpBulletEntry;
     }
 
     /*

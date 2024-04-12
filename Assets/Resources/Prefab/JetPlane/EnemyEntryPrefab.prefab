@@ -145,6 +145,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boardLeftBorder: -2.5
   _boardRightBorder: 2.5
-  _speed: 1.5
+  _fireIntervalEntry: 3
+  _speedEntry: 2
+  _yLowerBoundEntry: 2.5
+  _bulletAngleEntry: 5
+  _minimumValueBulletEntry: 90
+  _minimumValueHitPointEntry: 97
+  _minimumValueExtraLifeEntry: 99
+  _minimumValueShieldEntry: 100
   _enemyEntryBullet: {fileID: 5123982050819918642, guid: 25c3f8b7e060627439d2fc50fb37beee, type: 3}
-  _containerTypeEnemyBullet: {fileID: 3137337985021221110, guid: e7cc723a372febf4ea371333c5e8f869, type: 3}
+  _powerUpBulletEntry: {fileID: 6158412924169713037, guid: b42af3f759d37564a85e95778bd33d49, type: 3}

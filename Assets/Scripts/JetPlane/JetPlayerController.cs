@@ -39,7 +39,14 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     public int Burst
     {
         get { return _burstCount; }
-        set { _burstCount = value; }
+        set
+        {
+            if (_burstCount <= 3) 
+            {
+                _burstCount = value;
+                Debug.Log(string.Format("JetPlayerController has burst count increased to {0}", _burstCount));
+            }
+        }
     }
 
     // Start is called before the first frame update
@@ -114,8 +121,9 @@ public class JetPlayerController : MonoBehaviour, IExplosible
             AbstractPowerUp powerUp = null;
             switch (other.name)
             {
-                case "PowerUpBullet":
+                case "PowerUpBulletPrefab(Clone)":
                     {
+                        Debug.Log("PowerUp collided.");
                         powerUp = otherObject.GetComponent<PowerUpBullet>();
                         break;
                     }
@@ -123,7 +131,9 @@ public class JetPlayerController : MonoBehaviour, IExplosible
             }
             if (powerUp != null)
             {
+                Debug.Log("From JetPlayerController as " + this);
                 powerUp.ProcessPowerUp(this);
+                Destroy(other.gameObject);
             }
         }
     }
