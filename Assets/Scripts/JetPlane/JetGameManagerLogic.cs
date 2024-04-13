@@ -17,8 +17,53 @@ public class JetGameManagerLogic : MonoBehaviour
 
     void Start()
     {
-        
+        _masterVolumeSlider.value = PlayerPrefs.GetFloat("masterVol", 0.75f); // Default value if not set
+        _bgmVolumeSlider.value = PlayerPrefs.GetFloat("bgmVol", 0.75f);
+        _effectVolumeSlider.value = PlayerPrefs.GetFloat("sfxVol", 0.75f);
+
+        _masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
+        _bgmVolumeSlider.onValueChanged.AddListener(SetBgmVolume);
+        _effectVolumeSlider.onValueChanged.AddListener(SetEffectVolume);
+
+        // Debug.Log(string.Format("Master Volume: {0}, BGM Volume: {1}, Effect Volume:{2}", _masterVolumeSlider.value, _bgmVolumeSlider.value, _effectVolumeSlider.value));
+
+        // Apply the initial volume settings
+        SetMasterVolume(_masterVolumeSlider.value);
+        SetBgmVolume(_bgmVolumeSlider.value);
+        SetEffectVolume(_effectVolumeSlider.value);
     }
+
+    public void SetMasterVolume(float volume)
+    {
+        _audioMixer.SetFloat("MasterVolume", LinearToDecibel(volume));
+        PlayerPrefs.SetFloat("masterVol", volume);
+        // Debug.Log(string.Format("Master Volume: {0}", _masterVolumeSlider.value));
+    }
+
+    public void SetBgmVolume(float volume)
+    {
+        _audioMixer.SetFloat("bgmVolume", LinearToDecibel(volume));
+        PlayerPrefs.SetFloat("bgmVol", volume);
+        // Debug.Log(string.Format("BGM Volume: {0}", _bgmVolumeSlider.value));
+    }
+
+    public void SetEffectVolume(float volume)
+    {
+        _audioMixer.SetFloat("SoundEffect", LinearToDecibel(volume));
+        PlayerPrefs.SetFloat("sfxVol", volume);
+        // Debug.Log(string.Format("Effect Volume: {0}", _effectVolumeSlider.value));
+    }
+
+    private float LinearToDecibel(float linear)
+    {
+        return linear != 0 ? 20.0f * Mathf.Log10(linear) : -80.0f;
+    }
+    public void PlayButtonSFX()
+    {
+        AudioManager.Instance.PlaySFX("Button");
+    }
+
+
     public void Pause()
     {
         Time.timeScale = 0f;
@@ -67,5 +112,10 @@ public class JetGameManagerLogic : MonoBehaviour
         AudioManager.Instance.PlayMusic("BGM");
         SceneManager.LoadScene("MainMenu");
 
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("InGameJet");
     }
 }
