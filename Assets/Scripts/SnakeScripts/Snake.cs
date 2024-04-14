@@ -34,7 +34,7 @@ public class Snake : MonoBehaviour
     public Sprite rightHeadSprite;
 
     private SpriteRenderer headSpriteRenderer;
-
+    [SerializeField] MultiUIController multiUIController;
 
 
 
@@ -186,7 +186,14 @@ public class Snake : MonoBehaviour
         else if (other.gameObject.CompareTag("Obstacle")) 
         {
             AudioManager.Instance.PlaySFX("Lose");
-            GameOver();
+            if (MultiSingleManager.Instance.isMulti)
+            {
+                MultiGameOver();
+            }
+            else
+            {
+                GameOver();
+            }
         } 
     }
 
@@ -195,11 +202,19 @@ public class Snake : MonoBehaviour
         return gridPosition;
     }
 
-    private void GameOver()
+    public void GameOver()
     {
         gameOver.SetActive(true);
         Time.timeScale = 0;
         isGameOver = true;
+    }
+
+    public void MultiGameOver()
+    {
+        multiUIController.PlayerDead();
+        isGameOver = true;
+        snakeMovePositionList.Clear();
+        Destroy(gameObject);
     }
 
     // Return the full list of positions occupied by the snake: Head + Body

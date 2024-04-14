@@ -68,8 +68,7 @@ public class SnakeInGameUIController : MonoBehaviour
         isRunning = true;
         if (!snake.isGameOver)
         {
-            Time.timeScale = 0;
-            StartCoroutine(CountingBeforeStart());
+            Time.timeScale = 1;
         }
     }
     public void QuitGame()
@@ -81,26 +80,6 @@ public class SnakeInGameUIController : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the scene to restart the game
-    }
-
-    private IEnumerator CountingBeforeStart()
-    {
-        int count = 3; // Reset count to its initial value
-        resumeText.gameObject.SetActive(true); // Make sure the text is visible
-        while (count > 0)
-        {
-            resumeText.text = count.ToString();
-            Debug.Log("Countdown: " + count); // Verify the countdown is running
-            yield return new WaitForSecondsRealtime(1); // Now it will wait for 1 real-time second, regardless of Time.timeScale
-            count--;
-        }
-
-        resumeText.text = "Start!";
-        yield return new WaitForSecondsRealtime(1); // Additional wait to show "Start!"
-
-        Debug.Log("Countdown finished"); // Confirm the coroutine reaches the end
-        resumeText.gameObject.SetActive(false);
-        Time.timeScale = 1;
     }
 
     public void PressToStart()
