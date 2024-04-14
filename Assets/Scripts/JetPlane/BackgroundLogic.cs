@@ -27,7 +27,7 @@ public class BackgroundLogic : MonoBehaviour
             _canRespawn = false;
             StartCoroutine(RespawnTimer());
         }
-        else if (transform.position.y < -11f)
+        else if (transform.position.y < -20f)
         {
             _jetSpawnManager.BackgroundScrolledOut();
             Destroy(gameObject);
