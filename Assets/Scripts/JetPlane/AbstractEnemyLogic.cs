@@ -9,6 +9,7 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
     protected float _timeToRush;
     protected float _xLeftBound;
     protected float _xRightBound;
+    protected float _yVisibleUpperBound;
     protected float _yLowerBound;
     protected int _bulletAngle;
     protected int _burstCount;
@@ -21,9 +22,12 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
     protected int _direction;
     protected int _score;
     protected bool _canFire;
+    protected bool _isInvincible;
     protected bool _isTimeToRush;
     protected GameObject _containerTypeEnemyBullet;
     protected GameObject _powerUpBullet;
+    protected Collider2D _collider;
+    protected JetGameManagerLogic _jetGameManager;
 
     private int _diceResult = 0;
 
@@ -58,6 +62,13 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
             {
                 Instantiate(_powerUpBullet, transform.position + new Vector3(0, -0.25f, 0), Quaternion.identity);
             }
+            if (_jetGameManager != null)
+            {
+                _jetGameManager.PlayerScore += _score;
+            } else
+            {
+                Debug.LogWarning("Cannot find JetGameMangerLogic instance!");
+            }
             Destroy(this.gameObject);
         }
     }
@@ -89,10 +100,18 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
 
     protected void ActionControl(GameObject bulletObject)
     {
+        // This enemy object has entered the visible area of the player.
+        if (transform.position.y < _yVisibleUpperBound && _isInvincible)
+        {
+            CeaseInvincible();
+        }
+
+        // The enemy has yet to arrive the 'stopping' range.
         if (transform.position.y > _yLowerBound)
         {
             transform.Translate(Vector3.down * _speed * Time.deltaTime);
         }
+        // After entered the 'stopping' range, the enemy will move horizontally until run out of the preconfigured waiting time to rush downward.
         else
         {
             StartCoroutine(DirectionDecision(transform.position.x));
@@ -120,6 +139,10 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
                     bullet.transform.parent = _containerTypeEnemyBullet.transform;
                 }
                 StartCoroutine(BulletTimer());
+            }
+            if (transform.position.y < -10f)
+            {
+                Destroy(this.gameObject);
             }
         }
         // Debug.Log(string.Format("Updating EnemyEntry intended as: x {0}, y {1}, direction {2}", transform.position.x, transform.position.y, _direction));
@@ -169,5 +192,20 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
     private void RollPowerUpDice()
     {
         _diceResult = Random.Range(0, 100);
+    }
+
+    // Make the enemy invincible before being scrolled into the visible area.
+    protected void SpawnInvincible()
+    {
+        _collider = this.gameObject.GetComponent<BoxCollider2D>();
+        _collider.enabled = false;
+        _isInvincible = true;
+    }
+
+    protected void CeaseInvincible()
+    {
+        _collider = this.gameObject.GetComponent<BoxCollider2D>();
+        _collider.enabled = true;
+        _isInvincible = false;
     }
 }

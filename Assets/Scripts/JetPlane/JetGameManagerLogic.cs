@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -8,12 +10,20 @@ using UnityEngine.UI;
 public class JetGameManagerLogic : MonoBehaviour 
 {
     private int _playerScore;
+    private int _playerHitPoint;
+    private int _playerLives;
+    private string _multiManagerName = "MultiSingleManager";
+    private string _playerHpLivesFormat = "Lives: {0}\nHit Points: {1}";
+    private bool _isMultiMode = false;
 
-    [SerializeField] private GameObject _gameOverSingleMode; 
+    [SerializeField] private GameObject _gameOverSingleMode;
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private Slider _masterVolumeSlider;
     [SerializeField] private Slider _bgmVolumeSlider;
     [SerializeField] private Slider _effectVolumeSlider;
+    [SerializeField] private TMP_Text _hitPointsAndLivesText;
+    [SerializeField] private TMP_Text _singleScoreText;
+    [SerializeField] private TMP_Text _singleNameText;
 
     void Start()
     {
@@ -31,6 +41,36 @@ public class JetGameManagerLogic : MonoBehaviour
         SetMasterVolume(_masterVolumeSlider.value);
         SetBgmVolume(_bgmVolumeSlider.value);
         SetEffectVolume(_effectVolumeSlider.value);
+
+        GameObject multiManager = GameObject.Find(_multiManagerName);
+        if (multiManager != null)
+        {
+            _isMultiMode = true;
+        } else
+        {
+            if (_singleNameText != null)
+            {
+                _singleNameText.text = "You";
+            } else
+            {
+                Debug.LogError("Cannot find the instance of _singleNameText.");
+            }
+            Debug.Log("The JetGameManagerLogic now operates in single player mode.");
+        }
+
+        if (_singleScoreText == null && !_isMultiMode)
+        {
+            Debug.LogError("Cannot find the instance of _singleScoreText.");
+        }
+
+        if (_hitPointsAndLivesText != null)
+        {
+            _hitPointsAndLivesText.text = string.Format(_playerHpLivesFormat, 2, 100);
+        }
+
+
+        Time.timeScale = 0f;
+
     }
 
     public void SetMasterVolume(float volume)
@@ -63,6 +103,20 @@ public class JetGameManagerLogic : MonoBehaviour
         AudioManager.Instance.PlaySFX("Button");
     }
 
+    public void InitScore()
+    {
+        if (!_isMultiMode)
+        {
+            _singleScoreText.text = "0";
+        }
+    }
+
+    public void UpdateSingleScore()
+    {
+        string _scoreText = _playerScore.ToString();
+        _singleScoreText.text = _scoreText;
+    }
+
 
     public void Pause()
     {
@@ -72,7 +126,18 @@ public class JetGameManagerLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!_isMultiMode)
+        {
+            UpdateSingleScore();
+        }
 
+        UpdatePlayerHitPointAndLives();
+    }
+
+
+    private void UpdatePlayerHitPointAndLives()
+    {
+        _hitPointsAndLivesText.text = string.Format(_playerHpLivesFormat, PlayerLives, PlayerHitPoint);
     }
 
     public int PlayerScore
@@ -81,11 +146,33 @@ public class JetGameManagerLogic : MonoBehaviour
         set { _playerScore = value; }
     }
 
+    public int PlayerHitPoint
+    {
+        get { return _playerHitPoint; }
+        set 
+        {
+            if (_playerLives > 0) 
+            {
+                _playerHitPoint = value;
+            } else
+            {
+                _playerHitPoint = 0;
+            }
+             
+        }
+    }
+
+    public int PlayerLives
+    {
+        get { return _playerLives; }
+        set { _playerLives = value; }
+    }
+
     // Member to call when user touches a button
     public void PressToStart()
     {
         JetPlayerController JetPlayer = (FindObjectsByType<JetPlayerController>(FindObjectsInactive.Include, FindObjectsSortMode.None))[0];
-        EnemySpawnManager EnemySpawnManager = (FindObjectsByType<EnemySpawnManager>(FindObjectsInactive.Include, FindObjectsSortMode.None))[0];
+        JetSpawnManager EnemySpawnManager = (FindObjectsByType<JetSpawnManager>(FindObjectsInactive.Include, FindObjectsSortMode.None))[0];
         GameObject pressToStartText = GameObject.Find("PressToStart");
         if (JetPlayer != null && EnemySpawnManager != null && pressToStartText != null)
         {
@@ -93,6 +180,7 @@ public class JetGameManagerLogic : MonoBehaviour
             EnemySpawnManager.gameObject.SetActive(true);
             pressToStartText.SetActive(false);
         }
+        Time.timeScale = 1.0f;
 
     }
 
@@ -118,4 +206,5 @@ public class JetGameManagerLogic : MonoBehaviour
     {
         SceneManager.LoadScene("InGameJet");
     }
+
 }

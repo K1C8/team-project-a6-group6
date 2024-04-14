@@ -25,6 +25,7 @@ public class EnemyEntryLogic : AbstractEnemyLogic
     [SerializeField] private float _fireIntervalEntry = 3.0f;
     [SerializeField] private float _speedEntry = 2f;
     [SerializeField] private float _yLowerBoundEntry = 2.5f;
+    [SerializeField] private float _yVisibleUpperBoundEntry = 2.8f;
     [SerializeField] private int _bulletAngleEntry = 5;
     [SerializeField] private int _minimumValueBulletEntry = 90;
     [SerializeField] private int _minimumValueHitPointEntry = 97;
@@ -38,6 +39,7 @@ public class EnemyEntryLogic : AbstractEnemyLogic
     {
         Spawn();
         SetUpEnemyBulletContainer();
+        SpawnInvincible();
     }
 
     // Update is called once per frame
@@ -52,6 +54,7 @@ public class EnemyEntryLogic : AbstractEnemyLogic
         _speed = _speedEntry;
         _timeToRush = UnityEngine.Random.Range(10f, 20f);
         // _yLowerBound = 2.5f;
+
         _bulletAngle = _bulletAngleEntry;
         _burstCount = 1;
         _damage = 50;
@@ -69,11 +72,17 @@ public class EnemyEntryLogic : AbstractEnemyLogic
         _xLeftBound = Math.Max(_boardLeftBorder, _xStart - 1);
         _xRightBound = Math.Min(_boardRightBorder, _xStart + 1);
         _yLowerBound = _yLowerBoundEntry;
+        _yVisibleUpperBound = _yVisibleUpperBoundEntry;
 
         _xPosition = transform.position.x;
         _spawnPosition = new Vector3(_xPosition, 4, 0);
         transform.position = _spawnPosition;
         _powerUpBullet = _powerUpBulletEntry;
+        _jetGameManager = GameObject.Find("JetGameManager").GetComponent<JetGameManagerLogic>();
+        if (_jetGameManager == null)
+        {
+            Debug.LogWarning("Cannot find the instance of the JetGameMangerLogic!");
+        }
     }
 
     /*
