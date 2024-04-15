@@ -7727,7 +7727,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Title
+  m_text: Snake
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a59fcbb88387a614fb0e1694d2b7cb6b, type: 2}
   m_sharedMaterial: {fileID: 3894273643174941849, guid: a59fcbb88387a614fb0e1694d2b7cb6b, type: 2}
@@ -11754,7 +11754,15 @@ MonoBehaviour:
   multiUI: {fileID: 280494015}
   objectsToHide:
   - {fileID: 967490754}
-  buttonsToDisable: []
+  buttonsToDisable:
+  - {fileID: 1990645630}
+  - {fileID: 1353376944}
+  - {fileID: 324976157}
+  - {fileID: 1322654071}
+  - {fileID: 611201352}
+  - {fileID: 1728447334}
+  - {fileID: 693061561}
+  - {fileID: 664064525}
   gameStartCD: {fileID: 431825424}
   inGameCD: {fileID: 1224560880}
   scoreScale: 100

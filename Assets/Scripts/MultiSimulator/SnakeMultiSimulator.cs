@@ -26,6 +26,7 @@ public class SnakeMultiSimulator : MonoBehaviour
     public bool isGameOver = false;
     public void Start()
     {
+        AudioManager.Instance.PlayMusic("BGM For Snake");
         player1.GetComponentInChildren<TMP_Text>().text = "YOU";
         if (MultiSingleManager.Instance.isMulti)
         {
