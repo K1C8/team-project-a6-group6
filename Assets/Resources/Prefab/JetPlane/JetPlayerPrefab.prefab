@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6333437102504209209
 Transform:
   m_ObjectHideFlags: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 5123982050819918642, guid: 71f06cdf6cdf536428701b08f5c26e58, type: 3}
   MoveUnit: 4
   _containerTypeBullet: {fileID: 0}
+  _jetGameManagerLogic: {fileID: 0}
 --- !u!50 &4537169623489249479
 Rigidbody2D:
   serializedVersion: 4
