@@ -1520,7 +1520,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &280494019
 RectTransform:
@@ -11768,7 +11768,7 @@ MonoBehaviour:
   scoreScale: 100
   minTimeScore: 2
   maxTimeScore: 10
-  gameDuration: 180
+  gameDuration: 120
   isGameOver: 0
 --- !u!4 &1640938539
 Transform:

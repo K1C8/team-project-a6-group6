@@ -159,6 +159,7 @@ public class SnakeMultiSimulator : MonoBehaviour
     {
         isGameOver = true;
         inGameCD.enabled = false;
+        Time.timeScale = 0;
         multiUI.GetComponent<MultiUIController>().GameOver(playerScores);
     }
 
