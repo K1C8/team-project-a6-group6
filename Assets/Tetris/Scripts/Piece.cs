@@ -12,7 +12,7 @@ public class Piece : MonoBehaviour
     public Vector3Int position { get; private set; }
     public int rotationIndex { get; private set; } // (0,1,2,3) storing 4 rotations
     [HideInInspector]
-    public bool isGameStarted = false;
+    public bool isGameStarted;
 
     public float stepDelay;
     public float lockDelay;
@@ -21,15 +21,27 @@ public class Piece : MonoBehaviour
     private float lockTime; // time for locking after the tetris touches the ground?
     private bool isLocked;
 
+    public void OnGameStart()
+    {
+        this.isGameStarted = true;
+    }
+
+    private void Start()
+    {
+        this.isLocked = false;
+        this.isGameStarted = false;
+        //Debug.Log("Piece: started");
+    }
+
     public void Initialize(Board board, Vector3Int position, TetrominoData data, float stepDelay)
     {
         this.board = board;
         this.position = position;
         this.data = data;
         this.rotationIndex = 0;
+        this.stepDelay = stepDelay;
         this.stepTime = Time.time + this.stepDelay; // trigger a stepping each stepDelay amount of time
         this.lockTime = 0f;
-        this.stepDelay = stepDelay;
         this.isLocked = (this.stepDelay > 10) ?  true : false;
 
         if (this.cells == null)
@@ -41,11 +53,15 @@ public class Piece : MonoBehaviour
         { 
             this.cells[i] = ((Vector3Int)data.cells[i]);
         }
+
+        //Debug.Log("Tetrimono get initialized! stepTime: " + stepTime.ToString());
     }
 
     public void Update()
     {
         if (this.isLocked || !this.isGameStarted) { return; }
+
+        //if (Time.time % 2 >= 1) Debug.Log("Time: " + Time.time);
 
         this.lockTime += Time.deltaTime;
 
@@ -83,10 +99,10 @@ public class Piece : MonoBehaviour
         if (Time.time >= this.stepTime)
         {
             Step();
+            Debug.Log("Piece | Step!");
         }
     
     }
-
     public void VirtualMove(int direction)
     {
         if (this.isLocked || !this.isGameStarted) { return; }
@@ -140,14 +156,6 @@ public class Piece : MonoBehaviour
         }
     }
 
-    private void HardDrop()
-    {
-        while (Move(Vector2Int.down))
-        {
-            continue;
-        }
-        Lock();
-    }
 
     private bool Move(Vector2Int translation)
     {
@@ -166,6 +174,15 @@ public class Piece : MonoBehaviour
         }
 
         return valid;
+    }
+
+    private void HardDrop()
+    {
+        while (Move(Vector2Int.down))
+        {
+            continue;
+        }
+        Lock();
     }
 
     private void Rotate()

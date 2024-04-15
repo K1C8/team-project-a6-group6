@@ -16,12 +16,10 @@ public class Board : MonoBehaviour
     private Vector3Int generatePosition;
     private Vector3Int nextTilePosition1;
     private Vector3Int nextTilePosition2;
-    private Vector2Int nextTiles;
+    private Vector2Int nextTilesList;
     public Vector2Int boardSize;
     public int Score { get; private set; }
-    public bool IsGameOver { get; private set; }
-
-    
+    public bool IsGameOver { get; private set; }    
 
     // Start is called before the first frame update
     private void Awake()
@@ -33,8 +31,8 @@ public class Board : MonoBehaviour
         this.Bounds = new RectInt(position, this.boardSize + new Vector2Int(0, 4));
 
         this.generatePosition = new Vector3Int(-1, this.boardSize.y / 2 - 1, 0);
-        this.nextTilePosition1 = new Vector3Int((int)spriteR.size.x - 3, 5, 0);
-        this.nextTilePosition2 = new Vector3Int((int)spriteR.size.x - 3, 0, 0);
+        this.nextTilePosition1 = new Vector3Int((int)spriteR.size.x - 3, 2, 0);
+        this.nextTilePosition2 = new Vector3Int((int)spriteR.size.x - 3, -3, 0);
 
         this.Score = 0;
         this.IsGameOver = false;
@@ -47,15 +45,22 @@ public class Board : MonoBehaviour
 
     private void Start()
     {
-        this.nextTiles = new Vector2Int(Random.Range(0, this.tetrominoes.Length), Random.Range(0, this.tetrominoes.Length));
+        this.IsGameOver = false;
+        //Debug.Log("Board: started");
+    }
+
+    public void OnGameStart()
+    {
+        this.nextTilesList = new Vector2Int(Random.Range(0, this.tetrominoes.Length), Random.Range(0, this.tetrominoes.Length));
+        GeneratePiece();
     }
 
     public void GeneratePiece()
     {
         ClearTilePreview();
 
-        int generatedCellIndex = this.nextTiles.x;
-        this.nextTiles = new Vector2Int(this.nextTiles.y, Random.Range(0, this.tetrominoes.Length));
+        int generatedCellIndex = this.nextTilesList.x;
+        this.nextTilesList = new Vector2Int(this.nextTilesList.y, Random.Range(0, this.tetrominoes.Length));
 
         SetTilePreview();
 
@@ -80,39 +85,39 @@ public class Board : MonoBehaviour
 
     private void SetTilePreview()
     {
-        Vector3Int[] cellsList1 = new Vector3Int[this.tetrominoes[this.nextTiles.x].cells.Length];
+        Vector3Int[] cellsList1 = new Vector3Int[this.tetrominoes[this.nextTilesList.x].cells.Length];
         for (int i = 0; i < cellsList1.Length; i++)
         {
-            cellsList1[i] = ((Vector3Int)this.tetrominoes[this.nextTiles.x].cells[i]);
+            cellsList1[i] = ((Vector3Int)this.tetrominoes[this.nextTilesList.x].cells[i]);
             Vector3Int tilePosition = cellsList1[i] + this.nextTilePosition1;
-            this.tilemap.SetTile(tilePosition, this.tetrominoes[this.nextTiles.x].tile);
+            this.tilemap.SetTile(tilePosition, this.tetrominoes[this.nextTilesList.x].tile);
         }
 
-        Vector3Int[] cellsList2 = new Vector3Int[this.tetrominoes[this.nextTiles.y].cells.Length];
+        Vector3Int[] cellsList2 = new Vector3Int[this.tetrominoes[this.nextTilesList.y].cells.Length];
         for (int i = 0; i < cellsList2.Length; i++)
         {
-            cellsList2[i] = ((Vector3Int)this.tetrominoes[this.nextTiles.y].cells[i]);
+            cellsList2[i] = ((Vector3Int)this.tetrominoes[this.nextTilesList.y].cells[i]);
             Vector3Int tilePosition = cellsList2[i] + this.nextTilePosition2;
-            this.tilemap.SetTile(tilePosition, this.tetrominoes[this.nextTiles.y].tile);
+            this.tilemap.SetTile(tilePosition, this.tetrominoes[this.nextTilesList.y].tile);
         }
     }
 
     private void ClearTilePreview()
     {
         //this.tilemap.SetTile(this.nextTilePosition1, null);
-        Vector3Int[] cellsList1 = new Vector3Int[this.tetrominoes[this.nextTiles.x].cells.Length];
+        Vector3Int[] cellsList1 = new Vector3Int[this.tetrominoes[this.nextTilesList.x].cells.Length];
         for (int i = 0; i < cellsList1.Length; i++)
         {
-            cellsList1[i] = ((Vector3Int)this.tetrominoes[this.nextTiles.x].cells[i]);
+            cellsList1[i] = ((Vector3Int)this.tetrominoes[this.nextTilesList.x].cells[i]);
             Vector3Int tilePosition = cellsList1[i] + this.nextTilePosition1;
             this.tilemap.SetTile(tilePosition, null);
         }
 
         //this.tilemap.SetTile(this.nextTilePosition2, null);
-        Vector3Int[] cellsList2 = new Vector3Int[this.tetrominoes[this.nextTiles.y].cells.Length];
+        Vector3Int[] cellsList2 = new Vector3Int[this.tetrominoes[this.nextTilesList.y].cells.Length];
         for (int i = 0; i < cellsList2.Length; i++)
         {
-            cellsList2[i] = ((Vector3Int)this.tetrominoes[this.nextTiles.y].cells[i]);
+            cellsList2[i] = ((Vector3Int)this.tetrominoes[this.nextTilesList.y].cells[i]);
             Vector3Int tilePosition = cellsList2[i] + this.nextTilePosition2;
             this.tilemap.SetTile(tilePosition, null);
         }
