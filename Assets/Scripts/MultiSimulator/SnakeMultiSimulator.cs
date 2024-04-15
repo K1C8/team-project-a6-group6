@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public class SnakeMultiSimulator : MonoBehaviour
 {
@@ -17,17 +18,30 @@ public class SnakeMultiSimulator : MonoBehaviour
     [SerializeField] Button[] buttonsToDisable;
     [SerializeField] TMP_Text gameStartCD;
     [SerializeField] TMP_Text inGameCD;
-    public float gameDuration = 180f; // 3 minutes in seconds
+    [SerializeField] int scoreScale = 100;
+    [SerializeField] float minTimeScore = 2f;
+    [SerializeField] float maxTimeScore = 10f;
+    private Dictionary<string, int> playerScores = new Dictionary<string, int>();
+    public float gameDuration = 180f;
     public bool isGameOver = false;
     public void Start()
     {
         player1.GetComponentInChildren<TMP_Text>().text = "YOU";
         if (MultiSingleManager.Instance.isMulti)
         {
+            playerScores.Add("YOU", 0);
+            playerScores.Add("P2", 0);
+            playerScores.Add("P3", 0);
+            playerScores.Add("P4", 0);
+
             player1.SetActive(true);
             player2.SetActive(true);
             player3.SetActive(true);
             player4.SetActive(true);
+            player1.transform.Find("Score").GetComponentInChildren<TMP_Text>().text = "0";
+            player2.transform.Find("Score").GetComponentInChildren<TMP_Text>().text = "0";
+            player3.transform.Find("Score").GetComponentInChildren<TMP_Text>().text = "0";
+            player4.transform.Find("Score").GetComponentInChildren<TMP_Text>().text = "0";
             setButtonToDisable(true);
             setObjectsToHide(true);
             StartCoroutine(StartGameCountdown());
@@ -93,6 +107,7 @@ public class SnakeMultiSimulator : MonoBehaviour
                 UpdateInGameCountdown();
             }
         }
+        UpdateLeaderboard();
     }
 
     private IEnumerator StartGameCountdown()
@@ -115,6 +130,11 @@ public class SnakeMultiSimulator : MonoBehaviour
 
         // Start in-game countdown
         StartCoroutine(InGameCountdown());
+
+        // Start scoring for players 2 to 4
+        StartCoroutine(SimulateCPUPlayersScoring("P2"));
+        StartCoroutine(SimulateCPUPlayersScoring("P3"));
+        StartCoroutine(SimulateCPUPlayersScoring("P4"));
     }
 
     private IEnumerator InGameCountdown()
@@ -138,6 +158,51 @@ public class SnakeMultiSimulator : MonoBehaviour
     {
         isGameOver = true;
         inGameCD.enabled = false;
-        multiUI.GetComponent<MultiUIController>().GameOver();
+        multiUI.GetComponent<MultiUIController>().GameOver(playerScores);
+    }
+
+    private IEnumerator SimulateCPUPlayersScoring(string player)
+    {
+        while (!isGameOver)
+        {
+            yield return new WaitForSeconds(Random.Range(minTimeScore, maxTimeScore));
+            UpdateScore(player, scoreScale);
+        }
+    }
+
+    public void UpdateScore(string playerName, int scoreToAdd)
+    {
+        playerScores[playerName] += scoreToAdd;
+    }
+
+    private void UpdateLeaderboard()
+    {
+        var sortedPlayers = playerScores.OrderByDescending(x => x.Value);
+        int rank = 1;
+        foreach (var player in sortedPlayers)
+        {
+            GameObject playerUI = GetPlayerUI("Player"+rank.ToString());
+            Transform playerNameUI = playerUI.transform.Find("Name");
+            Transform playerScoreUI = playerUI.transform.Find("Score");
+            playerNameUI.GetComponent<TMP_Text>().text = player.Key;
+            playerScoreUI.GetComponentInChildren<TMP_Text>().text = player.Value.ToString();
+            rank++;
+        }
+    }
+    private GameObject GetPlayerUI(string playerName)
+    {
+        switch (playerName)
+        {
+            case "Player1":
+                return player1;
+            case "Player2":
+                return player2;
+            case "Player3":
+                return player3;
+            case "Player4":
+                return player4;
+            default:
+                return null;
+        }
     }
 }
