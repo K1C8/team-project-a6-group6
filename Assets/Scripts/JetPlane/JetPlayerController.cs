@@ -7,11 +7,11 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     private float _fireInterval = 0.2f;
     private int _burstCount = 1;
     private bool _canFire = true;
-    private int _healthPoint = 100;
+    private int _hitPoint = 100;
     private int _lives = 2;
     private bool _isInvincible = false;
     private SpriteRenderer _spriteRenderer;
-    private EnemySpawnManager _enemySpawnManager;
+    private JetSpawnManager _enemySpawnManager;
 
     private bool _isKeyUpPressed = false;
     private bool _isKeyDownPressed = false;
@@ -23,7 +23,7 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     private float _boardLeftBorder = -2.5f;
     private float _invincibleCoolDownTime = 3.0f;
     private Collider2D _playerCollider2D;
-    private int _bulletAngle = 8;
+    private int _bulletAngle = 5;
 
     [SerializeField] 
     public GameObject JetPlayer;
@@ -33,11 +33,26 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     public float MoveUnit;
     [SerializeField]
     private GameObject _containerTypeBullet;
+    [SerializeField]
+    private JetGameManagerLogic _jetGameManagerLogic;
+
+    public int Burst
+    {
+        get { return _burstCount; }
+        set
+        {
+            if (_burstCount <= 3) 
+            {
+                _burstCount = value;
+                Debug.Log(string.Format("JetPlayerController has burst count increased to {0}", _burstCount));
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        _enemySpawnManager = GameObject.Find("EnemySpawnManager").GetComponent<EnemySpawnManager>();
+        _enemySpawnManager = GameObject.Find("EnemySpawnManager").GetComponent<JetSpawnManager>();
         _spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
 
         // Check if _enemySpawnManger is null.
@@ -45,6 +60,10 @@ public class JetPlayerController : MonoBehaviour, IExplosible
         {
             Debug.LogError("Cannot find instance for EnemySpawnManager.");
         }
+
+        // Do not reverse these two lines, as PlayerHitPoint has logic to set to 0 if PlayerLives is 0.
+        _jetGameManagerLogic.PlayerLives = _lives;
+        _jetGameManagerLogic.PlayerHitPoint = _hitPoint;
     }
 
     // Update is called once per frame
@@ -80,8 +99,8 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     private void OnTriggerEnter2D(Collider2D other)
     {
         GameObject otherObject = other.gameObject;
-        // If the other object is an Enemy, destroy the enemy then destroy this bullet instance.
-        if (other.tag == "Enemy")
+        // If the other object is a bullet from an enemy, destroy the enemy bullet then take the damage.
+        if (other.CompareTag("Enemy"))
         {
             IBullet bullet = null;
             switch (other.name)
@@ -100,6 +119,25 @@ public class JetPlayerController : MonoBehaviour, IExplosible
                 int selfDamage = bullet.GetDamage();
                 Destroy(other.gameObject);
                 TakeDamage(selfDamage);
+            }
+        } else if (other.CompareTag("PowerUp"))
+        {
+            AbstractPowerUp powerUp = null;
+            switch (other.name)
+            {
+                case "PowerUpBulletPrefab(Clone)":
+                    {
+                        Debug.Log("PowerUp collided.");
+                        powerUp = otherObject.GetComponent<PowerUpBullet>();
+                        break;
+                    }
+                default : break;
+            }
+            if (powerUp != null)
+            {
+                Debug.Log("From JetPlayerController as " + this);
+                powerUp.ProcessPowerUp(this);
+                Destroy(other.gameObject);
             }
         }
     }
@@ -163,10 +201,10 @@ public class JetPlayerController : MonoBehaviour, IExplosible
 
     void Damage(int damage)
     {
-        _healthPoint -= damage;
-        if (_healthPoint < 1)
+        _hitPoint -= damage;
+        if (_hitPoint < 1)
         {
-            _healthPoint = 100;
+            _hitPoint = 100;
             _lives -= 1;
             ResetPowerUp();
             InvincibleEffect();
@@ -174,9 +212,12 @@ public class JetPlayerController : MonoBehaviour, IExplosible
         if (_lives < 1)
         {
             _enemySpawnManager.OnPlayerDeath();
+            _jetGameManagerLogic.OnGameOver();
             Destroy(this.gameObject);
         }
-        Debug.Log(string.Format("Updating JetPlayer health and lives with damage as: damage {0}, HP {1}, lives {2}", damage, _healthPoint, _lives));
+        Debug.Log(string.Format("Updating JetPlayer health and lives with damage as: damage {0}, HP {1}, lives {2}", damage, _hitPoint, _lives));
+        _jetGameManagerLogic.PlayerHitPoint = _hitPoint;
+        _jetGameManagerLogic.PlayerLives = _lives;
     }
 
     IEnumerator InvincibleTimer()
