@@ -42,6 +42,11 @@ public class JetGameManagerLogic : MonoBehaviour
         SetBgmVolume(_bgmVolumeSlider.value);
         SetEffectVolume(_effectVolumeSlider.value);
 
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMusic("Silent");
+        }
+
         GameObject multiManager = GameObject.Find(_multiManagerName);
         if (multiManager != null)
         {
@@ -100,7 +105,11 @@ public class JetGameManagerLogic : MonoBehaviour
     }
     public void PlayButtonSFX()
     {
-        AudioManager.Instance.PlaySFX("Button");
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX("Button");
+        }
     }
 
     public void InitScore()
@@ -171,6 +180,11 @@ public class JetGameManagerLogic : MonoBehaviour
     // Member to call when user touches a button
     public void PressToStart()
     {
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMusic("BGM For Jet");
+        }
         JetPlayerController JetPlayer = (FindObjectsByType<JetPlayerController>(FindObjectsInactive.Include, FindObjectsSortMode.None))[0];
         JetSpawnManager EnemySpawnManager = (FindObjectsByType<JetSpawnManager>(FindObjectsInactive.Include, FindObjectsSortMode.None))[0];
         GameObject pressToStartText = GameObject.Find("PressToStart");
@@ -192,12 +206,20 @@ public class JetGameManagerLogic : MonoBehaviour
 
     public void OnGameOver()
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMusic("Silent");
+        }
         StartCoroutine(GameOverProcess());
     }
 
     public void QuitGame()
     {
-        AudioManager.Instance.PlayMusic("BGM");
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMusic("BGM");
+        }
         SceneManager.LoadScene("MainMenu");
 
     }

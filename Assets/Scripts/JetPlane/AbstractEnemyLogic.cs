@@ -57,6 +57,7 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
         Debug.Log(string.Format("Enemy Entry has {0} hit point left.", _hitPoint));
         if (_hitPoint < 1)
         {
+            AudioManager.Instance.PlaySFX("JetEnemyExplosion");
             RollPowerUpDice();
             if (_diceResult >= _minimumValueBullet && _powerUpBullet != null)
             {
@@ -127,6 +128,7 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
 
             if (_canFire)
             {
+                AudioManager.Instance.PlaySFX("JetEnemyBullet");
                 _canFire = false;
                 int angleWidthTotal = _bulletAngle * (_burstCount - 1);
                 int angle = angleWidthTotal / -2;

@@ -7,7 +7,7 @@ public class JetSpawnManager : MonoBehaviour
 {
     private bool _isPlayerAlive = true;
     private bool _needToRespawnBackground = false;
-    private float _spawnMaximumInterval = 4.0f;
+    private float _spawnMaximumInterval = 2.5f;
     private GameObject _firstSpawnedBackground;
     private GameObject _secondSpawnedBackground;
 
@@ -40,7 +40,7 @@ public class JetSpawnManager : MonoBehaviour
             Vector3 positionToSpawn = new Vector3(Random.Range(-2f, 2f), 3, 0);
             GameObject newEnemyEntry = Instantiate(_enemyEntry, positionToSpawn, Quaternion.identity);
             newEnemyEntry.transform.parent = _containerTypeEnemy.transform;
-            yield return new WaitForSeconds(Random.Range(0.5f, _spawnMaximumInterval));
+            yield return new WaitForSeconds(Random.Range(0.25f, _spawnMaximumInterval));
         }
     }
 
