@@ -73,7 +73,7 @@ public class MainMenuUIController : MonoBehaviour
     // Update after game scenes added
     public void PlayTetris()
     {
-        SceneManager.LoadScene("InGameTemp");
+        SceneManager.LoadScene("Tetris");
         AudioManager.Instance.StopMusic();
     }
     public void PlaySnake()
