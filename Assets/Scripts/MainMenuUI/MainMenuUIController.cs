@@ -13,7 +13,11 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private Slider SFXSlider;
 
     private void Start()
-    {   
+    {
+        // Initialzation of game state
+        Time.timeScale = 1f;
+        MultiSingleManager.Instance.isMulti = false;
+
         masterSlider.value = PlayerPrefs.GetFloat("masterVol", 0.75f); // Default value if not set
         bgmSlider.value = PlayerPrefs.GetFloat("bgmVol", 0.75f);
         SFXSlider.value = PlayerPrefs.GetFloat("sfxVol", 0.75f);
@@ -54,12 +58,11 @@ public class MainMenuUIController : MonoBehaviour
 
     public void MultiModeButton()
     {
-        SceneManager.LoadScene("MultiMode");
+        SceneManager.LoadScene("Matching");
     }
 
     public void SingleModeButton ()
     {
-        Debug.Log("Single Mode Pressed.");
         SceneManager.LoadScene("SingleMode");
     }
     public void PlayButtonSFX()
@@ -71,16 +74,16 @@ public class MainMenuUIController : MonoBehaviour
     public void PlayTetris()
     {
         SceneManager.LoadScene("InGameTemp");
-        SceneManager.LoadScene("Tetris");
-        AudioManager.Instance.PlayMusic("BGM For Tetris");
+        AudioManager.Instance.StopMusic();
     }
     public void PlaySnake()
     {
         SceneManager.LoadScene("Snake");
-        AudioManager.Instance.PlayMusic("BGM For Snake");
+        AudioManager.Instance.StopMusic();
     }
     public void PlayJet()
     {
-        SceneManager.LoadScene("InGameJet");
+        SceneManager.LoadScene("InGameTemp");
+        AudioManager.Instance.StopMusic();
     }
 }
