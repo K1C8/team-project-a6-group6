@@ -45,7 +45,6 @@ public class BackgroundLogic : MonoBehaviour
     IEnumerator RespawnTimer()
     {
         yield return new WaitForSeconds(_respawnTime);
-        _canRespawn = true;
     }
 
 }

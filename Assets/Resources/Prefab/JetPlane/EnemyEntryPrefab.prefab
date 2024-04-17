@@ -148,9 +148,10 @@ MonoBehaviour:
   _fireIntervalEntry: 3
   _speedEntry: 2
   _yLowerBoundEntry: 2.5
+  _yVisibleUpperBoundEntry: 2.7
   _bulletAngleEntry: 5
-  _minimumValueBulletEntry: 90
-  _minimumValueHitPointEntry: 97
+  _minimumValueBulletEntry: 93
+  _minimumValueHitPointEntry: 98
   _minimumValueExtraLifeEntry: 99
   _minimumValueShieldEntry: 100
   _enemyEntryBullet: {fileID: 5123982050819918642, guid: 25c3f8b7e060627439d2fc50fb37beee, type: 3}

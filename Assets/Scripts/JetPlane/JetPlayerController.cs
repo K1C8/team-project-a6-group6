@@ -78,6 +78,11 @@ public class JetPlayerController : MonoBehaviour, IExplosible
 
         if (_canFire)
         {
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFX("JetPlayerBullet");
+            }
             int angleWidthTotal = _bulletAngle * (_burstCount - 1);
             int angle = angleWidthTotal / -2;
             for (int i = 0; i < _burstCount; i++)
@@ -122,6 +127,11 @@ public class JetPlayerController : MonoBehaviour, IExplosible
             }
         } else if (other.CompareTag("PowerUp"))
         {
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFX("JetPlayerPowerUp");
+            }
             AbstractPowerUp powerUp = null;
             switch (other.name)
             {
@@ -204,6 +214,10 @@ public class JetPlayerController : MonoBehaviour, IExplosible
         _hitPoint -= damage;
         if (_hitPoint < 1)
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFX("JetPlayerExplosion");
+            }
             _hitPoint = 100;
             _lives -= 1;
             ResetPowerUp();
