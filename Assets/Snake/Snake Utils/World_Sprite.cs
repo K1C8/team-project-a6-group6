@@ -43,15 +43,9 @@ namespace Utils {
         }
         public void SetTag(string tag)
         {
-            if (!string.IsNullOrEmpty(tag) && UnityEditorInternal.InternalEditorUtility.tags.Contains(tag))
-            {
                 gameObject.tag = tag;
-            }
-            else
-            {
-                Debug.LogWarning("Tag '" + tag + "' not found. Please ensure it is added in the Tags and Layers settings.");
-            }
         }
+
         public void DestroySelf() {
             Object.Destroy(gameObject);
         }
