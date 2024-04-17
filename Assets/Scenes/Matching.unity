@@ -1069,8 +1069,8 @@ MonoBehaviour:
   gameName: {fileID: 1019694021}
   gameImage: {fileID: 431123354}
   gameScenes:
-  - sceneName: Snake
-    gameIcon: {fileID: 21300000, guid: 52b14ce35df55be4eb827694078f3c91, type: 3}
+  - sceneName: Tetris
+    gameIcon: {fileID: 21300000, guid: 8618e947034bd33499b69f9a089e9d3d, type: 3}
 --- !u!1 &1823014859
 GameObject:
   m_ObjectHideFlags: 0

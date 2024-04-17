@@ -19,7 +19,9 @@ public class Board : MonoBehaviour
     private Vector2Int nextTilesList;
     public Vector2Int boardSize;
     public int Score { get; private set; }
-    public bool IsGameOver { get; private set; }    
+    public bool IsGameOver { get; private set; }
+    [SerializeField] MultiUIController multiUIController;
+    [SerializeField] TetrisMultiSimulator tetrisMultiSimulator;
 
     // Start is called before the first frame update
     private void Awake()
@@ -78,8 +80,16 @@ public class Board : MonoBehaviour
         
         if (this.IsGameOver)
         {
-            this.controller.GameOverTrigger();
-            Debug.Log("Triggered Gameover");
+            if (MultiSingleManager.Instance.isMulti)
+            {
+                multiUIController.PlayerDead();
+                tetrisMultiSimulator.setButtonToDisable(true);
+            }
+            else
+            {
+                this.controller.GameOverTrigger();
+                Debug.Log("Triggered Gameover");
+            }
         }
     }
 
@@ -210,7 +220,14 @@ public class Board : MonoBehaviour
             }
             row++;
         }
-        this.controller.ClearRowTrigger();
+        if (MultiSingleManager.Instance.isMulti)
+        {
+            tetrisMultiSimulator.UpdateScore("YOU", 100);
+        }
+        else
+        {
+            this.controller.ClearRowTrigger();
+        }
     }
 
     public bool IsPositionValid(Piece piece, Vector3Int position)
