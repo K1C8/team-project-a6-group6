@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Matching.unity
     guid: 488a43f593b928f4a803084a53af23f4
+  - enabled: 1
+    path: Assets/Scenes/InGameJet.unity
+    guid: cb95bcb3621535143b063fe06795d9da
   m_configObjects: {}

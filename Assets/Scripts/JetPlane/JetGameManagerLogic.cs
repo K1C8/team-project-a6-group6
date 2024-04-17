@@ -44,7 +44,7 @@ public class JetGameManagerLogic : MonoBehaviour
 
         if (AudioManager.Instance != null)
         {
-            AudioManager.Instance.PlayMusic("Silent");
+            AudioManager.Instance.StopMusic();
         }
 
         GameObject multiManager = GameObject.Find(_multiManagerName);
@@ -208,7 +208,7 @@ public class JetGameManagerLogic : MonoBehaviour
     {
         if (AudioManager.Instance != null)
         {
-            AudioManager.Instance.PlayMusic("Silent");
+            AudioManager.Instance.StopMusic();
         }
         StartCoroutine(GameOverProcess());
     }

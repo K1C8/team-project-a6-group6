@@ -3052,6 +3052,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 5e7ff2f8225d0e34e86ea59202c23eca, type: 3}
   - name: BGM For Matching
     clip: {fileID: 8300000, guid: c53d52b6903e77342963b7b627f126fb, type: 3}
+  - name: BGM For Jet
+    clip: {fileID: 8300000, guid: c9ac900628c27c7478c0b41f1212310e, type: 3}
   sfxSounds:
   - name: Button
     clip: {fileID: 8300000, guid: 0bb36014e255f5745b99a24e5ecd5916, type: 3}
@@ -3061,6 +3063,16 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 019333ddf5881244b88695eb419d43c8, type: 3}
   - name: Matched
     clip: {fileID: 8300000, guid: 3a0789bed28639149a94da7d499e6606, type: 3}
+  - name: JetEnemyBullet
+    clip: {fileID: 8300000, guid: ba3142f91e3a1d348af7908b5c91e14f, type: 3}
+  - name: JetEnemyExplosion
+    clip: {fileID: 8300000, guid: a13000fec1c4d4e4985e5c3441c6819d, type: 3}
+  - name: JetPlayerBullet
+    clip: {fileID: 8300000, guid: 2d3acd46cb8497e4086fbc7db490a5f1, type: 3}
+  - name: JetPlayerPowerUp
+    clip: {fileID: 8300000, guid: d367a594f3893d844b5b43a4af32b088, type: 3}
+  - name: JetPlayerExplosion
+    clip: {fileID: 8300000, guid: 55f607a6b7970e241add5b3228f544bd, type: 3}
   musicSource: {fileID: 1905460029}
   sfxSource: {fileID: 193268146}
 --- !u!4 &1186580103

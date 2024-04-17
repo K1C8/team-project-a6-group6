@@ -83,7 +83,7 @@ public class MainMenuUIController : MonoBehaviour
     }
     public void PlayJet()
     {
-        SceneManager.LoadScene("InGameTemp");
+        SceneManager.LoadScene("InGameJet");
         AudioManager.Instance.StopMusic();
     }
 }
