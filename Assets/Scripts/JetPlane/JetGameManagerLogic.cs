@@ -24,6 +24,8 @@ public class JetGameManagerLogic : MonoBehaviour
     [SerializeField] private TMP_Text _hitPointsAndLivesText;
     [SerializeField] private TMP_Text _singleScoreText;
     [SerializeField] private TMP_Text _singleNameText;
+    [SerializeField] private JetMultiSimulator jetMultiSimulator;
+    [SerializeField] private MultiUIController multiUIController;
 
     void Start()
     {
@@ -122,8 +124,15 @@ public class JetGameManagerLogic : MonoBehaviour
 
     public void UpdateSingleScore()
     {
-        string _scoreText = _playerScore.ToString();
-        _singleScoreText.text = _scoreText;
+        if (MultiSingleManager.Instance.isMulti)
+        {
+            jetMultiSimulator.UpdateScore("YOU", _playerScore);
+        }
+        else
+        {
+            string _scoreText = _playerScore.ToString();
+            _singleScoreText.text = _scoreText;
+        }
     }
 
 
@@ -194,8 +203,13 @@ public class JetGameManagerLogic : MonoBehaviour
             EnemySpawnManager.gameObject.SetActive(true);
             pressToStartText.SetActive(false);
         }
-        Time.timeScale = 1.0f;
 
+        if (MultiSingleManager.Instance.isMulti)
+        {
+            JetPlayer.gameObject.SetActive(true);
+            EnemySpawnManager.gameObject.SetActive(true);
+        }
+        Time.timeScale = 1.0f;
     }
 
     IEnumerator GameOverProcess()
@@ -210,7 +224,15 @@ public class JetGameManagerLogic : MonoBehaviour
         {
             AudioManager.Instance.StopMusic();
         }
-        StartCoroutine(GameOverProcess());
+        if (MultiSingleManager.Instance.isMulti)
+        {
+            multiUIController.PlayerDead();
+            jetMultiSimulator.setButtonToDisable(true);
+        }
+        else
+        {
+            StartCoroutine(GameOverProcess());
+        }
     }
 
     public void QuitGame()

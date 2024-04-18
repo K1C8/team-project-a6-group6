@@ -12,50 +12,45 @@ public class InGameUIController : MonoBehaviour
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider SFXSlider;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        if (PlayerPrefs.HasKey("masterVol") || PlayerPrefs.HasKey("bgmVol") || PlayerPrefs.HasKey("sfxVol"))
-        {
-            LoadVolume();
-        }
-        else
-        {
-            SetMasterVolume();
-            SetBgmVolume();
-            SetEffectVolume();
-        }
+        masterSlider.value = PlayerPrefs.GetFloat("masterVol", 0.75f); // Default value if not set
+        bgmSlider.value = PlayerPrefs.GetFloat("bgmVol", 0.75f);
+        SFXSlider.value = PlayerPrefs.GetFloat("sfxVol", 0.75f);
+
+        masterSlider.onValueChanged.AddListener(SetMasterVolume);
+        bgmSlider.onValueChanged.AddListener(SetBgmVolume);
+        SFXSlider.onValueChanged.AddListener(SetEffectVolume);
+
+        // Apply the initial volume settings
+        SetMasterVolume(masterSlider.value);
+        SetBgmVolume(bgmSlider.value);
+        SetEffectVolume(SFXSlider.value);
     }
 
     // This function will control the master volume
-    public void SetMasterVolume()
+    public void SetMasterVolume(float volume)
     {
-        float volume = masterSlider.value;
-        audioMixer.SetFloat("MasterVolume", volume);
+        audioMixer.SetFloat("MasterVolume", LinearToDecibel(volume));
         PlayerPrefs.SetFloat("masterVol", volume);
     }
-    public void SetBgmVolume()
+
+    public void SetBgmVolume(float volume)
     {
-        float volume = bgmSlider.value;
-        audioMixer.SetFloat("bgmVolume", volume);
+        audioMixer.SetFloat("bgmVolume", LinearToDecibel(volume));
         PlayerPrefs.SetFloat("bgmVol", volume);
     }
 
-    public void SetEffectVolume()
+    public void SetEffectVolume(float volume)
     {
-        float volume = SFXSlider.value;
-        audioMixer.SetFloat("SoundEffect", volume);
+        audioMixer.SetFloat("SoundEffect", LinearToDecibel(volume));
         PlayerPrefs.SetFloat("sfxVol", volume);
     }
 
-    private void LoadVolume()
+    // Convert linear scale [0,1] to decibel scale [-80,0]
+    private float LinearToDecibel(float linear)
     {
-        masterSlider.value = PlayerPrefs.GetFloat("masterVol");
-        bgmSlider.value = PlayerPrefs.GetFloat("bgmVol");
-        SFXSlider.value = PlayerPrefs.GetFloat("sfxVol");
-
-        SetMasterVolume();
-        SetBgmVolume();
-        SetEffectVolume();
+        return linear != 0 ? 20.0f * Mathf.Log10(linear) : -80.0f;
     }
 
     public void PauseGame()
