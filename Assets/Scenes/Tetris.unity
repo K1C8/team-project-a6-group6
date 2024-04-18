@@ -10384,8 +10384,8 @@ MonoBehaviour:
   gameStartCD: {fileID: 642199015}
   inGameCD: {fileID: 1822158060}
   scoreScale: 100
-  minTimeScore: 2
-  maxTimeScore: 10
+  minTimeScore: 5
+  maxTimeScore: 13
   gameDuration: 180
   isGameOver: 0
 --- !u!1 &1509744279
