@@ -12332,7 +12332,7 @@ MonoBehaviour:
   inGameCD: {fileID: 1224560880}
   scoreScale: 100
   minTimeScore: 2
-  maxTimeScore: 10
+  maxTimeScore: 6
   gameDuration: 120
   isGameOver: 0
 --- !u!4 &1640938539

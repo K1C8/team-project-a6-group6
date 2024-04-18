@@ -33,8 +33,8 @@ public class Board : MonoBehaviour
         this.Bounds = new RectInt(position, this.boardSize + new Vector2Int(0, 4));
 
         this.generatePosition = new Vector3Int(-1, this.boardSize.y / 2 - 1, 0);
-        this.nextTilePosition1 = new Vector3Int((int)spriteR.size.x - 3, 2, 0);
-        this.nextTilePosition2 = new Vector3Int((int)spriteR.size.x - 3, -3, 0);
+        this.nextTilePosition1 = new Vector3Int((int)spriteR.size.x - 3, -1, 0);
+        this.nextTilePosition2 = new Vector3Int((int)spriteR.size.x - 3, -6, 0);
 
         this.Score = 0;
         this.IsGameOver = false;

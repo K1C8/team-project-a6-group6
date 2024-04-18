@@ -175,7 +175,14 @@ public class JetMultiSimulator : MonoBehaviour
 
     public void UpdateScore(string playerName, int scoreToAdd)
     {
-        playerScores[playerName] += scoreToAdd;
+        if (playerName == "YOU")
+        {
+            playerScores[playerName] = scoreToAdd;
+        }
+        else
+        {
+            playerScores[playerName] += scoreToAdd;
+        }
     }
 
     private void UpdateLeaderboard()
