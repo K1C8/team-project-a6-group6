@@ -20,7 +20,6 @@ public class UIController : MonoBehaviour
     public void Start()
     {
         isGameStarted = false;
-        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("Button");
         //Debug.Log("UI controler: started");
     }
 
