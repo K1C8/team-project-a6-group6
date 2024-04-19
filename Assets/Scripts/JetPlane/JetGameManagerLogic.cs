@@ -194,20 +194,25 @@ public class JetGameManagerLogic : MonoBehaviour
         {
             AudioManager.Instance.PlayMusic("BGM For Jet");
         }
-        JetPlayerController JetPlayer = (FindObjectsByType<JetPlayerController>(FindObjectsInactive.Include, FindObjectsSortMode.None))[0];
-        JetSpawnManager EnemySpawnManager = (FindObjectsByType<JetSpawnManager>(FindObjectsInactive.Include, FindObjectsSortMode.None))[0];
-        GameObject pressToStartText = GameObject.Find("PressToStart");
-        if (JetPlayer != null && EnemySpawnManager != null && pressToStartText != null)
+        JetPlayerController[] tmpJetPlayerArray = (FindObjectsByType<JetPlayerController>(FindObjectsInactive.Include, FindObjectsSortMode.None));
+        JetSpawnManager[] tmpJetSpawnArray = (FindObjectsByType<JetSpawnManager>(FindObjectsInactive.Include, FindObjectsSortMode.None));
+        if (tmpJetPlayerArray.Length > 0 && tmpJetSpawnArray.Length > 0)
         {
-            JetPlayer.gameObject.SetActive(true);
-            EnemySpawnManager.gameObject.SetActive(true);
-            pressToStartText.SetActive(false);
-        }
+            JetPlayerController JetPlayer = tmpJetPlayerArray[0];
+            JetSpawnManager EnemySpawnManager = tmpJetSpawnArray[0];
+            GameObject pressToStartText = GameObject.Find("PressToStart");
+            if (JetPlayer != null && EnemySpawnManager != null && pressToStartText != null)
+            {
+                JetPlayer.gameObject.SetActive(true);
+                EnemySpawnManager.gameObject.SetActive(true);
+                pressToStartText.SetActive(false);
+            }
 
-        if (MultiSingleManager.Instance.isMulti)
-        {
-            JetPlayer.gameObject.SetActive(true);
-            EnemySpawnManager.gameObject.SetActive(true);
+            if (MultiSingleManager.Instance.isMulti)
+            {
+                JetPlayer.gameObject.SetActive(true);
+                EnemySpawnManager.gameObject.SetActive(true);
+            }
         }
         Time.timeScale = 1.0f;
     }
