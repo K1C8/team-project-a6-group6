@@ -11,9 +11,10 @@ public class SnakeInGameUIController : MonoBehaviour
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider SFXSlider;
-    public TextMeshProUGUI resumeText;
+    public GameObject pressToStartText;
     public Snake snake;
     public Boolean isRunning = true;
+    private Boolean isStarted = false;
 
     private void Start()
     {
@@ -64,7 +65,11 @@ public class SnakeInGameUIController : MonoBehaviour
     public void ResumeGame()
     {
         isRunning = true;
-        if (!snake.isGameOver)
+        if (!isStarted) 
+        {
+            pressToStartText.SetActive(true);
+        }
+        else if (!snake.isGameOver)
         {
             Time.timeScale = 1;
         }
@@ -82,6 +87,7 @@ public class SnakeInGameUIController : MonoBehaviour
 
     public void PressToStart()
     {
+        isStarted = true;
         Time.timeScale = 1;
     }
     public void PlayButtonSFX()
