@@ -13423,7 +13423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c659d21f6483ba4e8e457c047ecefd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1994179739}
+  scoreText: {fileID: 1799791845}
   tetrisBoard: {fileID: 706639132}
   pieceComponent: {fileID: 706639131}
   StartWordUI: {fileID: 947172924}
