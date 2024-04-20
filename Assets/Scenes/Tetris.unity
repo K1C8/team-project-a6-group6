@@ -863,8 +863,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 327917903}
-        m_TargetAssemblyTypeName: InGameUIController, Assembly-CSharp
+      - m_Target: {fileID: 1884268250}
+        m_TargetAssemblyTypeName: TetrisUIController, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
@@ -1695,7 +1695,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1884268250}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_TargetAssemblyTypeName: TetrisUIController, Assembly-CSharp
         m_MethodName: ToggleTips
         m_Mode: 1
         m_Arguments:
@@ -1900,7 +1900,6 @@ GameObject:
   - component: {fileID: 327917900}
   - component: {fileID: 327917902}
   - component: {fileID: 327917901}
-  - component: {fileID: 327917903}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -1973,22 +1972,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 327917899}
   m_CullTransparentMesh: 1
---- !u!114 &327917903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 327917899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8949b7988a009f64d8dc81d6d1867aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 124ee53fd17e0334b8c887676e325a56, type: 2}
-  masterSlider: {fileID: 1000022519}
-  bgmSlider: {fileID: 1237073502}
-  SFXSlider: {fileID: 2048009186}
 --- !u!1 &334123858
 GameObject:
   m_ObjectHideFlags: 0
@@ -3657,7 +3640,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1884268250}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_TargetAssemblyTypeName: TetrisUIController, Assembly-CSharp
         m_MethodName: ToggleMenu
         m_Mode: 1
         m_Arguments:
@@ -6641,10 +6624,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
+      - m_Target: {fileID: 1884268250}
+        m_TargetAssemblyTypeName: TetrisUIController, Assembly-CSharp
         m_MethodName: SetMasterVolume
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8370,10 +8353,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
+      - m_Target: {fileID: 1884268250}
+        m_TargetAssemblyTypeName: TetrisUIController, Assembly-CSharp
         m_MethodName: SetBgmVolume
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9395,7 +9378,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1884268250}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_TargetAssemblyTypeName: TetrisUIController, Assembly-CSharp
         m_MethodName: ToggleTips
         m_Mode: 1
         m_Arguments:
@@ -13447,6 +13430,10 @@ MonoBehaviour:
   GameOverUI: {fileID: 50502122}
   GameMenuUI: {fileID: 1211201950}
   TipsUI: {fileID: 294559961}
+  audioMixer: {fileID: 24100000, guid: 124ee53fd17e0334b8c887676e325a56, type: 2}
+  masterSlider: {fileID: 1000022519}
+  bgmSlider: {fileID: 1237073502}
+  SFXSlider: {fileID: 2048009186}
   isGameStarted: 0
 --- !u!1 &1886278383
 GameObject:
@@ -13870,7 +13857,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1884268250}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_TargetAssemblyTypeName: TetrisUIController, Assembly-CSharp
         m_MethodName: ToggleMenu
         m_Mode: 1
         m_Arguments:
@@ -14296,10 +14283,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuUIController, Assembly-CSharp
+      - m_Target: {fileID: 1884268250}
+        m_TargetAssemblyTypeName: TetrisUIController, Assembly-CSharp
         m_MethodName: SetEffectVolume
-        m_Mode: 1
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
