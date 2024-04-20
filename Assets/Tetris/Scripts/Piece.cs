@@ -99,7 +99,7 @@ public class Piece : MonoBehaviour
         if (Time.time >= this.stepTime)
         {
             Step();
-            Debug.Log("Piece | Step!");
+            //Debug.Log("Piece | Step!");
         }
     
     }
