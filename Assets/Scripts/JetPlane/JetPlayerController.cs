@@ -19,8 +19,8 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     private bool _isKeyRightPressed = false;
     private float _boardLowerBorder = 2.6f;
     private float _boardUpperBorder = -2.6f;
-    private float _boardRightBorder = 2.5f;
-    private float _boardLeftBorder = -2.5f;
+    private float _boardRightBorder = 2.05f;
+    private float _boardLeftBorder = -2.05f;
     private float _invincibleCoolDownTime = 3.0f;
     private Collider2D _playerCollider2D;
     private int _bulletAngle = 5;
