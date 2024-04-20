@@ -11,7 +11,7 @@ public class TetrisMultiSimulator : MonoBehaviour
     [SerializeField] GameObject player2;
     [SerializeField] GameObject player3;
     [SerializeField] GameObject player4;
-    [SerializeField] UIController tetrisUI;
+    [SerializeField] TetrisUIController tetrisUI;
     [SerializeField] GameObject multiUI;
     [SerializeField] GameObject[] objectsToHide;
     [SerializeField] Button[] buttonsToDisable;
@@ -97,7 +97,10 @@ public class TetrisMultiSimulator : MonoBehaviour
     {
         if (!isGameOver && Time.timeScale == 1)
         {
-            gameDuration -= Time.deltaTime;
+            if (MultiSingleManager.Instance.isMulti)
+            {
+                gameDuration -= Time.deltaTime;
+            }
             if (gameDuration <= 0)
             {
                 GameOver();

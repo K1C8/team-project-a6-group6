@@ -97,7 +97,10 @@ public class JetMultiSimulator : MonoBehaviour
     {
         if (!isGameOver && Time.timeScale == 1)
         {
-            gameDuration -= Time.deltaTime;
+            if (MultiSingleManager.Instance.isMulti)
+            {
+                gameDuration -= Time.deltaTime;
+            }
             if (gameDuration <= 0)
             {
                 GameOver();
