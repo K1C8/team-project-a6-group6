@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class Board : MonoBehaviour
 {
-    public UIController controller;
+    public TetrisUIController controller;
     public Tilemap tilemap { get; private set; }
     public TetrominoData[] tetrominoes;
     public SpriteRenderer spriteR;
@@ -74,6 +74,7 @@ public class Board : MonoBehaviour
         {
             TetrominoData data = this.tetrominoes[generatedCellIndex];
             float stepSpeed = this.Score >= Data.ScoreVersusSpeed.Length ? 0.4f : Data.ScoreVersusSpeed[this.Score].y;
+            Debug.Log("stepSpeed : " + stepSpeed);
             this.activePiece.Initialize(this, generatePosition, data, stepSpeed);
             Set(this.activePiece);
         }

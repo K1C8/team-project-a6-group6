@@ -3054,6 +3054,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c53d52b6903e77342963b7b627f126fb, type: 3}
   - name: BGM For Jet
     clip: {fileID: 8300000, guid: c9ac900628c27c7478c0b41f1212310e, type: 3}
+  - name: BGM For Tetris
+    clip: {fileID: 8300000, guid: e1d72bb71ba06b349943300096924af1, type: 3}
   sfxSounds:
   - name: Button
     clip: {fileID: 8300000, guid: 0bb36014e255f5745b99a24e5ecd5916, type: 3}
@@ -3073,6 +3075,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: d367a594f3893d844b5b43a4af32b088, type: 3}
   - name: JetPlayerExplosion
     clip: {fileID: 8300000, guid: 55f607a6b7970e241add5b3228f544bd, type: 3}
+  - name: Clear Line
+    clip: {fileID: 8300000, guid: 915d45db5377e4c4d8b8e40da8a0f0db, type: 3}
   musicSource: {fileID: 1905460029}
   sfxSource: {fileID: 193268146}
 --- !u!4 &1186580103
