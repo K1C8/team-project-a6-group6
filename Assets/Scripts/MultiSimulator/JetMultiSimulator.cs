@@ -31,7 +31,7 @@ public class JetMultiSimulator : MonoBehaviour
     {
         //AudioManager.Instance.PlayMusic("BGM For Snake");
         player1.GetComponentInChildren<TMP_Text>().text = "YOU";
-        if (MultiSingleManager.Instance.isMulti)
+        if (MultiSingleManager.Instance != null && MultiSingleManager.Instance.isMulti)
         {
             playerScores.Add("YOU", 0);
             playerScores.Add("P2", 0);
@@ -104,7 +104,7 @@ public class JetMultiSimulator : MonoBehaviour
     {
         if (!isGameOver && Time.timeScale == 1)
         {
-            if (MultiSingleManager.Instance.isMulti)
+            if (MultiSingleManager.Instance != null && MultiSingleManager.Instance.isMulti)
             {
                 gameDuration -= Time.deltaTime;
             }

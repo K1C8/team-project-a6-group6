@@ -127,7 +127,7 @@ public class JetGameManagerLogic : MonoBehaviour
 
     public void UpdateSingleScore()
     {
-        if (MultiSingleManager.Instance.isMulti)
+        if (MultiSingleManager.Instance != null && MultiSingleManager.Instance.isMulti)
         {
             jetMultiSimulator.UpdateScore("YOU", _playerScore);
         }
@@ -264,7 +264,7 @@ public class JetGameManagerLogic : MonoBehaviour
                 pressToStartText.SetActive(false);
             }
 
-            if (MultiSingleManager.Instance.isMulti)
+            if (MultiSingleManager.Instance != null && MultiSingleManager.Instance.isMulti)
             {
                 JetPlayer.gameObject.SetActive(true);
                 EnemySpawnManager.gameObject.SetActive(true);
@@ -286,7 +286,7 @@ public class JetGameManagerLogic : MonoBehaviour
         {
             AudioManager.Instance.StopMusic();
         }
-        if (MultiSingleManager.Instance.isMulti)
+        if (MultiSingleManager.Instance != null && MultiSingleManager.Instance.isMulti)
         {
             multiUIController.PlayerDead();
             jetMultiSimulator.setButtonToDisable(true);
