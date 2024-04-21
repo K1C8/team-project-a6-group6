@@ -127,7 +127,7 @@ public class JetGameManagerLogic : MonoBehaviour
 
     public void UpdateSingleScore()
     {
-        if (MultiSingleManager.Instance.isMulti)
+        if (MultiSingleManager.Instance != null && MultiSingleManager.Instance.isMulti)
         {
             jetMultiSimulator.UpdateScore("YOU", _playerScore);
         }

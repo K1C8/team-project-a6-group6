@@ -118,7 +118,7 @@ public class JetPlayerController : MonoBehaviour, IExplosible
 
         IEnumerator BulletTimer()
         {
-            yield return new WaitForSecondsRealtime(_fireInterval);
+            yield return new WaitForSeconds(_fireInterval);
             _canFire = true;
         }
 
