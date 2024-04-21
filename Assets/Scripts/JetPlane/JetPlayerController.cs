@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class JetPlayerController : MonoBehaviour, IExplosible
@@ -72,7 +73,7 @@ public class JetPlayerController : MonoBehaviour, IExplosible
             {
                 _hp = value;
             }
-            else
+            else if (_lives < 1)
             {
                 _hp = 0;
             }
