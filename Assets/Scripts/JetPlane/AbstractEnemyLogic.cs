@@ -14,9 +14,9 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
     protected int _bulletAngle;
     protected int _burstCount;
     protected int _damage;
-    protected int _hitPoint;
+    protected int _hp;
     protected int _minimumValueBullet;
-    protected int _minimumValueHitPoint;
+    protected int _minimumValueHp;
     protected int _minimumValueExtraLife;
     protected int _minimumValueShield;
     protected int _direction;
@@ -53,9 +53,9 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
 
     public void TakeDamage(int damageTaken)
     {
-        _hitPoint -= damageTaken;
-        Debug.Log(string.Format("Enemy Entry has {0} hit point left.", _hitPoint));
-        if (_hitPoint < 1)
+        _hp -= damageTaken;
+        Debug.Log(string.Format("Enemy Entry has {0} hit point left.", _hp));
+        if (_hp < 1)
         {
             AudioManager.Instance.PlaySFX("JetEnemyExplosion");
             RollPowerUpDice();

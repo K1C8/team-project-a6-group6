@@ -11,7 +11,7 @@ public class EnemyEntryLogic : AbstractEnemyLogic
     private float _yPosition; 
     private Vector3 _spawnPosition;
     // private int _direction = 1;
-    // private int _hitPoint = 50;
+    // private int _hp = 50;
     // private int _score = 50;
     // private int _damage = 50;
     // private float _fireInterval = 3.0f;
@@ -28,7 +28,7 @@ public class EnemyEntryLogic : AbstractEnemyLogic
     [SerializeField] private float _yVisibleUpperBoundEntry = 2.7f;
     [SerializeField] private int _bulletAngleEntry = 5;
     [SerializeField] private int _minimumValueBulletEntry = 93;
-    [SerializeField] private int _minimumValueHitPointEntry = 98;
+    [SerializeField] private int _minimumValueHpEntry = 98;
     [SerializeField] private int _minimumValueExtraLifeEntry = 99;
     [SerializeField] private int _minimumValueShieldEntry = 100;
     [SerializeField] private GameObject _enemyEntryBullet;
@@ -59,9 +59,9 @@ public class EnemyEntryLogic : AbstractEnemyLogic
         _burstCount = 1;
         _damage = 50;
         _direction = 1;
-        _hitPoint = 50;
+        _hp = 50;
         _minimumValueBullet = _minimumValueBulletEntry;
-        _minimumValueHitPoint = _minimumValueHitPointEntry;
+        _minimumValueHp = _minimumValueHpEntry;
         _minimumValueExtraLife = _minimumValueExtraLifeEntry;
         _minimumValueShield = _minimumValueShieldEntry;
         _score = 50;
@@ -152,9 +152,9 @@ public class EnemyEntryLogic : AbstractEnemyLogic
 
     public void TakeDamage(int damageTaken)
     {
-        _hitPoint -= damageTaken;
-        Debug.Log(string.Format("Enemy Entry has {0} hit point left.", _hitPoint));
-        if (_hitPoint < 1)
+        _hp -= damageTaken;
+        Debug.Log(string.Format("Enemy Entry has {0} hit point left.", _hp));
+        if (_hp < 1)
         {
             Destroy(this.gameObject);
         }

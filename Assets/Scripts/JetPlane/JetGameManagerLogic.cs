@@ -10,18 +10,20 @@ using UnityEngine.UI;
 public class JetGameManagerLogic : MonoBehaviour 
 {
     private int _playerScore;
-    private int _playerHitPoint;
+    private int _playerHp;
     private int _playerLives;
     private string _multiManagerName = "MultiSingleManager";
-    private string _playerHpLivesFormat = "Lives: {0}\nHit Points: {1}";
+    private string _playerHpLivesFormat = "Lives: {0}\nHP: {1}";
     private bool _isMultiMode = false;
+    private bool _hasStarted = false;
+    private Color _hpAndLivesTextColor = Color.white;
 
     [SerializeField] private GameObject _gameOverSingleMode;
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private Slider _masterVolumeSlider;
     [SerializeField] private Slider _bgmVolumeSlider;
     [SerializeField] private Slider _effectVolumeSlider;
-    [SerializeField] private TMP_Text _hitPointsAndLivesText;
+    [SerializeField] private TMP_Text _hpAndLivesText;
     [SerializeField] private TMP_Text _singleScoreText;
     [SerializeField] private TMP_Text _singleNameText;
     [SerializeField] private JetMultiSimulator jetMultiSimulator;
@@ -70,9 +72,9 @@ public class JetGameManagerLogic : MonoBehaviour
             Debug.LogError("Cannot find the instance of _singleScoreText.");
         }
 
-        if (_hitPointsAndLivesText != null)
+        if (_hpAndLivesText != null)
         {
-            _hitPointsAndLivesText.text = string.Format(_playerHpLivesFormat, 2, 100);
+            _hpAndLivesText.text = string.Format(_playerHpLivesFormat, 2, 100);
         }
 
 
@@ -149,13 +151,14 @@ public class JetGameManagerLogic : MonoBehaviour
             UpdateSingleScore();
         }
 
-        UpdatePlayerHitPointAndLives();
+        UpdatePlayerHpAndLives();
     }
 
 
-    private void UpdatePlayerHitPointAndLives()
+    private void UpdatePlayerHpAndLives()
     {
-        _hitPointsAndLivesText.text = string.Format(_playerHpLivesFormat, PlayerLives, PlayerHitPoint);
+        _hpAndLivesText.text = string.Format(_playerHpLivesFormat, PlayerLives, PlayerHp);
+        _hpAndLivesText.color = _hpAndLivesTextColor;
     }
 
     public int PlayerScore
@@ -164,20 +167,26 @@ public class JetGameManagerLogic : MonoBehaviour
         set { _playerScore = value; }
     }
 
-    public int PlayerHitPoint
+    public int PlayerHp
     {
-        get { return _playerHitPoint; }
+        get { return _playerHp; }
         set 
         {
             if (_playerLives > 0) 
             {
-                _playerHitPoint = value;
+                _playerHp = value;
             } else
             {
-                _playerHitPoint = 0;
+                _playerHp = 0;
             }
              
         }
+    }
+
+    public Color HpAndLivesTextColor
+    {
+        get { return _hpAndLivesTextColor; }
+        set { _hpAndLivesTextColor = value;}
     }
 
     public int PlayerLives
@@ -186,18 +195,18 @@ public class JetGameManagerLogic : MonoBehaviour
         set { _playerLives = value; }
     }
 
-    // Member to call when user touches a button
+    // Member to call when user touches button B on the gamepad or started by multiplayer (simulation) mode.
     public void PressToStart()
     {
-
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlayMusic("BGM For Jet");
-        }
+        /*
         JetPlayerController[] tmpJetPlayerArray = (FindObjectsByType<JetPlayerController>(FindObjectsInactive.Include, FindObjectsSortMode.None));
         JetSpawnManager[] tmpJetSpawnArray = (FindObjectsByType<JetSpawnManager>(FindObjectsInactive.Include, FindObjectsSortMode.None));
         if (tmpJetPlayerArray.Length > 0 && tmpJetSpawnArray.Length > 0)
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayMusic("BGM For Jet");
+            }
             JetPlayerController JetPlayer = tmpJetPlayerArray[0];
             JetSpawnManager EnemySpawnManager = tmpJetSpawnArray[0];
             GameObject pressToStartText = GameObject.Find("PressToStart");
@@ -215,6 +224,33 @@ public class JetGameManagerLogic : MonoBehaviour
             }
         }
         Time.timeScale = 1.0f;
+        */
+        if (!_hasStarted)
+        {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayMusic("BGM For Jet");
+            }
+            JetPlayerController[] tmpJetPlayerArray = (FindObjectsByType<JetPlayerController>(FindObjectsInactive.Include, FindObjectsSortMode.None));
+            JetSpawnManager[] tmpJetSpawnArray = (FindObjectsByType<JetSpawnManager>(FindObjectsInactive.Include, FindObjectsSortMode.None));
+            JetPlayerController JetPlayer = tmpJetPlayerArray[0];
+            JetSpawnManager EnemySpawnManager = tmpJetSpawnArray[0];
+            GameObject pressToStartText = GameObject.Find("PressToStart");
+            if (JetPlayer != null && EnemySpawnManager != null && pressToStartText != null)
+            {
+                JetPlayer.gameObject.SetActive(true);
+                EnemySpawnManager.gameObject.SetActive(true);
+                pressToStartText.SetActive(false);
+            }
+
+            if (MultiSingleManager.Instance.isMulti)
+            {
+                JetPlayer.gameObject.SetActive(true);
+                EnemySpawnManager.gameObject.SetActive(true);
+            }
+            Time.timeScale = 1.0f;
+            _hasStarted = true;
+        }
     }
 
     IEnumerator GameOverProcess()
@@ -255,5 +291,6 @@ public class JetGameManagerLogic : MonoBehaviour
     {
         SceneManager.LoadScene("Jet");
     }
+
 
 }
