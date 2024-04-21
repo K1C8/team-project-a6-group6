@@ -18,11 +18,15 @@ public class JetMultiSimulator : MonoBehaviour
     [SerializeField] TMP_Text gameStartCD;
     [SerializeField] TMP_Text inGameCD;
     [SerializeField] int scoreScale = 100;
-    [SerializeField] float minTimeScore = 2f;
-    [SerializeField] float maxTimeScore = 10f;
+    [SerializeField] float minTimeScore = 1.2f;
+    [SerializeField] float maxTimeScore = 9f;
+    [SerializeField] float ratioMinTimeSpeedUp = 0.9955f;
+    [SerializeField] float ratioMaxTimeSpeedUp = 0.9965f;
     private Dictionary<string, int> playerScores = new Dictionary<string, int>();
     public float gameDuration = 180f;
     public bool isGameOver = false;
+    public bool isBossOneSpawned = false;
+    public bool isBossSecondSpawned = false;
     public void Start()
     {
         //AudioManager.Instance.PlayMusic("BGM For Snake");
@@ -173,6 +177,27 @@ public class JetMultiSimulator : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(minTimeScore, maxTimeScore));
             UpdateScore(player, scoreScale);
+            minTimeScore *= ratioMinTimeSpeedUp;
+            maxTimeScore *= ratioMaxTimeSpeedUp;
+            float randomBossDelay = Random.Range(8f, 15f);
+            if (!isBossOneSpawned && 180 - gameDuration + randomBossDelay > 70)
+            {
+                isBossOneSpawned = true;
+                float cpuKillBossRoll = Random.Range(0f, 6f);
+                if (cpuKillBossRoll > 0.5f) 
+                {
+                    UpdateScore(player, 450);
+                }
+            } 
+            else if (!isBossSecondSpawned && 180 - gameDuration + randomBossDelay > 140)
+            {
+                isBossSecondSpawned = true;
+                float cpuKillBossRoll = Random.Range(0f, 6f);
+                if (cpuKillBossRoll > 3.75f)
+                {
+                    UpdateScore(player, 450);
+                }
+            }
         }
     }
 

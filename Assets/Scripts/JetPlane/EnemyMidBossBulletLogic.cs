@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyEntryBulletLogic : MonoBehaviour, IBullet
+public class EnemyMidBossBulletLogic : MonoBehaviour, IBullet
 {
     private int _angle = 0;
 
-    [SerializeField]
-    private float _speed = 6.0f;
-    [SerializeField] private int _damage = 50;
+    [SerializeField] private float _speed = 8.0f;
+    [SerializeField] private int _damage = 75;
 
     // Start is called before the first frame update
     void Start()
@@ -38,5 +37,4 @@ public class EnemyEntryBulletLogic : MonoBehaviour, IBullet
     {
         _angle = angle;
     }
-
 }

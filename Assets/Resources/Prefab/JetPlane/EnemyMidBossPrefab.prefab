@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7480346947797809782}
   - component: {fileID: 8705394554038536817}
   - component: {fileID: 8810188866175308979}
-  - component: {fileID: 6755766873919696917}
+  - component: {fileID: 4507591989127757474}
   m_Layer: 0
-  m_Name: EnemyEntryPrefab
+  m_Name: EnemyMidBossPrefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bf03f9cb10f8723449e41486095cb909, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 112679ac6b1163747b85db7dc7d2bcfd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,7 +122,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 1.18, y: 1.23}
     newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.2, y: 1.6}
   m_EdgeRadius: 0
---- !u!114 &6755766873919696917
+--- !u!114 &4507591989127757474
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,21 +140,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8102695240844952884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3756438e51a8a74aabd232f9312d306, type: 3}
+  m_Script: {fileID: 11500000, guid: 909d7139a4826914383061325a6973b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boardLeftBorder: -2.5
-  _boardRightBorder: 2.5
-  _fireIntervalEntry: 3
-  _minimumValueBulletEntry: 90
-  _minimumValueHpEntry: 95
-  _minimumValueExtraLifeEntry: 98
-  _minimumValueShieldEntry: 100
-  _speedEntry: 2
-  _yLowerBoundEntry: 2.5
-  _yVisibleUpperBoundEntry: 2.7
-  _bulletAngleEntry: 5
-  _enemyEntryBullet: {fileID: 5123982050819918642, guid: 25c3f8b7e060627439d2fc50fb37beee, type: 3}
-  _powerUpBulletEntry: {fileID: 6158412924169713037, guid: b42af3f759d37564a85e95778bd33d49, type: 3}
-  _powerUpHpEntry: {fileID: 6158412924169713037, guid: e4df562865ae15149898b2298b5b92f8, type: 3}
-  _powerUpLivesEntry: {fileID: 6158412924169713037, guid: 3703e9e5432fe08459e9d25d94f2e162, type: 3}
+  _boardLeftBorder: -1.85
+  _boardRightBorder: 1.85
+  _fireIntervalMidBoss: 1.8
+  _minimumValueBulletMidBoss: 40
+  _minimumValueHpMidBoss: 70
+  _minimumValueExtraLifeMidBoss: 90
+  _minimumValueShieldMidBoss: 100
+  _speedMidBoss: 1.5
+  _yLowerBoundMidBoss: 2
+  _yVisibleUpperBoundMidBoss: 2.5
+  _bulletAngleMidBoss: 8
+  _enemyMidBossBullet: {fileID: 5123982050819918642, guid: c54e1ed14c05af945826af3ccb79096e, type: 3}
+  _powerUpBulletMidBoss: {fileID: 6158412924169713037, guid: b42af3f759d37564a85e95778bd33d49, type: 3}
+  _powerUpHpMidBoss: {fileID: 6158412924169713037, guid: e4df562865ae15149898b2298b5b92f8, type: 3}
+  _powerUpLivesMidBoss: {fileID: 6158412924169713037, guid: 3703e9e5432fe08459e9d25d94f2e162, type: 3}

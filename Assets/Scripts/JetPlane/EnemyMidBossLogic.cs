@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class EnemyEntryLogic : AbstractEnemyLogic
+public class EnemyMidBossLogic : AbstractEnemyLogic
 {
     private float _xStart;
     private float _xPosition;
@@ -22,21 +22,22 @@ public class EnemyEntryLogic : AbstractEnemyLogic
     // private GameObject _containerTypeEnemyBullet;
     // private float _timeToRush;
 
-    [SerializeField] private float _boardLeftBorder = -2.05f;
-    [SerializeField] private float _boardRightBorder = 2.05f;
-    [SerializeField] private float _fireIntervalEntry = 3.0f;
-    [SerializeField] private float _minimumValueBulletEntry = 93f;
-    [SerializeField] private float _minimumValueHpEntry = 99.2f;
-    [SerializeField] private float _minimumValueExtraLifeEntry = 99.7f;
-    [SerializeField] private float _minimumValueShieldEntry = 100f;
-    [SerializeField] private float _speedEntry = 2f;
-    [SerializeField] private float _yLowerBoundEntry = 2.5f;
-    [SerializeField] private float _yVisibleUpperBoundEntry = 2.7f;
-    [SerializeField] private int _bulletAngleEntry = 5;
-    [SerializeField] private GameObject _enemyEntryBullet;
-    [SerializeField] private GameObject _powerUpBulletEntry;
-    [SerializeField] protected GameObject _powerUpHpEntry;
-    [SerializeField] protected GameObject _powerUpLivesEntry;
+    [SerializeField] private float _boardLeftBorder = -1.85f;
+    [SerializeField] private float _boardRightBorder = 1.85f;
+    [SerializeField] private float _fireIntervalMidBoss = 2.0f;
+    [SerializeField] private float _minimumValueBulletMidBoss = 50f;
+    [SerializeField] private float _minimumValueHpMidBoss = 70f;
+    [SerializeField] private float _minimumValueExtraLifeMidBoss = 90f;
+    [SerializeField] private float _minimumValueShieldMidBoss = 100f;
+    [SerializeField] private float _speedMidBoss = 1.5f;
+    [SerializeField] private float _yLowerBoundMidBoss = 2.0f;
+    [SerializeField] private float _yVisibleUpperBoundMidBoss = 2.5f;
+    [SerializeField] private int _bulletAngleMidBoss = 10;
+    [SerializeField] private int _hpMidBoss = 1500;
+    [SerializeField] private GameObject _enemyMidBossBullet;
+    [SerializeField] private GameObject _powerUpBulletMidBoss;
+    [SerializeField] private GameObject _powerUpHpMidBoss;
+    [SerializeField] private GameObject _powerUpLivesMidBoss;
 
     // Start is called before the first frame update
     void Start()
@@ -49,41 +50,39 @@ public class EnemyEntryLogic : AbstractEnemyLogic
     // Update is called once per frame
     void Update()
     {
-        ActionControl(_enemyEntryBullet);
+        ActionControl(_enemyMidBossBullet);
     }
 
     protected void Spawn()
     {
-        _fireInterval = _fireIntervalEntry;
-        _speed = _speedEntry;
-        _timeToRush = UnityEngine.Random.Range(2f, 6f);
+        _fireInterval = _fireIntervalMidBoss;
+        _speed = _speedMidBoss;
+        _timeToRush = UnityEngine.Random.Range(8f, 16f);
         // _yLowerBound = 2.5f;
 
-        _bulletAngle = _bulletAngleEntry;
-        _burstCount = 1;
-        _damage = 50;
+        _bulletAngle = _bulletAngleMidBoss;
+        _burstCount = 3;
+        _damage = 150;
         _direction = 1;
-        _hp = 50;
-        _minimumValueBullet = _minimumValueBulletEntry;
-        _minimumValueHp = _minimumValueHpEntry;
-        _minimumValueExtraLife = _minimumValueExtraLifeEntry;
-        _minimumValueShield = _minimumValueShieldEntry;
-        _score = 50;
+        _hp = _hpMidBoss;
+        _minimumValueBullet = _minimumValueBulletMidBoss;
+        _minimumValueHp = _minimumValueHpMidBoss;
+        _minimumValueExtraLife = _minimumValueExtraLifeMidBoss;
+        _minimumValueShield = _minimumValueShieldMidBoss;
+        _score = 500;
         _canFire = true;
         _isTimeToRush = false;
 
         _xStart = transform.position.x;
         _xLeftBound = Math.Max(_boardLeftBorder, _xStart - 1);
         _xRightBound = Math.Min(_boardRightBorder, _xStart + 1);
-        _yLowerBound = _yLowerBoundEntry;
-        _yVisibleUpperBound = _yVisibleUpperBoundEntry;
+        _yLowerBound = _yLowerBoundMidBoss;
+        _yVisibleUpperBound = _yVisibleUpperBoundMidBoss;
 
         _xPosition = transform.position.x;
         _spawnPosition = new Vector3(_xPosition, 4, 0);
         transform.position = _spawnPosition;
-        _powerUpBullet = _powerUpBulletEntry;
-        _powerUpHp = _powerUpHpEntry;
-        _powerUpLives = _powerUpLivesEntry;
+        _powerUpBullet = _powerUpBulletMidBoss;
         _jetGameManager = GameObject.Find("JetGameManager").GetComponent<JetGameManagerLogic>();
         if (_jetGameManager == null)
         {

@@ -1,3 +1,5 @@
+// Inspired by tutorial: https://medium.com/@dhunterthornton
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,15 +10,19 @@ public class JetSpawnManager : MonoBehaviour
     private bool _isPlayerAlive = true;
     private bool _needToRespawnBackground = false;
     private float _spawnMaximumInterval = 2.5f;
+    private float _spawnMinimumInterval = 0.25f;
     private float _nextSpawnYOffset = 11.72f;
+    private float _midBossInterval = 0f;
     private GameObject _firstSpawnedBackground;
     private GameObject _secondSpawnedBackground;
 
     [SerializeField] private GameObject _background;
+    [SerializeField] private GameObject _enemyEntry;
+    [SerializeField] private GameObject _enemyMidBoss;
     [SerializeField]
-    private GameObject _enemyEntry;
-    [SerializeField]
-    private GameObject _containerTypeEnemy; 
+    private GameObject _containerTypeEnemy;
+    [SerializeField] float _ratioEnemySpawnSpeedUp = 0.996f;
+    [SerializeField] float _bossInterval = 70f;
 
 
 
@@ -41,7 +47,24 @@ public class JetSpawnManager : MonoBehaviour
             Vector3 positionToSpawn = new Vector3(Random.Range(-2f, 2f), 3, 0);
             GameObject newEnemyEntry = Instantiate(_enemyEntry, positionToSpawn, Quaternion.identity);
             newEnemyEntry.transform.parent = _containerTypeEnemy.transform;
-            yield return new WaitForSeconds(Random.Range(0.25f, _spawnMaximumInterval));
+            float next = Random.Range(_spawnMinimumInterval, _spawnMaximumInterval);
+            if (_spawnMinimumInterval > 0.1f) 
+            { 
+                _spawnMinimumInterval *= _ratioEnemySpawnSpeedUp;
+            }
+            if (_spawnMaximumInterval > 1f)
+            { 
+                _spawnMaximumInterval *= _ratioEnemySpawnSpeedUp;
+            }
+            _midBossInterval += next;
+            if (_midBossInterval > _bossInterval && _enemyMidBoss != null)
+            {
+                Vector3 positionToSpawnMidBoss = new Vector3(Random.Range(-0.5f, 0.5f), 3, 0);
+                GameObject newEnemyMidBoss = Instantiate(_enemyMidBoss, positionToSpawnMidBoss, Quaternion.identity);
+                newEnemyMidBoss.transform.parent = _containerTypeEnemy.transform;
+                _midBossInterval = 0;
+            }
+            yield return new WaitForSeconds(next);
         }
     }
 
