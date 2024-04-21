@@ -141,7 +141,18 @@ public class JetGameManagerLogic : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0f;
+        if (!_isMultiMode) 
+        { 
+            Time.timeScale = 0f;
+        }
+    }
+
+    public void Resume()
+    {
+        if (!_isMultiMode)
+        {
+            Time.timeScale = 1f;
+        }
     }
 
     // Update is called once per frame
