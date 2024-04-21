@@ -48,8 +48,14 @@ public class JetSpawnManager : MonoBehaviour
             GameObject newEnemyEntry = Instantiate(_enemyEntry, positionToSpawn, Quaternion.identity);
             newEnemyEntry.transform.parent = _containerTypeEnemy.transform;
             float next = Random.Range(_spawnMinimumInterval, _spawnMaximumInterval);
-            _spawnMinimumInterval *= _ratioEnemySpawnSpeedUp;
-            _spawnMaximumInterval *= _ratioEnemySpawnSpeedUp;
+            if (_spawnMinimumInterval > 0.1f) 
+            { 
+                _spawnMinimumInterval *= _ratioEnemySpawnSpeedUp;
+            }
+            if (_spawnMaximumInterval > 1f)
+            { 
+                _spawnMaximumInterval *= _ratioEnemySpawnSpeedUp;
+            }
             _midBossInterval += next;
             if (_midBossInterval > _bossInterval && _enemyMidBoss != null)
             {
