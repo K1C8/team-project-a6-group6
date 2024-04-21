@@ -229,6 +229,7 @@ public class Board : MonoBehaviour
         {
             this.controller.ClearRowTrigger();
         }
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("Clear Line");
     }
 
     public bool IsPositionValid(Piece piece, Vector3Int position)

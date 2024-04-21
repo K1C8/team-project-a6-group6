@@ -34,6 +34,8 @@ public class TetrisMultiSimulator : MonoBehaviour
             playerScores.Add("P3", 0);
             playerScores.Add("P4", 0);
 
+            GameObject.Find("OptionButton").GetComponent<Button>().enabled = false;
+            GameObject.Find("TipButton").GetComponent<Button>().enabled = false;
             player1.SetActive(true);
             player2.SetActive(true);
             player3.SetActive(true);
