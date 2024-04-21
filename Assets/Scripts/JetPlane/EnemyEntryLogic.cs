@@ -20,8 +20,8 @@ public class EnemyEntryLogic : AbstractEnemyLogic
     // private GameObject _containerTypeEnemyBullet;
     // private float _timeToRush;
 
-    [SerializeField] private float _boardLeftBorder = -2.5f;
-    [SerializeField] private float _boardRightBorder = 2.5f;
+    [SerializeField] private float _boardLeftBorder = -2.05f;
+    [SerializeField] private float _boardRightBorder = 2.05f;
     [SerializeField] private float _fireIntervalEntry = 3.0f;
     [SerializeField] private float _speedEntry = 2f;
     [SerializeField] private float _yLowerBoundEntry = 2.5f;

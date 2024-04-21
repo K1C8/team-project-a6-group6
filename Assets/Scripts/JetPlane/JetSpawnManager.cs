@@ -8,6 +8,7 @@ public class JetSpawnManager : MonoBehaviour
     private bool _isPlayerAlive = true;
     private bool _needToRespawnBackground = false;
     private float _spawnMaximumInterval = 2.5f;
+    private float _nextSpawnYOffset = 11.72f;
     private GameObject _firstSpawnedBackground;
     private GameObject _secondSpawnedBackground;
 
@@ -60,7 +61,7 @@ public class JetSpawnManager : MonoBehaviour
     {
         if (_needToRespawnBackground)
         {
-            _secondSpawnedBackground = Instantiate(_background, new Vector3(0, 11.75f, 0), Quaternion.identity);
+            _secondSpawnedBackground = Instantiate(_background, new Vector3(0, _nextSpawnYOffset, 0), Quaternion.identity);
             _secondSpawnedBackground.GetComponent <BackgroundLogic>().RegisterCallback(this);
             _needToRespawnBackground = false;
         }

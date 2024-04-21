@@ -253,7 +253,7 @@ public class JetGameManagerLogic : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("InGameJet");
+        SceneManager.LoadScene("Jet");
     }
 
 }
