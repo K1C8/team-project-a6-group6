@@ -5,6 +5,10 @@ using UnityEngine;
 public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
 {
     protected float _fireInterval;
+    protected float _minimumValueBullet;
+    protected float _minimumValueHp;
+    protected float _minimumValueExtraLife;
+    protected float _minimumValueShield;
     protected float _speed;
     protected float _timeToRush;
     protected float _xLeftBound;
@@ -15,30 +19,25 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
     protected int _burstCount;
     protected int _damage;
     protected int _hp;
-    protected int _minimumValueBullet;
-    protected int _minimumValueHp;
-    protected int _minimumValueExtraLife;
-    protected int _minimumValueShield;
     protected int _direction;
     protected int _score;
     protected bool _canFire;
     protected bool _isInvincible;
     protected bool _isTimeToRush;
+    protected Collider2D _collider;
     protected GameObject _containerTypeEnemyBullet;
     protected GameObject _powerUpBullet;
-    protected Collider2D _collider;
+    protected GameObject _powerUpHp;
+    protected GameObject _powerUpLives;
     protected JetGameManagerLogic _jetGameManager;
 
-    private int _diceResult = 0;
-
-    protected void SetUpEnemyBulletContainer()
+    protected void SetUpEnemyBullet()
     {
         _containerTypeEnemyBullet = GameObject.Find("EnemyBulletContainer");
         if (_containerTypeEnemyBullet == null)
         {
             Debug.LogWarning("Container for enemy bullets is null.");
         }
-
     }
 
     public int GetDamage()
@@ -54,12 +53,20 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
     public void TakeDamage(int damageTaken)
     {
         _hp -= damageTaken;
-        Debug.Log(string.Format("Enemy Entry has {0} hit point left.", _hp));
+        Debug.Log(string.Format("Enemy has {0} hit point left.", _hp));
         if (_hp < 1)
         {
             AudioManager.Instance.PlaySFX("JetEnemyExplosion");
-            RollPowerUpDice();
-            if (_diceResult >= _minimumValueBullet && _powerUpBullet != null)
+            float diceResult = RollPowerUpDice();
+            if (diceResult >= _minimumValueExtraLife && _powerUpLives != null)
+            {
+                Instantiate(_powerUpLives, transform.position + new Vector3(0, -0.25f, 0), Quaternion.identity);
+            }
+            else if (diceResult >= _minimumValueHp && _powerUpHp != null)
+            {
+                Instantiate(_powerUpHp, transform.position + new Vector3(0, -0.25f, 0), Quaternion.identity);
+            }
+            else if (diceResult >= _minimumValueBullet && _powerUpBullet != null)
             {
                 Instantiate(_powerUpBullet, transform.position + new Vector3(0, -0.25f, 0), Quaternion.identity);
             }
@@ -71,6 +78,10 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
                 Debug.LogWarning("Cannot find JetGameMangerLogic instance!");
             }
             Destroy(this.gameObject);
+        }
+        else
+        {
+            AudioManager.Instance.PlaySFX("JetEnemyHit");
         }
     }
 
@@ -135,8 +146,22 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
                 for (int i = 0; i < _burstCount; i++)
                 {
                     GameObject bullet = Instantiate(bulletObject, transform.position + new Vector3(0f, -0.25f, 0f), Quaternion.identity);
-                    IBullet bulletLogic = bullet.GetComponent<EnemyEntryBulletLogic>();
-                    bulletLogic.SetAngle(angle);
+                    IBullet bulletLogic = null;
+                    switch (name)
+                    {
+                        case "EnemyMidBossPrefab(Clone)":
+                            bulletLogic = bullet.GetComponent<EnemyMidBossBulletLogic>();
+                            break;
+                        case "EnemyEntryPrefab(Clone)":
+                            bulletLogic = bullet.GetComponent<EnemyEntryBulletLogic>();
+                            break;
+                        default: break;
+                    }
+                    // IBullet bulletLogic = bullet.GetComponent<EnemyEntryBulletLogic>();
+                    if (bulletLogic != null)
+                    {
+                        bulletLogic.SetAngle(angle);
+                    }
                     angle += _bulletAngle;
                     bullet.transform.parent = _containerTypeEnemyBullet.transform;
                 }
@@ -191,9 +216,9 @@ public abstract class AbstractEnemyLogic : MonoBehaviour, IExplosible
         }
     }
 
-    private void RollPowerUpDice()
+    private float RollPowerUpDice()
     {
-        _diceResult = Random.Range(0, 100);
+        return Random.Range(0f, 100.05f);
     }
 
     // Make the enemy invincible before being scrolled into the visible area.

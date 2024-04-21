@@ -516,7 +516,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _background: {fileID: 4352241843547793610, guid: e329f77a03dadae4aabe0c5553a720f7, type: 3}
   _enemyEntry: {fileID: 8102695240844952884, guid: 2088c134312966945b77f68af0a48b51, type: 3}
+  _enemyMidBoss: {fileID: 8102695240844952884, guid: 7481aa34dcb6c1b4f9fa00390e1ece4f, type: 3}
   _containerTypeEnemy: {fileID: 1226367636}
+  _ratioEnemySpawnSpeedUp: 0.996
+  _bossInterval: 70
 --- !u!4 &94218127
 Transform:
   m_ObjectHideFlags: 0
@@ -8517,6 +8520,7 @@ MonoBehaviour:
   _singleScoreText: {fileID: 562125474}
   _singleNameText: {fileID: 1063608505}
   jetMultiSimulator: {fileID: 1560301765}
+  _jetPlayerController: {fileID: 0}
   multiUIController: {fileID: 1355001036}
 --- !u!1 &1264394635
 GameObject:
@@ -10695,10 +10699,12 @@ MonoBehaviour:
   gameStartCD: {fileID: 892233342}
   inGameCD: {fileID: 746373598}
   scoreScale: 50
-  minTimeScore: 0.2
-  maxTimeScore: 3.3
+  minTimeScore: 0.08
+  maxTimeScore: 2.6
   gameDuration: 180
   isGameOver: 0
+  isBossOneSpawned: 0
+  isBossSecondSpawned: 0
 --- !u!1 &1608699885
 GameObject:
   m_ObjectHideFlags: 0

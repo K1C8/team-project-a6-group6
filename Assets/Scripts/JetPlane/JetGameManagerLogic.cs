@@ -1,3 +1,5 @@
+// Inspired by tutorial: https://medium.com/@dhunterthornton
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,8 +12,6 @@ using UnityEngine.UI;
 public class JetGameManagerLogic : MonoBehaviour 
 {
     private int _playerScore;
-    private int _playerHp;
-    private int _playerLives;
     private string _multiManagerName = "MultiSingleManager";
     private string _playerHpLivesFormat = "Lives: {0}\nHP: {1}";
     private bool _isMultiMode = false;
@@ -27,6 +27,7 @@ public class JetGameManagerLogic : MonoBehaviour
     [SerializeField] private TMP_Text _singleScoreText;
     [SerializeField] private TMP_Text _singleNameText;
     [SerializeField] private JetMultiSimulator jetMultiSimulator;
+    [SerializeField] private JetPlayerController _jetPlayerController;
     [SerializeField] private MultiUIController multiUIController;
 
     void Start()
@@ -169,17 +170,24 @@ public class JetGameManagerLogic : MonoBehaviour
 
     public int PlayerHp
     {
-        get { return _playerHp; }
-        set 
+        get 
         {
-            if (_playerLives > 0) 
+            if (_jetPlayerController != null)
             {
-                _playerHp = value;
-            } else
-            {
-                _playerHp = 0;
+                return _jetPlayerController.Hp;
             }
-             
+            return 0;
+        }
+    }
+    public int PlayerLives
+    {
+        get
+        {
+            if (_jetPlayerController != null)
+            {
+                return _jetPlayerController.Lives;
+            }
+            return 0;
         }
     }
 
@@ -189,11 +197,13 @@ public class JetGameManagerLogic : MonoBehaviour
         set { _hpAndLivesTextColor = value;}
     }
 
-    public int PlayerLives
+    public JetPlayerController Player
     {
-        get { return _playerLives; }
-        set { _playerLives = value; }
+        get { return _jetPlayerController; }
+        set { _jetPlayerController = value; }
+
     }
+
 
     // Member to call when user touches button B on the gamepad or started by multiplayer (simulation) mode.
     public void PressToStart()

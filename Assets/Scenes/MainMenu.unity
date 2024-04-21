@@ -3104,6 +3104,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 55f607a6b7970e241add5b3228f544bd, type: 3}
   - name: Clear Line
     clip: {fileID: 8300000, guid: 915d45db5377e4c4d8b8e40da8a0f0db, type: 3}
+  - name: JetEnemyHit
+    clip: {fileID: 8300000, guid: 53f456cf685fbdb45a30850c796f5843, type: 3}
   musicSource: {fileID: 1905460029}
   sfxSource: {fileID: 193268146}
 --- !u!4 &1186580103

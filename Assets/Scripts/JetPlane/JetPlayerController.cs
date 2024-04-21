@@ -1,3 +1,5 @@
+// Inspired by tutorial: https://medium.com/@dhunterthornton
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -60,11 +62,41 @@ public class JetPlayerController : MonoBehaviour, IExplosible
         }
     }
 
+    public int Hp
+    {
+        get { return _hp; }
+        set
+        {
+            //_jetGameManagerLogic.PlayerHp = value;
+            if (_lives > 0 && value < 251)
+            {
+                _hp = value;
+            }
+            else
+            {
+                _hp = 0;
+            }
+        }
+    }
+
+    public int Lives
+    {
+        get { return _lives; }
+        set
+        {
+            //_jetGameManagerLogic.PlayerLives = value; 
+            if (value < 5)
+            {
+                _lives = value;
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         AccelInitialize();
-
+        _jetGameManagerLogic.Player = this;
         _enemySpawnManager = GameObject.Find("EnemySpawnManager").GetComponent<JetSpawnManager>();
         _spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
 
@@ -75,8 +107,8 @@ public class JetPlayerController : MonoBehaviour, IExplosible
         }
 
         // Do not reverse these two lines, as PlayerHp has logic to set to 0 if PlayerLives is 0.
-        _jetGameManagerLogic.PlayerLives = _lives;
-        _jetGameManagerLogic.PlayerHp = _hp;
+        // _jetGameManagerLogic.PlayerLives = _lives;
+        // _jetGameManagerLogic.PlayerHp = _hp;
     }
 
     // Update is called once per frame
@@ -127,6 +159,11 @@ public class JetPlayerController : MonoBehaviour, IExplosible
                         bullet = otherObject.GetComponent<EnemyEntryBulletLogic>();
                         break;
                     }
+                case "EnemyMidBossBulletPrefab(Clone)":
+                    {
+                        bullet = otherObject.GetComponent<EnemyMidBossBulletLogic>();
+                        break;
+                    }
                 default:
                     break;
             }
@@ -149,15 +186,27 @@ public class JetPlayerController : MonoBehaviour, IExplosible
             {
                 case "PowerUpBulletPrefab(Clone)":
                     {
-                        Debug.Log("PowerUp collided.");
+                        Debug.Log("PowerUp Bullet collided.");
                         powerUp = otherObject.GetComponent<PowerUpBullet>();
+                        break;
+                    }
+                case "PowerUpHpPrefab(Clone)":
+                    {
+                        Debug.Log("PowerUp HP collided.");
+                        powerUp = otherObject.GetComponent<PowerUpHp>();
+                        break;
+                    }
+                case "PowerUpLivesPrefab(Clone)":
+                    {
+                        Debug.Log("PowerUp Lives collided.");
+                        powerUp = otherObject.GetComponent<PowerUpLives>();
                         break;
                     }
                 default : break;
             }
             if (powerUp != null)
             {
-                Debug.Log("From JetPlayerController as " + this);
+                //Debug.Log("From JetPlayerController as " + this);
                 powerUp.ProcessPowerUp(this);
                 Destroy(other.gameObject);
             }
@@ -234,17 +283,18 @@ public class JetPlayerController : MonoBehaviour, IExplosible
             {
                 AudioManager.Instance.PlaySFX("JetPlayerExplosion");
             }
-            _hp = 100;
             _lives -= 1;
+            _hp = 100;
             ResetPowerUp();
             InvincibleEffect(_hitInvincibleCoolDownTime);
         }
         Debug.Log(string.Format("Updating JetPlayer health and lives with damage as: damage {0}, HP {1}, lives {2}", damage, _hp, _lives));
         // Do not reverse these two lines, as PlayerHp has logic to set to 0 if PlayerLives is 0.
-        _jetGameManagerLogic.PlayerLives = _lives;
-        _jetGameManagerLogic.PlayerHp = _hp;
+        // _jetGameManagerLogic.PlayerLives = _lives;
+        // _jetGameManagerLogic.PlayerHp = _hp;
         if (_lives < 1)
         {
+            _hp = 0;
             _enemySpawnManager.OnPlayerDeath();
             _jetGameManagerLogic.OnGameOver();
             Destroy(this.gameObject);
@@ -305,13 +355,13 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     public void OnLeftKeyDown()
     {
         _isKeyLeftPressed = true;
-        Debug.Log("Left Key Down called.");
+        //Debug.Log("Left Key Down called.");
     }
 
     public void OnLeftKeyUp()
     {
         _isKeyLeftPressed = false;
-        Debug.Log("Left Key Up called.");
+        //Debug.Log("Left Key Up called.");
     }
 
     public void OnRightKeyDown()
