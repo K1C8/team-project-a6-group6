@@ -10350,8 +10350,6 @@ MonoBehaviour:
   - {fileID: 1728447334}
   - {fileID: 693061561}
   - {fileID: 664064525}
-  - {fileID: 1990645630}
-  - {fileID: 1353376944}
   gameStartCD: {fileID: 642199015}
   inGameCD: {fileID: 1822158060}
   scoreScale: 100

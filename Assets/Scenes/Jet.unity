@@ -10736,8 +10736,6 @@ MonoBehaviour:
   objectsToHide:
   - {fileID: 381456069}
   buttonsToDisable:
-  - {fileID: 722372261}
-  - {fileID: 1064970533}
   - {fileID: 1212485933}
   - {fileID: 854375417}
   - {fileID: 1465312528}
