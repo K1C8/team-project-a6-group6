@@ -413,11 +413,11 @@ public class JetPlayerController : MonoBehaviour, IExplosible
     {
         float accelX = Input.acceleration.x;
         float avgX = 0;
-        float deltaX = accelX - avgX;
         foreach (float x in _observedXAccel)
         {
             avgX += (x / _observerWindow);
         }
+        float deltaX = accelX - avgX;
         if (System.Math.Abs(deltaX) > _dodgeMinimumDelta)
         {
             // User may have performed a dodge.
