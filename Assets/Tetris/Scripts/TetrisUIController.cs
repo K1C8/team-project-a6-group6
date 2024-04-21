@@ -51,7 +51,6 @@ public class TetrisUIController : MonoBehaviour
         if (!tetrisBoard.IsGameOver)
         {
             scoreText.SetText((tetrisBoard.Score * 100).ToString());
-            if (AudioManager.Instance != null) AudioManager.Instance.PlaySFX("Clear Line");
         }
     }
 
