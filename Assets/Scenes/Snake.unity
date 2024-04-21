@@ -9250,8 +9250,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 168.64001, y: 520}
-  m_SizeDelta: {x: 338.212, y: 122.561}
+  m_AnchoredPosition: {x: 146.777, y: 520}
+  m_SizeDelta: {x: 294.487, y: 122.561}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1224560880
 MonoBehaviour:
@@ -9300,8 +9300,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12369,7 +12369,7 @@ MonoBehaviour:
   scoreScale: 100
   minTimeScore: 2
   maxTimeScore: 6
-  gameDuration: 120
+  gameDuration: 180
   isGameOver: 0
 --- !u!4 &1640938539
 Transform:
