@@ -832,6 +832,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
+        m_MethodName: PlayButtonSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &182425344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1601,10 +1625,10 @@ RectTransform:
   - {fileID: 322740192}
   m_Father: {fileID: 327917900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -727.8108, y: -1361.9805}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -13.555298, y: -153.62701}
+  m_SizeDelta: {x: 269.61768, y: 441.44824}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &294559963
 MonoBehaviour:
@@ -1680,7 +1704,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000005722, y: -211}
+  m_AnchoredPosition: {x: -0.000005722, y: -175.00005}
   m_SizeDelta: {x: 139.4611, y: 50.8592}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &322740193
@@ -3832,7 +3856,7 @@ MonoBehaviour:
   masterSlider: {fileID: 1000022519}
   bgmSlider: {fileID: 1237073502}
   SFXSlider: {fileID: 2048009186}
-  resumeText: {fileID: 0}
+  pressToStartText: {fileID: 967490754}
   snake: {fileID: 475500701}
   isRunning: 1
 --- !u!1 &569863160
@@ -5498,6 +5522,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 534610601}
+        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
+        m_MethodName: PlayButtonSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &770874087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6483,7 +6519,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.301301, y: 286.0301}
+  m_AnchoredPosition: {x: 0.0000038147, y: 233.7}
   m_SizeDelta: {x: 209.5099, y: 59.5335}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &886363334
@@ -7185,8 +7221,8 @@ RectTransform:
   m_GameObject: {fileID: 969124824}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3793931, y: 0.3793931, z: 0.3793931}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1776380951}
   - {fileID: 682763152}
@@ -7194,7 +7230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -98, y: -20}
+  m_AnchoredPosition: {x: -79.1, y: -20}
   m_SizeDelta: {x: 208.744, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &969124826
@@ -8185,8 +8221,8 @@ RectTransform:
   m_GameObject: {fileID: 1106678280}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.37939313, y: 0.37939313, z: 0.3793931}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 588635041}
   - {fileID: 436350261}
@@ -8194,7 +8230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -98, y: 71}
+  m_AnchoredPosition: {x: -88.6, y: 71}
   m_SizeDelta: {x: 208.744, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1106678282
@@ -14512,8 +14548,8 @@ RectTransform:
   m_GameObject: {fileID: 1857001093}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.37939313, y: 0.37939313, z: 0.3793931}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1708096646}
   - {fileID: 1866122873}
@@ -14521,7 +14557,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -98, y: 167}
+  m_AnchoredPosition: {x: -86, y: 157.6}
   m_SizeDelta: {x: 208.744, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1857001095
@@ -16025,10 +16061,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 534610601}
-        m_TargetAssemblyTypeName: SnakeInGameUIController, Assembly-CSharp
-        m_MethodName: QuitGame
-        m_Mode: 1
+      - m_Target: {fileID: 1791184858}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -16178,8 +16214,8 @@ RectTransform:
   m_GameObject: {fileID: 2101070631}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3793931, y: 0.3793931, z: 0.3793931}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1941203147}
   - {fileID: 1712644312}
@@ -16187,7 +16223,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -98, y: -98}
+  m_AnchoredPosition: {x: -80.9, y: -94.6}
   m_SizeDelta: {x: 208.744, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2101070633
